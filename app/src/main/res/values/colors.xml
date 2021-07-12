@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#8775ed</color>
+    <color name="white">#ffffff</color>
+    <color name="Editwhite">#B3FFFFFF</color>
+    <color name="colorPrimaryDark">#8775ed</color>
+    <color name="colorAccent">#8775ed</color>
+    <color name="colorBG">#EEEEEE</color>
+    <color name="colorGrey">#C3BFC0</color>
+    <color name="colorText">#363636</color>
+    <color name="colorwhite">#ffffff</color>
+    <color name="colorBackground">#FFAAAA</color>
+    <color name="green">#0bb817</color>
+    <color name="orange">#ff0000</color>
+    <color name="enwc">#e9e9e9</color>
+    <color name="enwcc">#82ca9c</color>
+    <color name="red">#FF0000</color>
+    <color name="stepcolor">#4848b6</color>
+
+    <!-- Screens background color-->
+    <color name="bg_screen1">#f64c73</color>
+    <color name="bg_screen2">#20d2bb</color>
+    <color name="bg_screen3">#3395ff</color>
+    <color name="bg_screen4">#c873f4</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">#f98da5</color>
+    <color name="dot_dark_screen2">#f98da5</color>
+    <color name="dot_dark_screen3">#f98da5</color>
+    <color name="dot_dark_screen4">#f98da5</color>
+    <color name="dot_dark_screen5">#f98da5</color>
+    <color name="dot_dark_screen6">#f98da5</color>
+    <color name="dot_dark_screen7">#f98da5</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">#e4b5fc</color>
+    <color name="dot_light_screen2">#e4b5fc</color>
+    <color name="dot_light_screen3">#e4b5fc</color>
+    <color name="dot_light_screen4">#e4b5fc</color>
+    <color name="dot_light_screen5">#e4b5fc</color>
+    <color name="dot_light_screen6">#e4b5fc</color>
+    <color name="dot_light_screen7">#e4b5fc</color>
+
+    <array name="array_dot_active">
+        <item>@color/dot_light_screen1</item>
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen3</item>
+        <item>@color/dot_light_screen4</item>
+        <item>@color/dot_light_screen5</item>
+        <item>@color/dot_light_screen6</item>
+        <item>@color/dot_light_screen7</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dot_dark_screen1</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen3</item>
+        <item>@color/dot_dark_screen4</item>
+        <item>@color/dot_dark_screen5</item>
+        <item>@color/dot_dark_screen6</item>
+        <item>@color/dot_dark_screen7</item>
+    </array>
+    <color name="color_1">#DB4437</color>
+    <color name="color_2">#E91E63</color>
+    <color name="color_3">#FF5722</color>
+    <color name="color_4">#EF6C00</color>
+    <color name="color_5">#689F38</color>
+    <color name="color_6">#0097A7</color>
+    <color name="color_7">#4285F4</color>
+    <color name="color_8">#039BE5</color>
+    <color name="color_9">#3F51B5</color>
+    <color name="color_10">#673AB7</color>
+    <color name="color_11">#757575</color>
+    <color name="headingcolor">#4c4e55</color>
+    <color name="dividercolor">#707070</color>
+    <color name="app_bg_color">#838386</color>
+    <color name="othercolor">#47c6ad</color>
+    <color name="linecolor">#EFEFEF</color>
+</resources>

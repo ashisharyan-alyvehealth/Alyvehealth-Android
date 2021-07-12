@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/login_android"
+        android:padding="@dimen/dimen_20dp"
+        tools:context=".login.LoginActivity">
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/tvMobile"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter your \nmobile number"
+            android:textColor="@color/headingcolor"
+            style="@style/heading_text_size"
+            android:layout_marginBottom="@dimen/dimen_15dp"
+            app:layout_constraintBottom_toTopOf="@+id/cc1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cc1"
+            android:layout_marginBottom="@dimen/dimen_120dp"
+            android:background="@drawable/app_background_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_marginStart="@dimen/dimen_20dp"
+                android:paddingBottom="@dimen/dimen_5dp"
+                android:id="@+id/tvCountryCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+91"
+                android:textColor="@color/app_bg_color"
+                style="@style/sub_heading_text_size"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_marginStart="@dimen/dimen_20dp"
+                android:background="@color/dividercolor"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:alpha=".2"
+                app:layout_constraintStart_toEndOf="@id/tvCountryCode"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+            </View>
+
+            <EditText
+                android:background="@null"
+                style="@style/sub_heading_text_size"
+                android:id="@+id/etMobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:paddingBottom="@dimen/dimen_15dp"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:gravity="bottom"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxLines="1"
+                android:maxLength="10"
+                android:textColorHint="@color/app_bg_color"
+                android:textColor="@color/app_bg_color"
+                android:hint="@string/mobile_number"
+                app:layout_constraintStart_toEndOf="@+id/view"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

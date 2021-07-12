@@ -1,0 +1,114 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="bigger_text_size">
+        <item name="android:textSize">@dimen/dimen_24sp</item>
+        <item name="fontFamily">@font/nunito_regular</item>
+    </style>
+
+    <style name="text_size">
+        <item name="android:textSize">@dimen/dimen_20sp</item>
+        <item name="fontFamily">@font/nunito_regular</item>
+    </style>
+
+    <style name="option_text_size">
+        <item name="android:textSize">@dimen/dimen_14sp</item>
+        <item name="fontFamily">@font/nunito_regular</item>
+    </style>
+
+    <style name="option_text_size2">
+        <item name="android:textSize">@dimen/dimen_14sp</item>
+        <item name="fontFamily">@font/nunito_regular</item>
+    </style>
+    <style name="entry_text_size">
+        <item name="android:textSize">@dimen/dimen_14sp</item>
+        <item name="fontFamily">@font/nunito_regular</item>
+    </style>
+    <style name="time_text_size">
+        <item name="android:textSize">@dimen/dimen_12sp</item>
+        <item name="fontFamily">@font/nunito_regular</item>
+    </style>
+    <style name="sml_text_size">
+        <item name="android:textSize">@dimen/dimen_10sp</item>
+        <item name="fontFamily">@font/nunito_regular</item>
+    </style>
+    <style name="temp_text_size">
+        <item name="android:textSize">@dimen/dimen_16sp</item>
+        <item name="fontFamily">@font/nunito_regular</item>
+    </style>
+
+    <style name="spinnerstyle">
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">35dp</item>
+    </style>
+
+    <style name="MyProgressBarTwo" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="colorButtonNormal">#e9e9e9</item>
+        <item name="colorControlActivated">#e9e9e9</item>
+        <item name="colorControlHighlight">#47C6AB</item>
+        <item name="android:progressDrawable">@drawable/greenprogress</item>
+        <item name="android:minWidth">200dp</item>
+    </style>
+
+    <style name="heading_text_size">
+        <item name="android:textSize">25sp</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+    <style name="barlow_heading_text_size">
+        <item name="android:textSize">25sp</item>
+        <item name="fontFamily">@font/barlowbold</item>
+    </style>
+    <style name="sub_heading_text_size">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/nunito_regular</item>
+    </style>
+    <style name="bold_sub_heading_text_size">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+    <style name="sub_sub_heading_text_size">
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/nunito_regular</item>
+    </style>
+    <style name="nano_text_size">
+        <item name="android:textSize">@dimen/dimen_14sp</item>
+        <item name="fontFamily">@font/nunito_regular</item>
+    </style>
+    <style name="micro_text_size">
+        <item name="android:textSize">@dimen/dimen_12sp</item>
+        <item name="fontFamily">@font/nunito_regular</item>
+    </style>
+
+    <style name="BottomNavigation.ActiveItemTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">10sp</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+
+    <style name="Widget.BottomNavigationView14" parent="@style/Widget.Design.BottomNavigationView">
+        <item name="elevation">@dimen/dimen_30sp</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+
+    <style name="Custom" parent="android:Theme.DeviceDefault.Light.Dialog">
+        <item name="DialogSpotColor">@color/colorPrimary</item>
+        <item name="DialogSpotCount">4</item>
+        <item name="android:windowBackground">@null</item>
+
+    </style>
+    <style name="SpotsDialogDefault" parent="android:Theme.DeviceDefault.Light.Dialog">
+        <item name="DialogSpotCount">5</item>
+    </style>
+</resources>

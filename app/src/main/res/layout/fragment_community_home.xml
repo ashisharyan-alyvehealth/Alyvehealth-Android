@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".connect.CommunityHomeFragment"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_marginRight="@dimen/dimen_10dp"
+        android:layout_marginLeft="@dimen/dimen_10dp"
+        android:background="@android:color/white"
+        android:layout_height="wrap_content"
+        tools:context=".fragment.DashboardFragment">
+
+        <TextView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/tvmywatch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What's new"
+            android:textColor="@color/headingcolor"
+            style="@style/bold_sub_heading_text_size" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvGuidancewatch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvmywatch" />
+
+
+
+        <TextView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvcreate"
+            android:id="@+id/tvmy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My communities"
+            android:textColor="@color/headingcolor"
+            style="@style/bold_sub_heading_text_size" />
+        <TextView
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:background="@drawable/gradiant"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rvGuidancewatch"
+            android:id="@+id/tvcreate"
+            android:drawablePadding="@dimen/dimen_5dp"
+            android:drawableLeft="@drawable/plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CREATE"
+            android:padding="@dimen/dimen_10dp"
+            android:paddingStart="@dimen/dimen_15dp"
+            android:paddingEnd="@dimen/dimen_15dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/barlowbold" />
+
+        <TextView
+            android:textColor="@color/headingcolor"
+            android:id="@+id/tvpart"
+            style="@style/nano_text_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvcreate"></TextView>
+
+        <View
+            android:id="@+id/viewshowcom"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:background="@drawable/background_layout"
+            app:layout_constraintBottom_toBottomOf="@+id/rvpendingcommunity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rvshowcommunity" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:paddingTop="@dimen/dimen_10dp"
+            android:visibility="visible"
+            android:id="@+id/rvshowcommunity"
+            android:layout_width="match_parent"
+            android:scrollbars="vertical"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            app:layout_constraintBottom_toTopOf="@+id/rvpendingcommunity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvpart" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="visible"
+            android:id="@+id/rvpendingcommunity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/tvNoAction"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvshowcommunity" />
+
+        <ImageView
+            android:visibility="invisible"
+            android:id="@+id/imvv22"
+            android:background="@drawable/copy_7"
+            android:layout_width="@dimen/dimen_60dp"
+            android:layout_height="@dimen/dimen_30dp"
+            app:layout_constraintStart_toStartOf="@+id/viewshowcom"
+            app:layout_constraintEnd_toEndOf="@+id/viewshowcom"
+            app:layout_constraintBottom_toTopOf="@+id/tvNoAction">
+
+        </ImageView>
+
+        <TextView
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:id="@+id/tvNoAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Action Available!"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/rvpendingcommunity"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+</layout>

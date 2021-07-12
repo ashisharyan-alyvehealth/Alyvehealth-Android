@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_insight"
+        android:icon="@drawable/insight1"
+        android:title="INSIGHT"
+        />
+
+    <item
+        android:id="@+id/navigation_connect"
+        android:icon="@drawable/connect1"
+        android:title="CONNECT" />
+    <item
+        android:id="@+id/navigation_act"
+        android:icon="@drawable/act1"
+        android:title="ACT"/>
+
+    <item
+        android:id="@+id/navigation_discover"
+        android:icon="@drawable/discover1"
+        android:title="ENGAGE" />
+    <item
+        android:id="@+id/navigation_todo"
+        android:icon="@drawable/todo1"
+        android:title="TO DO" />
+
+</menu>

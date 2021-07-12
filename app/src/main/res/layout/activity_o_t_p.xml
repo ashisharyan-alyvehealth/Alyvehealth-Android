@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dimen_20dp"
+    android:background="@drawable/splashnew"
+    tools:context=".login.view.OTPActivity">
+
+    <ImageView
+        android:tint="@color/colorPrimary"
+        android:id="@+id/ivback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back"
+        android:backgroundTint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+
+
+
+
+    <TextView
+        android:id="@+id/tvOTP"
+        style="@style/heading_text_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_otp"
+        android:textColor="@color/headingcolor"
+        app:layout_constraintBottom_toTopOf="@+id/etEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/etEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_10dp"
+        style="@style/heading_text_size"
+        android:textColor="@color/headingcolor"
+        app:layout_constraintBottom_toTopOf="@+id/linearOTP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="OTP Sent to *******565" />
+
+
+
+
+    <com.mukesh.OtpView
+        style="@style/barlow_heading_text_size"
+        android:layout_marginBottom="@dimen/dimen_10dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/tvResend"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/linearOTP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:itemBackground="@drawable/background_otp"
+        android:textColor="@color/app_bg_color"
+        app:hideLineWhenFilled="true"
+        app:itemCount="4"
+        app:itemSpacing="20dp"
+        android:padding="@dimen/dimen_10dp"
+        app:lineColor="@color/white"
+        app:state_filled="true"
+        android:gravity="bottom|center"
+        android:paddingBottom="@dimen/dimen_10dp"
+        app:viewType="none" />
+
+
+    <TextView
+        android:id="@+id/tvResend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/resend_otp"
+        android:textSize="@dimen/dimen_16sp"
+        android:fontFamily="@font/helvetica"
+        android:textColor="@color/headingcolor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
