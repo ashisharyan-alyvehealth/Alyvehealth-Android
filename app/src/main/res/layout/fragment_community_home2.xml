@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".connect.CommunityHomeFragment"
@@ -16,15 +17,26 @@
         android:layout_height="wrap_content"
         tools:context=".fragment.DashboardFragment">
 
-        <TextView
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/tvmywatch"
+        <ImageView
+            android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_whats_new"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvmywatch"
+            style="@style/bold_sub_heading_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:text="What's new"
             android:textColor="@color/headingcolor"
-            style="@style/bold_sub_heading_text_size" />
+            app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+            app:layout_constraintStart_toEndOf="@+id/imageView3"
+            app:layout_constraintTop_toTopOf="@+id/imageView3" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvGuidancewatch"
             android:layout_width="match_parent"
@@ -33,31 +45,44 @@
             aintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvmywatch" />
-        <TextView
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvcreate"
-            android:id="@+id/tvmy"
+
+        <ImageView
+            android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_community"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvGuidancewatch" />
+
+        <TextView
+            android:id="@+id/tvmy"
+            style="@style/bold_sub_heading_text_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:text="My communities"
             android:textColor="@color/headingcolor"
-            style="@style/bold_sub_heading_text_size" />
+            app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
         <TextView
-            android:layout_marginTop="@dimen/dimen_20dp"
-            android:background="@drawable/gradiant"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rvGuidancewatch"
             android:id="@+id/tvcreate"
-            android:drawablePadding="@dimen/dimen_5dp"
-            android:drawableLeft="@drawable/plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CREATE"
+            android:background="@drawable/gradiant"
+            android:drawableLeft="@drawable/plus"
+            android:drawablePadding="@dimen/dimen_5dp"
+            android:fontFamily="@font/barlowbold"
             android:padding="@dimen/dimen_10dp"
             android:paddingStart="@dimen/dimen_15dp"
             android:paddingEnd="@dimen/dimen_15dp"
+            android:text="CREATE"
             android:textColor="@color/white"
-            android:fontFamily="@font/barlowbold" />
+            app:layout_constraintBottom_toBottomOf="@+id/tvmy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvmy" />
 
         <TextView
             android:textColor="@color/headingcolor"
