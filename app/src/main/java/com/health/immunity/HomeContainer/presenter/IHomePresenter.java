@@ -19,6 +19,6 @@ public interface IHomePresenter {
     void requestPedometerPermissionCustomDialog(AlertDialog.Builder builderpedo);
     void stopPedometerService();
     void savePedometerData(String steps,String distance);
-    void getGoogleFitData(Activity activity, GoogleSignInAccount account, Long startTime, Long endTime, DataType TYPE, Field field);
-    void saveGoogleFitData();
+    //void getGoogleFitData(Activity activity, GoogleSignInAccount account, Long startTime, Long endTime, DataType TYPE, Field field);
+   // void saveGoogleFitData();
 }

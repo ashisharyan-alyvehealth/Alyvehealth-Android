@@ -56,11 +56,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.BuildConfig;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.health.immunity.BaseActivity;
-import com.health.immunity.BuildConfig;
 import com.health.immunity.HomeContainer.model.TokenResponse;
 import com.health.immunity.HomeContainer.presenter.HomePresenter;
 import com.health.immunity.HomeContainer.presenter.IHomePresenter;
@@ -74,6 +74,7 @@ import com.health.immunity.alyvecash.AlyveCashFragment;
 import com.health.immunity.challenges.ChallengesFragment;
 import com.health.immunity.databinding.ActivityHomeBinding;
 import com.health.immunity.expertchat.ExpertChatFragment;
+import com.health.immunity.insight.InsightFragment;
 import com.health.immunity.myprogram.MyProgramFragment;
 import com.health.immunity.pedo.*;
 import com.health.immunity.pedo.ui.Fragment_Settings;
@@ -404,7 +405,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         binding.bottomNav.setOnNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.navigation_insight:
-
+                    InsightFragment insightFragment=new InsightFragment();
+                    viewFragment(insightFragment,"INSIGHT");
 
                     return true;
                 case R.id.navigation_connect:

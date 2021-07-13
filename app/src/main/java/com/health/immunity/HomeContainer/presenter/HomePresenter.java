@@ -227,52 +227,52 @@ public class HomePresenter implements IHomePresenter{
         saveUserKPI(steps2,distance2);
     }
 
-    @Override
-    public void getGoogleFitData(Activity activity, GoogleSignInAccount account, Long startTime, Long endTime, DataType dataType, Field field) {
-        final Task<DataReadResponse> response = Fitness.getHistoryClient(activity, account)
-                .readData(new DataReadRequest.Builder()
-                        .read(dataType)
-                        .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
-                        .build());
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                totalSteps = "";
-                DataReadResponse readDataResult = null;
-                try {
-                    readDataResult = Tasks.await(response);
-                    final DataSet dataSet = readDataResult.getDataSet(dataType);
-
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-
-                            int steps = 0;
-                            // Toast.makeText(HomeActivity.this, "Size: "+dataSet.getDataPoints().size(), Toast.LENGTH_SHORT).show();
-
-                            Calendar date = Calendar.getInstance();
-                            for(int i=0;i<dataSet.getDataPoints().size();i++)
-                            {
-                                long time = dataSet.getDataPoints().get(i).getTimestamp(TimeUnit.MILLISECONDS);
-                                date.setTimeInMillis(time);
-                                System.out.println("##############stepsnew1"+ dataSet.getDataPoints().get(i).getOriginalDataSource().getStreamName());
-                                if(! "user_input".equals(dataSet.getDataPoints().get(i).getOriginalDataSource().getStreamName())) {
-                                    totalSteps += dataSet.getDataPoints().get(i).getValue(field).toString() + " " + date.get(Calendar.DAY_OF_MONTH) + ",";
-                                }
-                            }
-
-                            System.out.println("##############stepsnew"+totalSteps);
-                        }
-                    });
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
+//    @Override
+//    public void getGoogleFitData(Activity activity, GoogleSignInAccount account, Long startTime, Long endTime, DataType dataType, Field field) {
+//        final Task<DataReadResponse> response = Fitness.getHistoryClient(activity, account)
+//                .readData(new DataReadRequest.Builder()
+//                        .read(dataType)
+//                        .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
+//                        .build());
+//
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                totalSteps = "";
+//                DataReadResponse readDataResult = null;
+//                try {
+//                    readDataResult = Tasks.await(response);
+//                    final DataSet dataSet = readDataResult.getDataSet(dataType);
+//
+//                    activity.runOnUiThread(new Runnable() {
+//                        @Override
+//                        public void run() {
+//
+//                            int steps = 0;
+//                            // Toast.makeText(HomeActivity.this, "Size: "+dataSet.getDataPoints().size(), Toast.LENGTH_SHORT).show();
+//
+//                            Calendar date = Calendar.getInstance();
+//                            for(int i=0;i<dataSet.getDataPoints().size();i++)
+//                            {
+//                                long time = dataSet.getDataPoints().get(i).getTimestamp(TimeUnit.MILLISECONDS);
+//                                date.setTimeInMillis(time);
+//                                System.out.println("##############stepsnew1"+ dataSet.getDataPoints().get(i).getOriginalDataSource().getStreamName());
+//                                if(! "user_input".equals(dataSet.getDataPoints().get(i).getOriginalDataSource().getStreamName())) {
+//                                    totalSteps += dataSet.getDataPoints().get(i).getValue(field).toString() + " " + date.get(Calendar.DAY_OF_MONTH) + ",";
+//                                }
+//                            }
+//
+//                            System.out.println("##############stepsnew"+totalSteps);
+//                        }
+//                    });
+//                } catch (ExecutionException e) {
+//                    e.printStackTrace();
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
+//    }
 
 
 }

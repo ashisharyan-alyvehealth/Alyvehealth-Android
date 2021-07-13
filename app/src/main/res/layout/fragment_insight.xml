@@ -1,14 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".insight.InsightFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:fillViewport="true">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginRight="@dimen/dimen_10dp"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
+
+
+            <TextView
+                android:visibility="invisible"
+                android:id="@+id/tvOrgGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Metrics"
+                android:textColor="@color/headingcolor"
+                style="@style/bold_sub_heading_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:textColor="@color/headingcolor"
+                style="@style/nano_text_size"
+                android:text="Compare"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:id="@+id/comparetv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toLeftOf="@+id/swtchbtn"
+                app:layout_constraintTop_toTopOf="@+id/tvOrgGuide"
+                app:layout_constraintBottom_toBottomOf="@+id/tvOrgGuide"
+
+                ></TextView>
+
+            <Switch
+                style="@style/option_text_size"
+                android:checked="false"
+                android:textOff="OFF"
+                android:textOn="ON"
+                android:switchMinWidth="30dp"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:id="@+id/swtchbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toLeftOf="@+id/tvfilter"
+                app:layout_constraintTop_toTopOf="@+id/tvOrgGuide"
+                app:layout_constraintBottom_toBottomOf="@+id/tvOrgGuide"
+
+                ></Switch>
+
+            <ImageView
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvOrgGuide"
+                app:layout_constraintBottom_toBottomOf="@+id/tvOrgGuide"
+                android:id="@+id/tvfilter"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dimen_20dp"
+                android:src="@drawable/filter"
+                app:tint="@color/colorPrimary" />
+
+
+
+            <com.health.immunity.insight.PagerSlidingTabStrip
+                style="@style/nano_text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvOrgGuide"
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="48dip"
+                app:pstsIndicatorHeight="@dimen/dimen_2dp"
+                app:pstsDividerColor="@color/white"
+                app:pstsIndicatorColor="@color/colorPrimary"
+                />
+
+            <TextView
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:text="Your comparision set is"
+                android:textColor="@color/colorPrimary"
+                android:id="@+id/tvloren"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/micro_text_size"
+                android:lineSpacingExtra="@dimen/dimen_10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tabs" />
+
+            <com.health.immunity.insight.WrapContentHeightViewPager
+                android:id="@+id/vpPager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvloren"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </com.health.immunity.insight.WrapContentHeightViewPager>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>
+
+
