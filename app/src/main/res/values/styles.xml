@@ -111,4 +111,5 @@
     <style name="SpotsDialogDefault" parent="android:Theme.DeviceDefault.Light.Dialog">
         <item name="DialogSpotCount">5</item>
     </style>
+
 </resources>
