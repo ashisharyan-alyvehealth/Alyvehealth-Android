@@ -17,6 +17,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.health.immunity.IConstant.BASE_URL_REPORTS;
+
 public class ActPresenter implements IActPresenter{
     IActFragment view;
     final String[] url = {""};
@@ -49,6 +51,10 @@ public class ActPresenter implements IActPresenter{
                                     }
                                     if(urlPos==997){
                                         url[0] = "https://programs.alyve.health/acts?tabId=challenges";
+                                        view1.loadUrl(url[0]);
+                                    }
+                                    if(urlPos==996){
+                                        url[0] = BASE_URL_REPORTS + token;
                                         view1.loadUrl(url[0]);
                                     }
                                 }

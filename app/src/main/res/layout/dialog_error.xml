@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/dimen_15dp"
+    android:layout_margin="@dimen/dimen_10dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:text="Alert"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:layout_marginTop="@dimen/dimen_18sp"
+            android:textColor="@color/headingcolor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            android:text="Please enter valid personal or\nwork email"
+             android:gravity="center"
+            android:textSize="24sp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:textColor="@color/headingcolor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+             android:gravity="center"
+             android:layout_marginTop="@dimen/dimen_20dp"
+            android:background="@drawable/dotted_line"
+             android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/btnSave"
+            android:layout_width="@dimen/dimen_100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:layout_marginBottom="@dimen/dimen_20dp"
+            android:background="@drawable/gradiant"
+            android:text="OK"
+            style="@style/option_text_size"
+            android:textColor="@android:color/white"
+            android:visibility="visible"
+            />
+v
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
+
+
+

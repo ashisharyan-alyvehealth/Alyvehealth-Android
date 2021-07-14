@@ -200,7 +200,7 @@ public class InsightFragment extends Fragment {
 
     }
     public static class MyPagerAdapter extends FragmentPagerAdapter {
-        private static int NUM_ITEMS = 2;
+        private static int NUM_ITEMS = 3;
 
         public MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
@@ -220,9 +220,9 @@ public class InsightFragment extends Fragment {
                     return PedoActivityFragment.newInstance("0", "Page # 1");
                 case 1: // Fragment # 0 - This will show FirstFragment different title
                     return VitalFragment.newInstance("0", "Page # 2");
-              //  case 2: // Fragment # 1 - This will show SecondFragment
+                case 2: // Fragment # 1 - This will show SecondFragment
 
-                   // return MyReportsFragment.newInstance(0,"Page # 3");
+                    return ReportsFragment.newInstance("0","Page # 3");
                 default:
                     return null;
             }
@@ -239,9 +239,9 @@ public class InsightFragment extends Fragment {
                 case 1:
 
                     return "Vitals";
-//                case 2:
-//
-//                    return "Reports";
+                case 2:
+
+                    return "Reports";
 
 
 

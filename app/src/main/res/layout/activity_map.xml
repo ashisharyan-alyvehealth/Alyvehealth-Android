@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.MapActivity">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="48dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_pin"
+        android:translationY="-18dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:background="@drawable/my_search_background"
+        android:padding="@dimen/dimen_5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <AutoCompleteTextView
+            style="@style/sub_sub_heading_text_size"
+            android:textColor="@color/colorPrimary"
+            android:background="@null"
+            android:id="@+id/autoText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/search_location"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:visibility="gone"
+            android:background="@android:color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_45dp">
+            <ImageView
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:layout_marginLeft="@dimen/dimen_5dp"
+                android:layout_gravity="center"
+                android:id="@+id/crss"
+                android:src="@drawable/shape_952"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></ImageView>
+        </LinearLayout>
+
+
+        <Button
+            style="@style/sub_sub_heading_text_size"
+            android:id="@+id/btnDone"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_45dp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/gradiant"
+            android:text="@string/done" />
+    </LinearLayout>
+</RelativeLayout>

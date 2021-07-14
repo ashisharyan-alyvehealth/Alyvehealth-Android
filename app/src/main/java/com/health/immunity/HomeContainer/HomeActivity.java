@@ -75,11 +75,13 @@ import com.health.immunity.challenges.ChallengesFragment;
 import com.health.immunity.databinding.ActivityHomeBinding;
 import com.health.immunity.expertchat.ExpertChatFragment;
 import com.health.immunity.insight.InsightFragment;
+import com.health.immunity.login.LoginActivity;
 import com.health.immunity.myprogram.MyProgramFragment;
 import com.health.immunity.pedo.*;
 import com.health.immunity.pedo.ui.Fragment_Settings;
 import com.health.immunity.pedo.util.Logger;
 import com.health.immunity.pedo.util.Util;
+import com.health.immunity.profile.ProfileActivity;
 import com.health.immunity.retrofit.RetrofitClient;
 import com.health.immunity.todo.TodoFragment;
 
@@ -291,12 +293,22 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
                     drawer.closeDrawer(GravityCompat.START);
 
+                {
+
+                    PreferenceHelper.clearAllPreferences(context);
+                    PreferenceHelper.setBooleanPreference(context, IConstant.IS_LOGIN, false);
+                    Intent intent = new Intent(context, LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+
+                }
 
 
                 break;
                 case R.id.tvedit:
-
-
+                    drawer.closeDrawer(GravityCompat.START);
+                    Intent intent = new Intent(context, ProfileActivity.class);
+                    startActivity(intent);
 
                     break;
                 case R.id.tvAbtus:

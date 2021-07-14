@@ -8,6 +8,10 @@ import com.health.immunity.act.model.SourceResponse;
 import com.health.immunity.login.model.LoginMobile;
 import com.health.immunity.login.model.MobileOTPModel;
 import com.health.immunity.login.model.OnBoardResponse;
+import com.health.immunity.profile.model.GetProfileResponse;
+import com.health.immunity.profile.model.ProfileResponse;
+import com.health.immunity.profile.model.WorkEmailResponse;
+import com.health.immunity.profile.model.updateZohoIdResponse;
 //import com.health.immunity.blue.bluetooth.Model;
 //import com.health.immunity.model.AQIResponse;
 //import com.health.immunity.model.CommunityResponse;
@@ -164,9 +168,9 @@ public interface ApiInterface {
 //
 //    @GET("organisation-guidance")
 //    Call<NoticeResponse> noticeCall(@Header("Authorization") String token);
-//
-//    @GET("get-profile")
-//    Call<GetProfileResponse> getProfileCall(@Header("Authorization") String token);
+
+    @GET("get-profile")
+    Call<GetProfileResponse> getProfileCall(@Header("Authorization") String token);
 //
 //    @POST("notificationTest")
 //    Call notificationTest();
@@ -175,20 +179,21 @@ public interface ApiInterface {
 //    @GET("insights")
 //    Call<InsightResponse> insightCall(@Header("Authorization") String token);
 //
-//    @Multipart
-//    @POST("update-profile")
-//    Call<ProfileResponse> profileCall(@Header("Authorization") String token,
-//                                      @Part("phone_number") RequestBody phone_number,
-//                                      @Part("dob") RequestBody dob,
-//                                      @Part("email") RequestBody email,
-//                                      @Part("personal_email") RequestBody personalemail,
-//                                      @Part("office_lat") RequestBody officelat,
-//                                      @Part("office_lon") RequestBody officelon,
-//                                      @Part("home_lat") RequestBody homelat,
-//                                      @Part("home_lon") RequestBody homelon,
-//                                      @Part("home_address") RequestBody homeadd,
-//                                      @Part("office_address") RequestBody officeadd,
-//                                      @Part MultipartBody.Part images);
+    @Multipart
+    @POST("update-profile")
+    Call<ProfileResponse> profileCall(@Header("Authorization") String token,
+                                      @Part("name") RequestBody name,
+                                      @Part("phone_number") RequestBody phone_number,
+                                      @Part("dob") RequestBody dob,
+                                      @Part("email") RequestBody email,
+                                      @Part("personal_email") RequestBody personalemail,
+                                      @Part("office_lat") RequestBody officelat,
+                                      @Part("office_lon") RequestBody officelon,
+                                      @Part("home_lat") RequestBody homelat,
+                                      @Part("home_lon") RequestBody homelon,
+                                      @Part("home_address") RequestBody homeadd,
+                                      @Part("office_address") RequestBody officeadd,
+                                      @Part MultipartBody.Part images);
 //    @Multipart
 //    @POST("update-profile")
 //    Call<ProfileResponse> updateimageprofileCall(@Header("Authorization") String token,
@@ -212,11 +217,11 @@ public interface ApiInterface {
 //                                     @Field("latitute") String latitute,
 //                                     @Field("longitute") String longitute);
 //
-//    @POST("generatePersonalizedLink")
-//    @FormUrlEncoded
-//    Call<WorkEmailResponse> workEmailCall(@Header("Authorization") String token,
-//                                          @Field("email") String email,
-//                                          @Field("resend") String resend);
+    @POST("generatePersonalizedLink")
+    @FormUrlEncoded
+    Call<WorkEmailResponse> workEmailCall(@Header("Authorization") String token,
+                                          @Field("email") String email,
+                                          @Field("resend") String resend);
 //
 //    @POST("near-me")
 //    @FormUrlEncoded
@@ -357,10 +362,10 @@ public interface ApiInterface {
 //                                    @Field("height_data") String datahei,
 //                                    @Field("weight_data") String datawei);
 //
-//    @POST("updateZohoId")
-//    @FormUrlEncoded
-//    Call<updateZohoIdResponse> gitstatusCall(@Header("Authorization") String token,
-//                                             @Field("google_healthkit_status") String source);
+    @POST("updateZohoId")
+    @FormUrlEncoded
+    Call<updateZohoIdResponse> gitstatusCall(@Header("Authorization") String token,
+                                             @Field("google_healthkit_status") String source);
 //    @POST("post_user_permission")
 //    @FormUrlEncoded
 //    Call<updatrPedoIdResponse> pedostatusCall(@Header("Authorization") String token,
