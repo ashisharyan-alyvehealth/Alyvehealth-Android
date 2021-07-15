@@ -43,8 +43,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".profile.MapActivity"></activity>
-        <activity android:name=".profile.ProfileActivity"
+        <activity android:name=".insight.FilterActivity"></activity>
+        <activity android:name=".insight.GraphActivity" />
+        <activity android:name=".profile.MapActivity" />
+        <activity
+            android:name=".profile.ProfileActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".HomeContainer.HomeActivity"
@@ -69,9 +72,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <service
             android:name=".sensor.SensorListener"
             android:enabled="true"

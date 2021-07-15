@@ -5,6 +5,9 @@ import com.health.immunity.HomeContainer.model.JsonObjectResponse;
 import com.health.immunity.HomeContainer.model.PEDORESPONSE;
 import com.health.immunity.HomeContainer.model.TokenResponse;
 import com.health.immunity.act.model.SourceResponse;
+import com.health.immunity.insight.model.GetKpiCall;
+import com.health.immunity.insight.model.GraphResponse;
+import com.health.immunity.insight.model.MyCommunitiesResponse;
 import com.health.immunity.login.model.LoginMobile;
 import com.health.immunity.login.model.MobileOTPModel;
 import com.health.immunity.login.model.OnBoardResponse;
@@ -116,15 +119,15 @@ public interface ApiInterface {
     @FormUrlEncoded
     Call<PEDORESPONSE> pedoCall(@Header("Authorization") String token,
                                 @Field("data") String data);
-//
-//    @POST("getHealthKpis")
-//    @FormUrlEncoded
-//    Call<GetKpiCall> GetKpiCall(@Header("Authorization") String token,
-//                                @Field("flag") String flag,
-//                                @Field("user") String user,
-//                                @Field("age_month") String age,
-//                                @Field("gender") String gender,
-//                                @Field("community") String community);
+
+    @POST("getHealthKpis")
+    @FormUrlEncoded
+    Call<GetKpiCall> GetKpiCall(@Header("Authorization") String token,
+                                @Field("flag") String flag,
+                                @Field("user") String user,
+                                @Field("age_month") String age,
+                                @Field("gender") String gender,
+                                @Field("community") String community);
 //
     @GET("check-in-status")
     Call<OnBoardResponse> checkInStatusCall(@Header("Authorization") String token);
@@ -300,8 +303,8 @@ public interface ApiInterface {
 //                                                @Field("invited_mobile_number") String invnum/*,
 //                                                @Field("invited_name") String invname*/);
 //
-//    @GET("myCommunities")
-//    Call<MyCommunitiesResponse> myCommunitiesCall(@Header("Authorization") String token);
+    @GET("myCommunities")
+    Call<MyCommunitiesResponse> myCommunitiesCall(@Header("Authorization") String token);
 //
 //    @POST("invitationResponse")
 //    @FormUrlEncoded
@@ -332,15 +335,15 @@ public interface ApiInterface {
 //    Call<PendingInvitationsResponse> pendingInvitationsCall(@Header("Authorization") String token);
 //
 //
-//    @POST("getKpiGraphDetail")
-//    @FormUrlEncoded
-//    Call<GraphResponse> GraphResponseCall(@Header("Authorization") String token,
-//                                          @Field("type") String type,
-//                                          @Field("kpi_id") String kpiid,
-//                                          @Field("user") String user,
-//                                          @Field("age_month") String age,
-//                                          @Field("gender") String gender,
-//                                          @Field("community") String community);
+    @POST("getKpiGraphDetail")
+    @FormUrlEncoded
+    Call<GraphResponse> GraphResponseCall(@Header("Authorization") String token,
+                                          @Field("type") String type,
+                                          @Field("kpi_id") String kpiid,
+                                          @Field("user") String user,
+                                          @Field("age_month") String age,
+                                          @Field("gender") String gender,
+                                          @Field("community") String community);
 //
 //    @GET("?token=61f1e81979bcba5fd3738f937e433a3a7e59f11f")
 //    Call<AQIResponse> AQICall();

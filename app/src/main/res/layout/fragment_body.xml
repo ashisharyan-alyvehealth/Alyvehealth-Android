@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+
+                android:id="@+id/tvNoGuidance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_regular"
+                android:textSize="@dimen/dimen_16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                app:layout_constraintTop_toTopOf="@+id/healthyrange"
+                app:layout_constraintBottom_toBottomOf="@+id/healthyrange"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/rectangle_color"
+                android:layout_width="@dimen/dimen_20dp"
+                android:layout_height="@dimen/dimen_20dp"
+                android:background="#47C6AB" />
+
+
+            <TextView
+                android:layout_marginLeft="@dimen/dimen_5dp"
+                android:text="Healthy range"
+                android:id="@+id/healthyrange"
+                android:layout_marginBottom="@dimen/dimen_20dp"
+                style="@style/micro_text_size"
+                android:textColor="@color/headingcolor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/rectangle_color"
+                app:layout_constraintTop_toBottomOf="@+id/tvNoGuidance"></TextView>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/healthyrange"
+                app:layout_constraintBottom_toBottomOf="@+id/healthyrange">
+                <View
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:id="@+id/rectangle_colorcom"
+                    android:layout_width="@dimen/dimen_20dp"
+                    android:layout_height="@dimen/dimen_20dp"
+                    android:background="#8775ed" />
+
+                <TextView
+                    android:layout_marginLeft="@dimen/dimen_5dp"
+                    app:layout_constraintLeft_toRightOf="@+id/rectangle_colorcom"
+                    app:layout_constraintTop_toTopOf="@+id/rectangle_colorcom"
+                    app:layout_constraintBottom_toBottomOf="@+id/rectangle_colorcom"
+                    android:text="My value"
+                    android:id="@+id/healthyrangecom"
+                    style="@style/time_text_size"
+                    android:textColor="@color/headingcolor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"></TextView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <View
+                android:layout_marginRight="@dimen/dimen_5dp"
+                android:visibility="invisible"
+                app:layout_constraintTop_toTopOf="@+id/myrange"
+                app:layout_constraintBottom_toBottomOf="@+id/myrange"
+                app:layout_constraintEnd_toStartOf="@+id/myrange"
+                android:id="@+id/rectangle_at_the_top"
+                android:layout_width="@dimen/dimen_20dp"
+                android:layout_height="@dimen/dimen_20dp"
+                android:background="#D0A000"
+                />
+            <TextView
+                android:visibility="invisible"
+                android:text="Comparison"
+                android:id="@+id/myrange"
+                android:layout_marginBottom="@dimen/dimen_20dp"
+                style="@style/time_text_size"
+                android:textColor="@color/headingcolor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvNoGuidance"></TextView>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvactivity"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/myrange" />
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>
+
+

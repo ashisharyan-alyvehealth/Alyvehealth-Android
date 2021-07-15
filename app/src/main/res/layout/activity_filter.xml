@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                android:id="@+id/ivHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="@dimen/dimen_12dp"
+                android:padding="@dimen/dimen_12dp"
+                android:scaleType="center"
+                android:src="@drawable/back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/ivNavBar"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="Filter"
+                android:layout_marginStart="@dimen/dimen_30dp"
+                android:gravity="center"
+                android:textColor="@color/headingcolor"
+                style="@style/bold_sub_heading_text_size"
+                app:layout_constraintLeft_toRightOf="@+id/ivHeader"
+                app:layout_constraintBottom_toBottomOf="@+id/ivHeader"
+                app:layout_constraintTop_toTopOf="@+id/ivHeader" />
+
+            <!--  <TextView
+                  android:visibility="visible"
+                  android:id="@+id/ivcreate"
+                  android:layout_width="wrap_content"
+                  android:layout_height="50dp"
+                  android:gravity="center"
+                  android:text="Submit"
+                  android:textColor="#80000000"
+                  style="@style/option_text_size"
+                  android:layout_marginEnd="@dimen/dimen_10dp"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toTopOf="@id/ivNavBar"
+                  app:layout_constraintBottom_toBottomOf="@+id/ivNavBar"/>
+          -->
+            <TextView
+                android:id="@+id/ivcreate"
+                android:padding="@dimen/dimen_5dp"
+                android:paddingStart="@dimen/dimen_10dp"
+                android:paddingEnd="@dimen/dimen_10dp"
+                android:background="@drawable/gradiant"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SUBMIT"
+                android:textColor="@android:color/white"
+                style="@style/option_text_size"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/ivNavBar"
+                app:layout_constraintBottom_toBottomOf="@+id/ivNavBar"/>
+
+
+
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/tvtime"
+                style="@style/option_text_size"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Time"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                app:layout_constraintTop_toBottomOf="@id/ivHeader"
+                app:layout_constraintStart_toStartOf="parent"></TextView>
+            <CheckBox
+                android:visibility="gone"
+                android:button="@android:color/transparent"
+
+                android:layout_marginTop="@dimen/dimen_20dp"
+                style="@style/option_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Last week"
+                android:background="@drawable/background_language"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:paddingEnd="@dimen/dimen_20dp"
+                android:id="@+id/tvlastweek"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvtime"
+                app:layout_constraintStart_toStartOf="parent"></CheckBox>
+            <CheckBox
+                android:visibility="gone"
+                android:button="@android:color/transparent"
+
+                android:id="@+id/tvyesterday"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                style="@style/option_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yesterday"
+                android:background="@drawable/background_language"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:paddingEnd="@dimen/dimen_20dp"
+                app:layout_constraintLeft_toRightOf="@+id/tvlastweek"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvtime"
+                ></CheckBox>
+
+
+
+            <!-- <TextView
+                 android:layout_marginTop="@dimen/dimen_20dp"
+                 style="@style/option_text_size"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="All Immunity Users"
+                 android:background="@drawable/background_yesterday"
+                 android:textColor="@android:color/white"
+                 android:padding="@dimen/dimen_10dp"
+                 android:paddingStart="@dimen/dimen_20dp"
+                 android:paddingEnd="@dimen/dimen_20dp"
+                 android:id="@+id/tvalluser"
+                 android:layout_marginStart="@dimen/dimen_10dp"
+                 app:layout_constraintTop_toBottomOf="@id/rvGuidance"
+                 app:layout_constraintStart_toStartOf="parent"></TextView>
+             <TextView
+                 android:id="@+id/tvcomcom"
+                 android:layout_marginTop="@dimen/dimen_20dp"
+                 style="@style/option_text_size"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Community [ Orangemantra.com ]"
+                 android:background="@drawable/background_language"
+                 android:textColor="@color/colorPrimary"
+                 android:padding="@dimen/dimen_10dp"
+                 android:paddingStart="@dimen/dimen_20dp"
+                 android:paddingEnd="@dimen/dimen_20dp"
+                 app:layout_constraintStart_toStartOf="parent"
+                 android:layout_marginStart="@dimen/dimen_10dp"
+                 app:layout_constraintTop_toBottomOf="@id/tvalluser"
+                 ></TextView>
+             <TextView
+                 android:id="@+id/tvcomper"
+                 android:layout_marginTop="@dimen/dimen_20dp"
+                 style="@style/option_text_size"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Community [ Gaurav’s Family ]"
+                 android:background="@drawable/background_language"
+                 android:textColor="@color/colorPrimary"
+                 android:padding="@dimen/dimen_10dp"
+                 android:paddingStart="@dimen/dimen_20dp"
+                 android:paddingEnd="@dimen/dimen_20dp"
+                 app:layout_constraintStart_toStartOf="parent"
+                 android:layout_marginStart="@dimen/dimen_10dp"
+                 app:layout_constraintTop_toBottomOf="@id/tvcomcom"
+                 ></TextView>
+         -->
+            <TextView
+                android:id="@+id/tvages"
+                style="@style/option_text_size"
+                android:textColor="@color/headingcolor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ages"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvyesterday"
+                app:layout_constraintStart_toStartOf="parent"></TextView>
+            <CheckBox
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                style="@style/option_text_size"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="wrap_content"
+                android:text="All ages"
+                android:background="@drawable/background_language"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:paddingEnd="@dimen/dimen_20dp"
+                android:id="@+id/tvallages"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvages"
+                app:layout_constraintStart_toStartOf="parent"></CheckBox>
+            <CheckBox
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:id="@+id/tvunder25"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                style="@style/option_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Under 25"
+                android:background="@drawable/background_language"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:paddingEnd="@dimen/dimen_20dp"
+                app:layout_constraintLeft_toRightOf="@+id/tvallages"
+                app:layout_constraintRight_toLeftOf="@id/tv25above"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvages"
+                ></CheckBox>
+            <CheckBox
+                android:button="@android:color/transparent"
+                android:gravity="center"
+                android:id="@+id/tv25above"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                style="@style/option_text_size"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="wrap_content"
+                android:text="25-35"
+                android:background="@drawable/background_language"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:paddingEnd="@dimen/dimen_20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvages"
+                ></CheckBox>
+
+            //
+            <CheckBox
+                android:button="@android:color/transparent"
+
+                android:layout_marginTop="@dimen/dimen_20dp"
+                style="@style/option_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="35-40"
+                android:background="@drawable/background_language"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:paddingEnd="@dimen/dimen_20dp"
+                android:id="@+id/tv35above"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvallages"
+                app:layout_constraintStart_toStartOf="parent"></CheckBox>
+            <CheckBox
+                android:button="@android:color/transparent"
+
+                android:id="@+id/tv40above"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                style="@style/option_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="40-50"
+                android:background="@drawable/background_language"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:paddingEnd="@dimen/dimen_20dp"
+                app:layout_constraintLeft_toRightOf="@+id/tv35above"
+                app:layout_constraintRight_toLeftOf="@+id/tv50above"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvallages"
+                ></CheckBox>
+            <CheckBox
+                android:button="@android:color/transparent"
+
+                android:id="@+id/tv50above"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                style="@style/option_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="50-60"
+                android:background="@drawable/background_language"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:paddingEnd="@dimen/dimen_20dp"
+                app:layout_constraintLeft_toRightOf="@+id/tv40above"
+                app:layout_constraintRight_toLeftOf="@id/tv60above"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvallages"
+                ></CheckBox>
+
+            <CheckBox
+                android:button="@android:color/transparent"
+
+                android:id="@+id/tv60above"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                style="@style/option_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="60+"
+                android:background="@drawable/background_language"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:paddingEnd="@dimen/dimen_20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvallages"
+                ></CheckBox>
+            //
+
+            <TextView
+                android:id="@+id/tvgender"
+                style="@style/option_text_size"
+                android:textColor="@color/headingcolor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Genders"
+                android:layout_marginTop="@dimen/dimen_40dp"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                app:layout_constraintTop_toBottomOf="@id/tv35above"
+                app:layout_constraintStart_toStartOf="parent"></TextView>
+            <CheckBox
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                style="@style/option_text_size"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="All Genders"
+                android:background="@drawable/background_language"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:paddingEnd="@dimen/dimen_20dp"
+                android:id="@+id/tvallgender"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvgender"
+                app:layout_constraintStart_toStartOf="parent"></CheckBox>
+            <CheckBox
+                android:button="@android:color/transparent"
+
+                android:id="@+id/tvmale"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                style="@style/option_text_size"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Male"
+                android:gravity="center"
+                android:background="@drawable/background_language"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:paddingEnd="@dimen/dimen_20dp"
+                app:layout_constraintLeft_toRightOf="@+id/tvallgender"
+                app:layout_constraintRight_toLeftOf="@id/tvFemale"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvgender"
+                ></CheckBox>
+            <CheckBox
+                android:gravity="center"
+                android:button="@android:color/transparent"
+                android:id="@+id/tvFemale"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                style="@style/option_text_size"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="Female"
+                android:background="@drawable/background_language"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:paddingEnd="@dimen/dimen_20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvgender"
+                ></CheckBox>
+
+            <TextView
+                android:id="@+id/tvuser"
+                style="@style/option_text_size"
+                android:textColor="@color/headingcolor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Communities"
+                android:layout_marginTop="@dimen/dimen_40dp"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvallgender"
+                app:layout_constraintStart_toStartOf="parent"></TextView>
+
+            <CheckBox
+                android:button="@android:color/transparent"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                style="@style/option_text_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="All Alyve Users"
+                android:background="@drawable/background_language"
+                android:textColor="@color/colorPrimary"
+                android:padding="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:paddingEnd="@dimen/dimen_20dp"
+                android:id="@+id/tvalluser"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                app:layout_constraintTop_toBottomOf="@id/tvuser"
+                app:layout_constraintStart_toStartOf="parent"></CheckBox>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvGuidance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvalluser" />
+            -->
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+</layout>
