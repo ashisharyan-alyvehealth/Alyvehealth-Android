@@ -7,12 +7,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/ivHeader"
@@ -28,15 +26,15 @@
 
             <TextView
                 android:id="@+id/ivNavBar"
+                style="@style/bold_sub_heading_text_size"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
-                android:text="Filter"
                 android:layout_marginStart="@dimen/dimen_30dp"
                 android:gravity="center"
+                android:text="Filter"
                 android:textColor="@color/headingcolor"
-                style="@style/bold_sub_heading_text_size"
-                app:layout_constraintLeft_toRightOf="@+id/ivHeader"
                 app:layout_constraintBottom_toBottomOf="@+id/ivHeader"
+                app:layout_constraintLeft_toRightOf="@+id/ivHeader"
                 app:layout_constraintTop_toTopOf="@+id/ivHeader" />
 
             <!--  <TextView
@@ -55,72 +53,70 @@
           -->
             <TextView
                 android:id="@+id/ivcreate"
+                style="@style/option_text_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                android:background="@drawable/gradiant"
                 android:padding="@dimen/dimen_5dp"
                 android:paddingStart="@dimen/dimen_10dp"
                 android:paddingEnd="@dimen/dimen_10dp"
-                android:background="@drawable/gradiant"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="SUBMIT"
                 android:textColor="@android:color/white"
-                style="@style/option_text_size"
-                android:layout_marginEnd="@dimen/dimen_10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/ivNavBar"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/ivNavBar"
-                app:layout_constraintBottom_toBottomOf="@+id/ivNavBar"/>
-
-
+                app:layout_constraintTop_toTopOf="@id/ivNavBar" />
 
 
             <TextView
-                android:visibility="gone"
                 android:id="@+id/tvtime"
                 style="@style/option_text_size"
-                android:textColor="@android:color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_10dp"
                 android:text="Time"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                app:layout_constraintTop_toBottomOf="@id/ivHeader"
-                app:layout_constraintStart_toStartOf="parent"></TextView>
-            <CheckBox
+                android:textColor="@android:color/black"
                 android:visibility="gone"
-                android:button="@android:color/transparent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivHeader"></TextView>
 
-                android:layout_marginTop="@dimen/dimen_20dp"
-                style="@style/option_text_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Last week"
-                android:background="@drawable/background_language"
-                android:textColor="@color/colorPrimary"
-                android:padding="@dimen/dimen_10dp"
-                android:paddingStart="@dimen/dimen_20dp"
-                android:paddingEnd="@dimen/dimen_20dp"
+            <CheckBox
                 android:id="@+id/tvlastweek"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                app:layout_constraintTop_toBottomOf="@id/tvtime"
-                app:layout_constraintStart_toStartOf="parent"></CheckBox>
-            <CheckBox
-                android:visibility="gone"
-                android:button="@android:color/transparent"
-
-                android:id="@+id/tvyesterday"
-                android:layout_marginTop="@dimen/dimen_20dp"
                 style="@style/option_text_size"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Yesterday"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginTop="@dimen/dimen_20dp"
                 android:background="@drawable/background_language"
-                android:textColor="@color/colorPrimary"
+                android:button="@android:color/transparent"
                 android:padding="@dimen/dimen_10dp"
                 android:paddingStart="@dimen/dimen_20dp"
                 android:paddingEnd="@dimen/dimen_20dp"
-                app:layout_constraintLeft_toRightOf="@+id/tvlastweek"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                app:layout_constraintTop_toBottomOf="@id/tvtime"
-                ></CheckBox>
+                android:text="Last week"
+                android:textColor="@color/colorPrimary"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvtime"></CheckBox>
 
+            <CheckBox
+                android:id="@+id/tvyesterday"
+                style="@style/option_text_size"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:background="@drawable/background_language"
+                android:button="@android:color/transparent"
+                android:padding="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_20dp"
+                android:paddingEnd="@dimen/dimen_20dp"
+                android:text="Yesterday"
+                android:textColor="@color/colorPrimary"
+                android:visibility="gone"
+                app:layout_constraintLeft_toRightOf="@+id/tvlastweek"
+                app:layout_constraintTop_toBottomOf="@id/tvtime"></CheckBox>
 
 
             <!-- <TextView
@@ -171,263 +167,322 @@
                  app:layout_constraintTop_toBottomOf="@id/tvcomcom"
                  ></TextView>
          -->
-            <TextView
-                android:id="@+id/tvages"
-                style="@style/option_text_size"
-                android:textColor="@color/headingcolor"
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ages"
-                android:layout_marginTop="@dimen/dimen_20dp"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                app:layout_constraintTop_toBottomOf="@id/tvyesterday"
-                app:layout_constraintStart_toStartOf="parent"></TextView>
-            <CheckBox
-                android:button="@android:color/transparent"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/dimen_20dp"
-                style="@style/option_text_size"
-                android:layout_width="@dimen/dimen_120dp"
-                android:layout_height="wrap_content"
-                android:text="All ages"
-                android:background="@drawable/background_language"
-                android:textColor="@color/colorPrimary"
-                android:padding="@dimen/dimen_10dp"
-                android:paddingStart="@dimen/dimen_20dp"
-                android:paddingEnd="@dimen/dimen_20dp"
-                android:id="@+id/tvallages"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                app:layout_constraintTop_toBottomOf="@id/tvages"
-                app:layout_constraintStart_toStartOf="parent"></CheckBox>
-            <CheckBox
-                android:button="@android:color/transparent"
-                android:gravity="center"
-                android:id="@+id/tvunder25"
-                android:layout_marginTop="@dimen/dimen_20dp"
-                style="@style/option_text_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Under 25"
-                android:background="@drawable/background_language"
-                android:textColor="@color/colorPrimary"
-                android:padding="@dimen/dimen_10dp"
-                android:paddingStart="@dimen/dimen_20dp"
-                android:paddingEnd="@dimen/dimen_20dp"
-                app:layout_constraintLeft_toRightOf="@+id/tvallages"
-                app:layout_constraintRight_toLeftOf="@id/tv25above"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                android:layout_marginEnd="@dimen/dimen_10dp"
-                app:layout_constraintTop_toBottomOf="@id/tvages"
-                ></CheckBox>
-            <CheckBox
-                android:button="@android:color/transparent"
-                android:gravity="center"
-                android:id="@+id/tv25above"
-                android:layout_marginTop="@dimen/dimen_20dp"
-                style="@style/option_text_size"
-                android:layout_width="@dimen/dimen_120dp"
-                android:layout_height="wrap_content"
-                android:text="25-35"
-                android:background="@drawable/background_language"
-                android:textColor="@color/colorPrimary"
-                android:padding="@dimen/dimen_10dp"
-                android:paddingStart="@dimen/dimen_20dp"
-                android:paddingEnd="@dimen/dimen_20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="@dimen/dimen_10dp"
-                app:layout_constraintTop_toBottomOf="@id/tvages"
-                ></CheckBox>
-
-            //
-            <CheckBox
-                android:button="@android:color/transparent"
-
-                android:layout_marginTop="@dimen/dimen_20dp"
-                style="@style/option_text_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="35-40"
-                android:background="@drawable/background_language"
-                android:textColor="@color/colorPrimary"
-                android:padding="@dimen/dimen_10dp"
-                android:paddingStart="@dimen/dimen_20dp"
-                android:paddingEnd="@dimen/dimen_20dp"
-                android:id="@+id/tv35above"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                app:layout_constraintTop_toBottomOf="@id/tvallages"
-                app:layout_constraintStart_toStartOf="parent"></CheckBox>
-            <CheckBox
-                android:button="@android:color/transparent"
-
-                android:id="@+id/tv40above"
-                android:layout_marginTop="@dimen/dimen_20dp"
-                style="@style/option_text_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="40-50"
-                android:background="@drawable/background_language"
-                android:textColor="@color/colorPrimary"
-                android:padding="@dimen/dimen_10dp"
-                android:paddingStart="@dimen/dimen_20dp"
-                android:paddingEnd="@dimen/dimen_20dp"
-                app:layout_constraintLeft_toRightOf="@+id/tv35above"
-                app:layout_constraintRight_toLeftOf="@+id/tv50above"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                app:layout_constraintTop_toBottomOf="@id/tvallages"
-                ></CheckBox>
-            <CheckBox
-                android:button="@android:color/transparent"
-
-                android:id="@+id/tv50above"
-                android:layout_marginTop="@dimen/dimen_20dp"
-                style="@style/option_text_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="50-60"
-                android:background="@drawable/background_language"
-                android:textColor="@color/colorPrimary"
-                android:padding="@dimen/dimen_10dp"
-                android:paddingStart="@dimen/dimen_20dp"
-                android:paddingEnd="@dimen/dimen_20dp"
-                app:layout_constraintLeft_toRightOf="@+id/tv40above"
-                app:layout_constraintRight_toLeftOf="@id/tv60above"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                android:layout_marginEnd="@dimen/dimen_10dp"
-                app:layout_constraintTop_toBottomOf="@id/tvallages"
-                ></CheckBox>
-
-            <CheckBox
-                android:button="@android:color/transparent"
-
-                android:id="@+id/tv60above"
-                android:layout_marginTop="@dimen/dimen_20dp"
-                style="@style/option_text_size"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="60+"
-                android:background="@drawable/background_language"
-                android:textColor="@color/colorPrimary"
-                android:padding="@dimen/dimen_10dp"
-                android:paddingStart="@dimen/dimen_20dp"
-                android:paddingEnd="@dimen/dimen_20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                android:layout_marginEnd="@dimen/dimen_10dp"
-                app:layout_constraintTop_toBottomOf="@id/tvallages"
-                ></CheckBox>
-            //
-
-            <TextView
-                android:id="@+id/tvgender"
-                style="@style/option_text_size"
-                android:textColor="@color/headingcolor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Genders"
-                android:layout_marginTop="@dimen/dimen_40dp"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                app:layout_constraintTop_toBottomOf="@id/tv35above"
-                app:layout_constraintStart_toStartOf="parent"></TextView>
-            <CheckBox
-                android:gravity="center"
-                android:button="@android:color/transparent"
-                android:layout_marginTop="@dimen/dimen_20dp"
-                style="@style/option_text_size"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:text="All Genders"
-                android:background="@drawable/background_language"
-                android:textColor="@color/colorPrimary"
-                android:padding="@dimen/dimen_10dp"
-                android:paddingStart="@dimen/dimen_20dp"
-                android:paddingEnd="@dimen/dimen_20dp"
-                android:id="@+id/tvallgender"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                app:layout_constraintTop_toBottomOf="@id/tvgender"
-                app:layout_constraintStart_toStartOf="parent"></CheckBox>
-            <CheckBox
-                android:button="@android:color/transparent"
-
-                android:id="@+id/tvmale"
-                android:layout_marginTop="@dimen/dimen_20dp"
-                style="@style/option_text_size"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Male"
-                android:gravity="center"
-                android:background="@drawable/background_language"
-                android:textColor="@color/colorPrimary"
-                android:padding="@dimen/dimen_10dp"
-                android:paddingStart="@dimen/dimen_20dp"
-                android:paddingEnd="@dimen/dimen_20dp"
-                app:layout_constraintLeft_toRightOf="@+id/tvallgender"
-                app:layout_constraintRight_toLeftOf="@id/tvFemale"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                android:layout_marginEnd="@dimen/dimen_10dp"
-                app:layout_constraintTop_toBottomOf="@id/tvgender"
-                ></CheckBox>
-            <CheckBox
-                android:gravity="center"
-                android:button="@android:color/transparent"
-                android:id="@+id/tvFemale"
-                android:layout_marginTop="@dimen/dimen_20dp"
-                style="@style/option_text_size"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:text="Female"
-                android:background="@drawable/background_language"
-                android:textColor="@color/colorPrimary"
-                android:padding="@dimen/dimen_10dp"
-                android:paddingStart="@dimen/dimen_20dp"
-                android:paddingEnd="@dimen/dimen_20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                android:layout_marginEnd="@dimen/dimen_10dp"
-                app:layout_constraintTop_toBottomOf="@id/tvgender"
-                ></CheckBox>
-
-            <TextView
-                android:id="@+id/tvuser"
-                style="@style/option_text_size"
-                android:textColor="@color/headingcolor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Communities"
-                android:layout_marginTop="@dimen/dimen_40dp"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                app:layout_constraintTop_toBottomOf="@id/tvallgender"
-                app:layout_constraintStart_toStartOf="parent"></TextView>
-
-            <CheckBox
-                android:button="@android:color/transparent"
-                android:layout_marginTop="@dimen/dimen_20dp"
-                style="@style/option_text_size"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="All Alyve Users"
-                android:background="@drawable/background_language"
-                android:textColor="@color/colorPrimary"
-                android:padding="@dimen/dimen_10dp"
-                android:paddingStart="@dimen/dimen_20dp"
-                android:paddingEnd="@dimen/dimen_20dp"
-                android:id="@+id/tvalluser"
-                android:layout_marginStart="@dimen/dimen_10dp"
-                android:layout_marginEnd="@dimen/dimen_10dp"
-                app:layout_constraintTop_toBottomOf="@id/tvuser"
-                app:layout_constraintStart_toStartOf="parent"></CheckBox>
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvGuidance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvalluser" />
-            -->
+                app:layout_constraintTop_toBottomOf="@+id/ivNavBar">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/tvages"
+                        style="@style/option_text_size"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Ages"
+                        android:textColor="@color/headingcolor"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+                    <CheckBox
+                        android:id="@+id/tvallages"
+                        style="@style/option_text_size"
+                        android:layout_width="@dimen/dimen_120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_10dp"
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:background="@drawable/background_language"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:padding="@dimen/dimen_10dp"
+                        android:paddingStart="@dimen/dimen_20dp"
+                        android:paddingEnd="@dimen/dimen_20dp"
+                        android:text="All ages"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvages"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/tvunder25"
+                        style="@style/option_text_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_10dp"
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:layout_marginEnd="@dimen/dimen_10dp"
+                        android:background="@drawable/background_language"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:padding="@dimen/dimen_10dp"
+                        android:paddingStart="@dimen/dimen_20dp"
+                        android:paddingEnd="@dimen/dimen_20dp"
+                        android:text="Under 25"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintLeft_toRightOf="@+id/tvallages"
+                        app:layout_constraintRight_toLeftOf="@id/tv25above"
+                        app:layout_constraintTop_toBottomOf="@id/tvages"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/tv25above"
+                        style="@style/option_text_size"
+                        android:layout_width="@dimen/dimen_120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:layout_marginEnd="@dimen/dimen_10dp"
+                        android:background="@drawable/background_language"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:padding="@dimen/dimen_10dp"
+                        android:paddingStart="@dimen/dimen_20dp"
+                        android:paddingEnd="@dimen/dimen_20dp"
+                        android:text="25-35"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvages"></CheckBox>
+
+                    //
+
+                    <CheckBox
+                        android:id="@+id/tv35above"
+
+                        style="@style/option_text_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_10dp"
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:background="@drawable/background_language"
+                        android:button="@android:color/transparent"
+                        android:padding="@dimen/dimen_10dp"
+                        android:paddingStart="@dimen/dimen_20dp"
+                        android:paddingEnd="@dimen/dimen_20dp"
+                        android:text="35-40"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvallages"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/tv40above"
+
+                        style="@style/option_text_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_10dp"
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:background="@drawable/background_language"
+                        android:button="@android:color/transparent"
+                        android:padding="@dimen/dimen_10dp"
+                        android:paddingStart="@dimen/dimen_20dp"
+                        android:paddingEnd="@dimen/dimen_20dp"
+                        android:text="40-50"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintLeft_toRightOf="@+id/tv35above"
+                        app:layout_constraintRight_toLeftOf="@+id/tv50above"
+                        app:layout_constraintTop_toBottomOf="@id/tvallages"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/tv50above"
+
+                        style="@style/option_text_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_10dp"
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:layout_marginEnd="@dimen/dimen_10dp"
+                        android:background="@drawable/background_language"
+                        android:button="@android:color/transparent"
+                        android:padding="@dimen/dimen_10dp"
+                        android:paddingStart="@dimen/dimen_20dp"
+                        android:paddingEnd="@dimen/dimen_20dp"
+                        android:text="50-60"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintLeft_toRightOf="@+id/tv40above"
+                        app:layout_constraintRight_toLeftOf="@id/tv60above"
+                        app:layout_constraintTop_toBottomOf="@id/tvallages"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/tv60above"
+
+                        style="@style/option_text_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_10dp"
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:layout_marginEnd="@dimen/dimen_10dp"
+                        android:background="@drawable/background_language"
+                        android:button="@android:color/transparent"
+                        android:padding="@dimen/dimen_10dp"
+                        android:paddingStart="@dimen/dimen_20dp"
+                        android:paddingEnd="@dimen/dimen_20dp"
+                        android:text="60+"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvallages"></CheckBox>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:layout_constraintEnd_toEndOf="@+id/cardView4"
+                app:layout_constraintStart_toStartOf="@+id/cardView4"
+                app:layout_constraintTop_toBottomOf="@+id/cardView4">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/tvgender"
+                        style="@style/option_text_size"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Genders"
+                        android:textColor="@color/headingcolor"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <CheckBox
+                        android:id="@+id/tvallgender"
+                        style="@style/option_text_size"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_10dp"
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:background="@drawable/background_language"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:padding="@dimen/dimen_10dp"
+                        android:paddingStart="@dimen/dimen_20dp"
+                        android:paddingEnd="@dimen/dimen_20dp"
+                        android:text="All Genders"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvgender"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/tvmale"
+
+                        style="@style/option_text_size"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_10dp"
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:layout_marginEnd="@dimen/dimen_10dp"
+                        android:background="@drawable/background_language"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:padding="@dimen/dimen_10dp"
+                        android:paddingStart="@dimen/dimen_20dp"
+                        android:paddingEnd="@dimen/dimen_20dp"
+                        android:text="Male"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintLeft_toRightOf="@+id/tvallgender"
+                        app:layout_constraintRight_toLeftOf="@id/tvFemale"
+                        app:layout_constraintTop_toBottomOf="@id/tvgender"></CheckBox>
+
+                    <CheckBox
+                        android:id="@+id/tvFemale"
+                        style="@style/option_text_size"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_10dp"
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:layout_marginEnd="@dimen/dimen_10dp"
+                        android:background="@drawable/background_language"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:padding="@dimen/dimen_10dp"
+                        android:paddingStart="@dimen/dimen_20dp"
+                        android:paddingEnd="@dimen/dimen_20dp"
+                        android:text="Female"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvgender"></CheckBox>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:layout_constraintEnd_toEndOf="@+id/cardView6"
+                app:layout_constraintStart_toStartOf="@+id/cardView6"
+                app:layout_constraintTop_toBottomOf="@+id/cardView6">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="20dp">
+
+                    <TextView
+                        android:id="@+id/tvuser"
+                        style="@style/option_text_size"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Communities"
+                        android:textColor="@color/headingcolor"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"></TextView>
+
+                    <CheckBox
+                        android:id="@+id/tvalluser"
+                        style="@style/option_text_size"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="@dimen/dimen_20dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/background_language"
+                        android:button="@android:color/transparent"
+                        android:padding="@dimen/dimen_10dp"
+                        android:paddingStart="@dimen/dimen_20dp"
+                        android:paddingEnd="@dimen/dimen_20dp"
+                        android:text="All Alyve Users"
+                        android:textColor="@color/colorPrimary"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvuser"></CheckBox>
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvGuidance"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/tvalluser"
+                        app:layout_constraintStart_toStartOf="@+id/tvalluser"
+                        app:layout_constraintTop_toBottomOf="@+id/tvalluser" />
+                    -->
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
