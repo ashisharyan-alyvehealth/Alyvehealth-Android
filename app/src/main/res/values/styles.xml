@@ -61,6 +61,7 @@
         <item name="colorControlHighlight">#47C6AB</item>
         <item name="android:progressDrawable">@drawable/greenprogress</item>
         <item name="android:minWidth">200dp</item>
+        <item name="cornerRadius">10dp</item>
     </style>
 
     <style name="heading_text_size">
