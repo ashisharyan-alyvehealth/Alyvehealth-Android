@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <com.github.ivbaranov.mli.MaterialLetterIcon
+        android:id="@+id/icont"
+        android:layout_width="@dimen/dimen_50dp"
+        android:layout_height="@dimen/dimen_50dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+    <TextView
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/dimen_18sp"
+        android:layout_marginLeft="@dimen/dimen_40dp"
+        android:text="@string/app_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/number" />
+            <CheckBox
+
+                android:text="@string/app_name"
+                android:paddingLeft="@dimen/dimen_10dp"
+                android:textColor="@color/headingcolor"
+                android:textSize="@dimen/dimen_16sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/chk_contact" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/viewadd1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/dimen_40dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:background="#fecfde" />
+
+
+
+
+</LinearLayout>

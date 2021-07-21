@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <TextView
+
+        android:layout_marginLeft="@dimen/dimen_10dp"
+        android:id="@+id/tvadd1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:textColor="@color/headingcolor"
+        style="@style/option_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Orangemantra.com" />
+
+    <ImageView
+        android:visibility="invisible"
+        android:id="@+id/imverify"
+        android:layout_marginLeft="@dimen/dimen_5dp"
+        android:background="@drawable/shape_1153_copy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/tvadd1"
+        app:layout_constraintTop_toTopOf="@id/tvadd1"
+        app:layout_constraintBottom_toBottomOf="@+id/tvadd1"
+        ></ImageView>
+    <ImageView
+        android:background="@drawable/ic_more_vert_black_24dp"
+        android:layout_marginRight="@dimen/dimen_10dp"
+        android:id="@+id/imvsetting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        style="@style/option_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageView
+        android:visibility="invisible"
+        android:background="@drawable/shape_952"
+        android:layout_marginRight="@dimen/dimen_20dp"
+        android:id="@+id/imvdecline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        style="@style/option_text_size"
+        app:layout_constraintRight_toLeftOf="@+id/imvsetting"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:layout_marginLeft="@dimen/dimen_10dp"
+        android:layout_marginRight="@dimen/dimen_10dp"
+        android:paddingBottom="@dimen/dimen_10dp"
+        android:id="@+id/tvsub1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:textColor="#99363636"
+        style="@style/time_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvadd1"
+        android:text="150 people joined" />
+
+    <View
+        android:id="@+id/viewadd1"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/dimen_10dp"
+
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:background="#fecfde"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvsub1" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

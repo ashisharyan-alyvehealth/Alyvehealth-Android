@@ -5,6 +5,13 @@ import com.health.immunity.HomeContainer.model.JsonObjectResponse;
 import com.health.immunity.HomeContainer.model.PEDORESPONSE;
 import com.health.immunity.HomeContainer.model.TokenResponse;
 import com.health.immunity.act.model.SourceResponse;
+import com.health.immunity.community.model.CommunityResponse;
+import com.health.immunity.community.model.CommunityUserListResponse;
+import com.health.immunity.community.model.DashboardResponse;
+import com.health.immunity.community.model.InsightResponse;
+import com.health.immunity.community.model.LeaveCommunityResponse;
+import com.health.immunity.community.model.NoticeResponse;
+import com.health.immunity.community.model.ZoneResponse;
 import com.health.immunity.insight.model.GetKpiCall;
 import com.health.immunity.insight.model.GraphResponse;
 import com.health.immunity.insight.model.MyCommunitiesResponse;
@@ -166,11 +173,11 @@ public interface ApiInterface {
 //    Call<OnBoardResponse> checkInCall(@Header("Authorization") String token,
 //                                      @Body JsonObject jsonObject);
 //
-//    @POST("user-dashboard")
-//    Call<DashboardResponse> dashboardCall(@Header("Authorization") String token);
-//
-//    @GET("organisation-guidance")
-//    Call<NoticeResponse> noticeCall(@Header("Authorization") String token);
+    @POST("user-dashboard")
+    Call<DashboardResponse> dashboardCall(@Header("Authorization") String token);
+
+    @GET("organisation-guidance")
+    Call<NoticeResponse> noticeCall(@Header("Authorization") String token);
 
     @GET("get-profile")
     Call<GetProfileResponse> getProfileCall(@Header("Authorization") String token);
@@ -179,8 +186,8 @@ public interface ApiInterface {
 //    Call notificationTest();
 //
 //
-//    @GET("insights")
-//    Call<InsightResponse> insightCall(@Header("Authorization") String token);
+    @GET("insights")
+    Call<InsightResponse> insightCall(@Header("Authorization") String token);
 //
     @Multipart
     @POST("update-profile")
@@ -282,20 +289,20 @@ public interface ApiInterface {
 //    @GET("get-contents")
 //    Call<DiscoverModel> discoverCall(@Header("Authorization") String token);
 //
-//    @POST("searchZone")
-//    @FormUrlEncoded
-//    Call<ZoneResponse> searchZoneCall(@Header("Authorization") String token,
-//                                            @Field("latitude") String latitude,
-//                                            @Field("longitude") String longitude,
-//                                            @Field("address") String address);
+    @POST("searchZone")
+    @FormUrlEncoded
+    Call<ZoneResponse> searchZoneCall(@Header("Authorization") String token,
+                                      @Field("latitude") String latitude,
+                                      @Field("longitude") String longitude,
+                                      @Field("address") String address);
 //
 //
-//    @POST("createCommunity")
-//    @FormUrlEncoded
-//    Call<CommunityResponse> communityCall(@Header("Authorization") String token,
-//                                          @Field("community_name") String communityname,
-//                                          @Field("description") String description);
-//
+    @POST("createCommunity")
+    @FormUrlEncoded
+    Call<CommunityResponse> communityCall(@Header("Authorization") String token,
+                                          @Field("community_name") String communityname,
+                                          @Field("description") String description);
+
 //    @POST("inviteMember")
 //    @FormUrlEncoded
 //    Call<InviteMemberResponse> inviteMemberCall(@Header("Authorization") String token,
@@ -305,30 +312,30 @@ public interface ApiInterface {
 //
     @GET("myCommunities")
     Call<MyCommunitiesResponse> myCommunitiesCall(@Header("Authorization") String token);
+
+    @POST("invitationResponse")
+    @FormUrlEncoded
+    Call<LeaveCommunityResponse> invitationResponseCall(@Header("Authorization") String token,
+                                                        @Field("community_id") String communityid,
+                                                        @Field("member_status") String status);
+    @POST("manage_member_status")
+    @FormUrlEncoded
+    Call<JSONObject> manageMemberStatus(@Header("Authorization") String token,
+                                        @Field("community_id") int communityid,
+                                        @Field("member_status") int status,
+                                        @Field("user_id") int userid);
+
 //
-//    @POST("invitationResponse")
-//    @FormUrlEncoded
-//    Call<LeaveCommunityResponse> invitationResponseCall(@Header("Authorization") String token,
-//                                          @Field("community_id") String communityid,
-//                                          @Field("member_status") String status);
-//    @POST("manage_member_status")
-//    @FormUrlEncoded
-//    Call<JSONObject> manageMemberStatus(@Header("Authorization") String token,
-//                                        @Field("community_id") int communityid,
-//                                        @Field("member_status") int status,
-//                                        @Field("user_id") int userid);
+    @POST("leaveCommunity")
+    @FormUrlEncoded
+    Call<LeaveCommunityResponse> leaveCommunityResponseCall(@Header("Authorization") String token,
+                                                            @Field("community_id") String communityid,
+                                                            @Field("member_status") String status);
 //
-//
-//    @POST("leaveCommunity")
-//    @FormUrlEncoded
-//    Call<LeaveCommunityResponse> leaveCommunityResponseCall(@Header("Authorization") String token,
-//                                                            @Field("community_id") String communityid,
-//                                                            @Field("member_status") String status);
-//
-//    @POST("communityUserList")
-//    @FormUrlEncoded
-//    Call<CommunityUserListResponse> communityUserListResponseCall(@Header("Authorization") String token,
-//                                                                  @Field("community_id") String communityid);
+    @POST("communityUserList")
+    @FormUrlEncoded
+    Call<CommunityUserListResponse> communityUserListResponseCall(@Header("Authorization") String token,
+                                                                  @Field("community_id") String communityid);
 //
 //
 //    @GET("pendingInvitations")

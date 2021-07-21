@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:id="@+id/grp1">
+        <item
+            android:id="@+id/action_leave"
+            android:orderInCategory="101"
+            android:title="Leave Community"
+            app:showAsAction="never" />
+    </group>
+
+    <group android:id="@+id/grp2">
+        <item
+            android:id="@+id/action_delete"
+            android:orderInCategory="101"
+            android:title="View Members"
+            app:showAsAction="never" />
+    </group>
+
+    <group android:id="@+id/grp3">
+        <item
+            android:id="@+id/action_compare"
+            android:orderInCategory="101"
+            android:title="Compare"
+            app:showAsAction="never" />
+    </group>
+
+   <!-- <group android:id="@+id/grp4">
+        <item
+            android:id="@+id/action_solution"
+            android:orderInCategory="101"
+            android:title="Corporate Solution"
+            app:showAsAction="never" />
+    </group>-->
+
+</menu>

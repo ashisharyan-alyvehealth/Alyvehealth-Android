@@ -305,7 +305,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void getProfileApi() {
-        CommonUtils.showSpotoProgressDialog(context);
+       // CommonUtils.showSpotoProgressDialog(context);
         Call<GetProfileResponse> call = RetrofitClient.getUniqInstance().getApi()
                 .getProfileCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN));
         call.enqueue(new Callback<GetProfileResponse>() {

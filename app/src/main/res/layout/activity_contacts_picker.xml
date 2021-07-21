@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/ivHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginTop="@dimen/dimen_12dp"
+            android:padding="@dimen/dimen_12dp"
+            android:scaleType="center"
+            android:src="@drawable/back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/ivNavBar"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="User list to invite"
+            android:layout_marginStart="@dimen/dimen_30dp"
+            android:gravity="center"
+            android:textColor="@color/headingcolor"
+            style="@style/bold_sub_heading_text_size"
+            app:layout_constraintLeft_toRightOf="@+id/ivHeader"
+            app:layout_constraintBottom_toBottomOf="@+id/ivHeader"
+            app:layout_constraintTop_toTopOf="@+id/ivHeader" />
+
+
+
+
+
+
+
+
+        <RelativeLayout
+            android:id="@+id/rr1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/dimen_10dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_done"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivHeader">
+
+            <TextView
+                android:id="@+id/userinv"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="User list to invite"
+                android:textColor="#000000"
+                android:textSize="@dimen/dimen_18sp" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/usercount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text=" "
+                android:textColor="#000000"
+                android:textSize="@dimen/dimen_18sp" />
+
+            <EditText
+                style="@style/text_size"
+                android:id="@+id/txt_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/userinv"
+                android:hint="@string/txt_search"
+                android:inputType="text"
+                android:maxLines="1" />
+
+
+            <TextView
+                style="@style/option_text_size"
+                android:id="@+id/txt_load_progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_filter"
+                android:text="Loading..." />
+
+
+            <ListView
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:id="@+id/lst_contacts_chooser"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/txt_load_progress" />
+
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_done"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10dp"
+
+            android:background="@drawable/gradiant"
+            android:text="SEND INVITE"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/rr1" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+

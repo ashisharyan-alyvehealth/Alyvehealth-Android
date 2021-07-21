@@ -58,12 +58,15 @@ public class BodyAdapter extends RecyclerView.Adapter<BodyAdapter.NoticeHolder> 
         if (!TextUtils.isEmpty(myCommunitiesResponses.get(position).getValue())) {
             float roundTotal = Float.parseFloat(myCommunitiesResponses.get(position).getValue());
             // holder.im1.setText(myCommunitiesResponses.get(position).getAlias() + "\n" + String.format("%.2f", roundTotal));
-            holder.im1.setText(myCommunitiesResponses.get(position).getAlias()+"\n"+myCommunitiesResponses.get(position).getValue());
+            holder.im1.setText(myCommunitiesResponses.get(position).getAlias());
+            holder.name.setText(myCommunitiesResponses.get(position).getValue());
+            holder.progressBar.setVisibility(View.VISIBLE);
 
 
         } else {
             holder.im1.setText(myCommunitiesResponses.get(position).getAlias() + "\n" + "?");
-
+            holder.name.setText(myCommunitiesResponses.get(position).getAlias());
+            holder.progressBar.setVisibility(View.VISIBLE);
         }
 
 
@@ -692,7 +695,7 @@ public class BodyAdapter extends RecyclerView.Adapter<BodyAdapter.NoticeHolder> 
 
         public NoticeHolder(@NonNull View itemView) {
             super(itemView);
-         //   name = itemView.findViewById(R.id.name);
+            name = itemView.findViewById(R.id.textView3);
             tvv1 = itemView.findViewById(R.id.tvv1);
             tvv2 = itemView.findViewById(R.id.tvv2);
             im1 = itemView.findViewById(R.id.im1);
@@ -710,7 +713,7 @@ public class BodyAdapter extends RecyclerView.Adapter<BodyAdapter.NoticeHolder> 
             uparrowL0 = itemView.findViewById(R.id.uparrowL0);
          //   imvideo = itemView.findViewById(R.id.imvideo);
             imviply = itemView.findViewById(R.id.imviply);
-            progressBar = itemView.findViewById(R.id.progressBar);
+            progressBar = itemView.findViewById(R.id.progressBar1);
             ivcompareset1 = itemView.findViewById(R.id.ivcompareset1);
             ivcompareset2 = itemView.findViewById(R.id.ivcompareset2);
             ivcompareset3 = itemView.findViewById(R.id.ivcompareset3);

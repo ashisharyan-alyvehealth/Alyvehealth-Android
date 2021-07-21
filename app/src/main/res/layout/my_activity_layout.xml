@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="Steps goal"
+                android:textColor="@color/colorText"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
@@ -60,371 +61,390 @@
                 android:id="@+id/im1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="2dp"
                 android:text="4000 / 20000 Steps"
                 android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="@+id/textView3"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
 
             <!--    <TextView-->
-<!--             android:padding="@dimen/dimen_5dp"-->
-<!--             android:background="@drawable/gradiant"-->
-<!--             android:id="@+id/im1"-->
-<!--             android:gravity="center"-->
-<!--             android:layout_width="@dimen/dimen_70dp"-->
-<!--             android:layout_height="@dimen/dimen_60dp"-->
-<!--             android:layout_marginTop="@dimen/dimen_8dp"-->
-<!--             android:lineSpacingExtra="@dimen/dimen_5dp"-->
-<!--             android:text="Steps\n6000"-->
-<!--             style="@style/sml_text_size"-->
-<!--             android:textColor="@android:color/white"-->
-<!--             app:layout_constraintRight_toLeftOf="@+id/tvHelpInfo1"-->
-<!--             app:layout_constraintStart_toStartOf="parent"-->
-<!--             app:layout_constraintTop_toTopOf="parent" />-->
+            <!--             android:padding="@dimen/dimen_5dp"-->
+            <!--             android:background="@drawable/gradiant"-->
+            <!--             android:id="@+id/im1"-->
+            <!--             android:gravity="center"-->
+            <!--             android:layout_width="@dimen/dimen_70dp"-->
+            <!--             android:layout_height="@dimen/dimen_60dp"-->
+            <!--             android:layout_marginTop="@dimen/dimen_8dp"-->
+            <!--             android:lineSpacingExtra="@dimen/dimen_5dp"-->
+            <!--             android:text="Steps\n6000"-->
+            <!--             style="@style/sml_text_size"-->
+            <!--             android:textColor="@android:color/white"-->
+            <!--             app:layout_constraintRight_toLeftOf="@+id/tvHelpInfo1"-->
+            <!--             app:layout_constraintStart_toStartOf="parent"-->
+            <!--             app:layout_constraintTop_toTopOf="parent" />-->
 
-<!--         <TextView-->
-<!--             android:layout_marginTop="@dimen/dimen_2dp"-->
-<!--             android:visibility="invisible"-->
-<!--             android:id="@+id/tvHelpInfo1"-->
-<!--             android:layout_width="wrap_content"-->
-<!--             android:layout_height="wrap_content"-->
-<!--             android:layout_marginStart="@dimen/dimen_20dp"-->
-<!--             android:text="Add / Update"-->
-<!--             android:textColor="@color/colorPrimary"-->
-<!--             style="@style/micro_text_size"-->
-<!--             app:layout_constraintLeft_toRightOf="@+id/im1"-->
-<!--             app:layout_constraintTop_toTopOf="@+id/im1" />-->
+            <!--         <TextView-->
+            <!--             android:layout_marginTop="@dimen/dimen_2dp"-->
+            <!--             android:visibility="invisible"-->
+            <!--             android:id="@+id/tvHelpInfo1"-->
+            <!--             android:layout_width="wrap_content"-->
+            <!--             android:layout_height="wrap_content"-->
+            <!--             android:layout_marginStart="@dimen/dimen_20dp"-->
+            <!--             android:text="Add / Update"-->
+            <!--             android:textColor="@color/colorPrimary"-->
+            <!--             style="@style/micro_text_size"-->
+            <!--             app:layout_constraintLeft_toRightOf="@+id/im1"-->
+            <!--             app:layout_constraintTop_toTopOf="@+id/im1" />-->
 
-      <ImageView
-          android:visibility="invisible"
-          android:id="@+id/inffo"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:src="@drawable/info_icon_copy_8"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintBottom_toBottomOf="@+id/tvHelpInfo1"
-          app:layout_constraintTop_toTopOf="@id/tvHelpInfo1"/>
+            <ImageView
+                android:id="@+id/inffo"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:src="@drawable/info_icon_copy_8"
+                app:layout_constraintStart_toEndOf="@id/textView3"
+                app:layout_constraintBottom_toBottomOf="@+id/tvHelpInfo1"
+                app:layout_constraintTop_toTopOf="@id/tvHelpInfo1"/>
 
 
             <ProgressBar
                 android:id="@+id/progressBar"
-                style="@style/MyProgressBarTwo"
                 android:layout_width="0dp"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:visibility="invisible"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                android:max="100"
+                android:progress="0"
+                android:minHeight="50dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/im1" />
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                android:layout_width="0dp"
+                android:visibility="invisible"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="@dimen/dimen_10dp"
-                android:indeterminate="false"
+                android:layout_marginStart="@dimen/dimen_10dp"
                 android:max="100"
-                android:minHeight="50dp"
                 android:progress="0"
-                android:secondaryProgress="0"
                 android:theme="@style/MyProgressBarTwo"
+                android:minHeight="50dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/im1"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/im1" />
 
-    <ImageView
-        android:visibility="invisible"
 
-        android:layout_marginStart="@dimen/dimen_10dp"
-        android:id="@+id/ivcompareset10"
-        android:layout_width="@dimen/dimen_25dp"
-        android:layout_height="@dimen/dimen_50dp"
-        android:src="@drawable/verticalline"
-        app:layout_constraintLeft_toRightOf="@id/im1"
-        app:layout_constraintBottom_toTopOf="@+id/viewadd1"/>
+            <ImageView
+                android:visibility="invisible"
 
-
-
-
-
-    <ImageView
-        android:visibility="invisible"
-
-        android:id="@+id/ivcompareset9"
-        android:layout_width="@dimen/dimen_25dp"
-        android:layout_height="@dimen/dimen_50dp"
-        android:src="@drawable/verticalline"
-        app:layout_constraintStart_toEndOf="@+id/ivcompareset10"
-        app:layout_constraintEnd_toStartOf="@id/ivcompareset8"
-        app:layout_constraintBottom_toTopOf="@+id/viewadd1"/>
-
-    <ImageView
-        android:visibility="invisible"
-
-        android:id="@+id/ivcompareset8"
-        android:layout_width="@dimen/dimen_25dp"
-        android:layout_height="@dimen/dimen_50dp"
-        android:src="@drawable/verticalline"
-        app:layout_constraintEnd_toStartOf="@id/ivcompareset7"
-        app:layout_constraintStart_toEndOf="@+id/ivcompareset9"
-
-        app:layout_constraintBottom_toTopOf="@+id/viewadd1"/>
-    <ImageView
-        android:visibility="invisible"
-
-        android:id="@+id/ivcompareset7"
-        android:layout_width="@dimen/dimen_25dp"
-        android:layout_height="@dimen/dimen_50dp"
-        android:src="@drawable/verticalline"
-        app:layout_constraintStart_toEndOf="@+id/ivcompareset8"
-
-        app:layout_constraintEnd_toStartOf="@id/ivcompareset6"
-        app:layout_constraintBottom_toTopOf="@+id/viewadd1"/>
-
-    <ImageView
-        android:visibility="invisible"
-
-        android:id="@+id/ivcompareset6"
-        android:layout_width="@dimen/dimen_25dp"
-        android:layout_height="@dimen/dimen_50dp"
-        android:src="@drawable/verticalline"
-        app:layout_constraintStart_toEndOf="@+id/ivcompareset7"
-
-        app:layout_constraintEnd_toStartOf="@id/ivcompareset1"
-        app:layout_constraintBottom_toTopOf="@+id/viewadd1"/>
-
-    <ImageView
-        android:visibility="invisible"
-
-        android:id="@+id/ivcompareset1"
-        android:layout_width="@dimen/dimen_25dp"
-        android:layout_height="@dimen/dimen_50dp"
-        android:src="@drawable/verticalline"
-        app:layout_constraintEnd_toEndOf="@id/progressBar"
-        app:layout_constraintStart_toStartOf="@+id/progressBar"
-        app:layout_constraintBottom_toTopOf="@+id/viewadd1"/>
-    <ImageView
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/ivcompareset3"
-
-        android:id="@+id/ivcompareset2"
-        android:layout_width="@dimen/dimen_25dp"
-        android:layout_height="@dimen/dimen_50dp"
-        android:src="@drawable/verticalline"
-        app:layout_constraintStart_toEndOf="@id/ivcompareset1"
-        app:layout_constraintBottom_toTopOf="@+id/viewadd1"/>
-
-    <ImageView
-        android:visibility="invisible"
-        app:layout_constraintEnd_toStartOf="@+id/ivcompareset4"
-
-        android:id="@+id/ivcompareset3"
-        android:layout_width="@dimen/dimen_25dp"
-        android:layout_height="@dimen/dimen_50dp"
-        android:src="@drawable/verticalline"
-        app:layout_constraintStart_toEndOf="@id/ivcompareset2"
-        app:layout_constraintBottom_toTopOf="@+id/viewadd1"/>
-    <ImageView
-        android:visibility="invisible"
-
-        android:id="@+id/ivcompareset4"
-        android:layout_width="@dimen/dimen_25dp"
-        android:layout_height="@dimen/dimen_50dp"
-        android:src="@drawable/verticalline"
-        app:layout_constraintStart_toEndOf="@id/ivcompareset3"
-        app:layout_constraintEnd_toStartOf="@+id/ivcompareset5"
-
-        app:layout_constraintBottom_toTopOf="@+id/viewadd1"/>
-    <ImageView
-        android:visibility="invisible"
-        android:id="@+id/ivcompareset5"
-        android:layout_width="@dimen/dimen_25dp"
-        android:layout_height="@dimen/dimen_50dp"
-        android:src="@drawable/verticalline"
-        app:layout_constraintStart_toEndOf="@id/ivcompareset4"
-        app:layout_constraintEnd_toStartOf="@+id/ivcomparesetLast"
-        app:layout_constraintBottom_toTopOf="@+id/viewadd1"/>
-    <ImageView
-        android:visibility="invisible"
-        android:id="@+id/ivcomparesetLast"
-        android:layout_marginLeft="9dp"
-        android:layout_width="@dimen/dimen_25dp"
-        android:layout_height="@dimen/dimen_50dp"
-        android:src="@drawable/verticalline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/viewadd1"/>
-
-    <ImageView
-        android:padding="3dp"
-
-        android:layout_marginLeft="@dimen/dimen_10dp"
-        android:visibility="invisible"
-        android:id="@+id/uparrowL0"
-        android:layout_width="25dp"
-        android:layout_height="20dp"
-        android:src="@drawable/ellipse_1479"
-        app:layout_constraintLeft_toRightOf="@id/im1"
-        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-        app:layout_constraintTop_toTopOf="@id/progressBar"/>
-
-    <ImageView
-
-        android:padding="3dp"
-
-        android:visibility="invisible"
-        android:id="@+id/uparrowL1"
-        android:layout_width="25dp"
-        android:layout_height="20dp"
-        android:src="@drawable/ellipse_1479"
-        app:layout_constraintRight_toLeftOf="@+id/uparrowL2"
-        app:layout_constraintLeft_toRightOf="@+id/uparrowL0"
-        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-        app:layout_constraintTop_toTopOf="@id/progressBar"/>
-    <ImageView
-        android:visibility="invisible"
-        android:padding="3dp"
-
-        android:id="@+id/uparrowL2"
-        android:layout_width="25dp"
-        android:layout_height="20dp"
-        android:src="@drawable/ellipse_1479"
-        app:layout_constraintRight_toLeftOf="@+id/uparrowL3"
-        app:layout_constraintLeft_toRightOf="@+id/uparrowL1"
-        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-        app:layout_constraintTop_toTopOf="@id/progressBar"/>
-    <ImageView
-        android:visibility="invisible"
-        android:padding="3dp"
-
-        android:id="@+id/uparrowL3"
-        android:layout_width="25dp"
-        android:layout_height="20dp"
-        android:src="@drawable/ellipse_1479"
-        app:layout_constraintRight_toLeftOf="@+id/uparrowL4"
-        app:layout_constraintLeft_toRightOf="@+id/uparrowL2"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:id="@+id/ivcompareset10"
+                android:layout_width="@dimen/dimen_25dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:src="@drawable/verticalline"
+                app:layout_constraintLeft_toRightOf="@id/im1"
+                app:layout_constraintStart_toStartOf="@+id/progressBar"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                />
 
 
-        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-        app:layout_constraintTop_toTopOf="@id/progressBar"/>
-    <ImageView
-        android:padding="3dp"
-
-        android:visibility="invisible"
-        android:id="@+id/uparrowL4"
-        android:layout_width="25dp"
-        android:layout_height="20dp"
-        android:src="@drawable/ellipse_1479"
-        app:layout_constraintRight_toLeftOf="@+id/uparrow"
-        app:layout_constraintLeft_toRightOf="@+id/uparrowL3"
-
-        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-        app:layout_constraintTop_toTopOf="@id/progressBar"/>
-    <ImageView
-        android:visibility="invisible"
-        android:id="@+id/uparrow"
-        android:padding="3dp"
-        android:layout_width="25dp"
-        android:layout_height="20dp"
-        android:src="@drawable/ellipse_1479"
-        app:layout_constraintLeft_toRightOf="@+id/uparrowL4"
-        app:layout_constraintRight_toLeftOf="@+id/uparrowR1"
-
-        app:layout_constraintEnd_toEndOf="@id/progressBar"
-        app:layout_constraintStart_toStartOf="@+id/progressBar"
-        app:layout_constraintBottom_toBottomOf="@+id/progressBar"
-        app:layout_constraintTop_toTopOf="@id/progressBar"/>
-    <ImageView
-        android:padding="3dp"
-
-        android:visibility="invisible"
-        android:id="@+id/uparrowR1"
-        android:layout_width="25dp"
-        android:layout_height="20dp"
-        android:src="@drawable/ellipse_1479"
-        app:layout_constraintTop_toTopOf="@+id/progressBar"
-        app:layout_constraintBottom_toBottomOf="@id/progressBar"
-       app:layout_constraintLeft_toRightOf="@+id/uparrow"
-        app:layout_constraintRight_toLeftOf="@+id/uparrowR2"
-        >
-    </ImageView>
-
-    <ImageView
-        android:visibility="invisible"
-        android:padding="3dp"
 
 
-        android:id="@+id/uparrowR2"
-        android:layout_width="25dp"
-        android:layout_height="20dp"
-        android:src="@drawable/ellipse_1479"
-        app:layout_constraintTop_toTopOf="@+id/progressBar"
-        app:layout_constraintBottom_toBottomOf="@id/progressBar"
-        app:layout_constraintLeft_toRightOf="@+id/uparrowR1"
-        app:layout_constraintRight_toLeftOf="@+id/uparrowR3"
-        >
-    </ImageView>
 
-    <ImageView
-        android:visibility="invisible"
-        android:padding="3dp"
+            <ImageView
+                android:visibility="invisible"
 
-        android:id="@+id/uparrowR3"
-        android:layout_width="25dp"
-        android:layout_height="20dp"
-        android:src="@drawable/ellipse_1479"
-        app:layout_constraintTop_toTopOf="@+id/progressBar"
-        app:layout_constraintBottom_toBottomOf="@id/progressBar"
-        app:layout_constraintLeft_toRightOf="@+id/uparrowR2"
-        app:layout_constraintRight_toLeftOf="@+id/uparrowR4"
+                android:id="@+id/ivcompareset9"
+                android:layout_width="@dimen/dimen_25dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:src="@drawable/verticalline"
+                app:layout_constraintStart_toEndOf="@+id/ivcompareset10"
+                app:layout_constraintEnd_toStartOf="@id/ivcompareset8"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"/>
 
-        >
+            <ImageView
+                android:visibility="invisible"
 
-    </ImageView>
+                android:id="@+id/ivcompareset8"
+                android:layout_width="@dimen/dimen_25dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:src="@drawable/verticalline"
+                app:layout_constraintEnd_toStartOf="@id/ivcompareset7"
+                app:layout_constraintStart_toEndOf="@+id/ivcompareset9"
 
-    <ImageView
-        android:padding="3dp"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"                />
+            <ImageView
+                android:visibility="invisible"
 
-        android:visibility="invisible"
-        android:id="@+id/uparrowR4"
-        android:layout_width="25dp"
-        android:layout_height="20dp"
-        android:src="@drawable/ellipse_1479"
-        app:layout_constraintTop_toTopOf="@+id/progressBar"
-        app:layout_constraintBottom_toBottomOf="@id/progressBar"
-        app:layout_constraintLeft_toRightOf="@+id/uparrowR3"
-        app:layout_constraintRight_toLeftOf="@+id/uparrowLast"
-        >
+                android:id="@+id/ivcompareset7"
+                android:layout_width="@dimen/dimen_25dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:src="@drawable/verticalline"
+                app:layout_constraintStart_toEndOf="@+id/ivcompareset8"
+                app:layout_constraintEnd_toStartOf="@id/ivcompareset6"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"                />
 
-    </ImageView>
-    <ImageView
-        android:padding="3dp"
-        android:layout_marginLeft="9dp"
-        android:visibility="invisible"
-        android:id="@+id/uparrowLast"
-        android:layout_width="25dp"
-        android:layout_height="20dp"
-        android:src="@drawable/ellipse_1479"
-        app:layout_constraintTop_toTopOf="@+id/progressBar"
-        app:layout_constraintBottom_toBottomOf="@id/progressBar"
-        app:layout_constraintLeft_toRightOf="@+id/uparrowR3"
-        app:layout_constraintEnd_toEndOf="parent"
-        >
+            <ImageView
+                android:visibility="invisible"
 
-    </ImageView>
+                android:id="@+id/ivcompareset6"
+                android:layout_width="@dimen/dimen_25dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:src="@drawable/verticalline"
+                app:layout_constraintStart_toEndOf="@+id/ivcompareset7"
+
+                app:layout_constraintEnd_toStartOf="@id/ivcompareset1"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"                />
+
+            <ImageView
+                android:visibility="invisible"
+
+                android:id="@+id/ivcompareset1"
+                android:layout_width="@dimen/dimen_25dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:src="@drawable/verticalline"
+                app:layout_constraintEnd_toEndOf="@id/progressBar"
+                app:layout_constraintStart_toStartOf="@+id/progressBar"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"                />
+            <ImageView
+                android:visibility="invisible"
+                app:layout_constraintEnd_toStartOf="@+id/ivcompareset3"
+
+                android:id="@+id/ivcompareset2"
+                android:layout_width="@dimen/dimen_25dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:src="@drawable/verticalline"
+                app:layout_constraintStart_toEndOf="@id/ivcompareset1"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"                />
+
+            <ImageView
+                android:visibility="invisible"
+                app:layout_constraintEnd_toStartOf="@+id/ivcompareset4"
+
+                android:id="@+id/ivcompareset3"
+                android:layout_width="@dimen/dimen_25dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:src="@drawable/verticalline"
+                app:layout_constraintStart_toEndOf="@id/ivcompareset2"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"                />
+            <ImageView
+                android:visibility="invisible"
+
+                android:id="@+id/ivcompareset4"
+                android:layout_width="@dimen/dimen_25dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:src="@drawable/verticalline"
+                app:layout_constraintStart_toEndOf="@id/ivcompareset3"
+                app:layout_constraintEnd_toStartOf="@+id/ivcompareset5"
+
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"                />
+            <ImageView
+                android:visibility="invisible"
+                android:id="@+id/ivcompareset5"
+                android:layout_width="@dimen/dimen_25dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:src="@drawable/verticalline"
+                app:layout_constraintStart_toEndOf="@id/ivcompareset4"
+                app:layout_constraintEnd_toStartOf="@+id/ivcomparesetLast"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"                />
+            <ImageView
+                android:visibility="invisible"
+                android:id="@+id/ivcomparesetLast"
+                android:layout_marginLeft="9dp"
+                android:layout_width="@dimen/dimen_25dp"
+                android:layout_height="@dimen/dimen_50dp"
+                android:src="@drawable/verticalline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"                />
+
+            <ImageView
+                android:padding="3dp"
+
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:visibility="invisible"
+                android:id="@+id/uparrowL0"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ellipse_1479"
+                app:layout_constraintLeft_toRightOf="@id/im1"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                app:layout_constraintTop_toTopOf="@id/progressBar"
+                app:layout_constraintStart_toStartOf="@+id/progressBar"/>
+
+            <ImageView
+
+                android:padding="3dp"
+
+                android:visibility="invisible"
+                android:id="@+id/uparrowL1"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ellipse_1479"
+                app:layout_constraintRight_toLeftOf="@+id/uparrowL2"
+                app:layout_constraintLeft_toRightOf="@+id/uparrowL0"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                app:layout_constraintTop_toTopOf="@id/progressBar"/>
+            <ImageView
+                android:visibility="invisible"
+                android:padding="3dp"
+
+                android:id="@+id/uparrowL2"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ellipse_1479"
+                app:layout_constraintRight_toLeftOf="@+id/uparrowL3"
+                app:layout_constraintLeft_toRightOf="@+id/uparrowL1"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                app:layout_constraintTop_toTopOf="@id/progressBar"/>
+            <ImageView
+                android:visibility="invisible"
+                android:padding="3dp"
+
+                android:id="@+id/uparrowL3"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ellipse_1479"
+                app:layout_constraintRight_toLeftOf="@+id/uparrowL4"
+                app:layout_constraintLeft_toRightOf="@+id/uparrowL2"
+
+
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                app:layout_constraintTop_toTopOf="@id/progressBar"/>
+            <ImageView
+                android:padding="3dp"
+
+                android:visibility="invisible"
+                android:id="@+id/uparrowL4"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ellipse_1479"
+                app:layout_constraintRight_toLeftOf="@+id/uparrow"
+                app:layout_constraintLeft_toRightOf="@+id/uparrowL3"
+
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                app:layout_constraintTop_toTopOf="@id/progressBar"/>
+            <ImageView
+                android:visibility="invisible"
+                android:id="@+id/uparrow"
+                android:padding="3dp"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ellipse_1479"
+                app:layout_constraintLeft_toRightOf="@+id/uparrowL4"
+                app:layout_constraintRight_toLeftOf="@+id/uparrowR1"
+
+                app:layout_constraintEnd_toEndOf="@id/progressBar"
+                app:layout_constraintStart_toStartOf="@+id/progressBar"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                app:layout_constraintTop_toTopOf="@id/progressBar"/>
+            <ImageView
+                android:padding="3dp"
+
+                android:visibility="invisible"
+                android:id="@+id/uparrowR1"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ellipse_1479"
+                app:layout_constraintTop_toTopOf="@+id/progressBar"
+                app:layout_constraintBottom_toBottomOf="@id/progressBar"
+                app:layout_constraintLeft_toRightOf="@+id/uparrow"
+                app:layout_constraintRight_toLeftOf="@+id/uparrowR2"
+                >
+            </ImageView>
+
+            <ImageView
+                android:visibility="invisible"
+                android:padding="3dp"
+
+
+                android:id="@+id/uparrowR2"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ellipse_1479"
+                app:layout_constraintTop_toTopOf="@+id/progressBar"
+                app:layout_constraintBottom_toBottomOf="@id/progressBar"
+                app:layout_constraintLeft_toRightOf="@+id/uparrowR1"
+                app:layout_constraintRight_toLeftOf="@+id/uparrowR3"
+                >
+            </ImageView>
+
+            <ImageView
+                android:visibility="invisible"
+                android:padding="3dp"
+
+                android:id="@+id/uparrowR3"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ellipse_1479"
+                app:layout_constraintTop_toTopOf="@+id/progressBar"
+                app:layout_constraintBottom_toBottomOf="@id/progressBar"
+                app:layout_constraintLeft_toRightOf="@+id/uparrowR2"
+                app:layout_constraintRight_toLeftOf="@+id/uparrowR4"
+
+                >
+
+            </ImageView>
+
+            <ImageView
+                android:padding="3dp"
+
+                android:visibility="invisible"
+                android:id="@+id/uparrowR4"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ellipse_1479"
+                app:layout_constraintTop_toTopOf="@+id/progressBar"
+                app:layout_constraintBottom_toBottomOf="@id/progressBar"
+                app:layout_constraintLeft_toRightOf="@+id/uparrowR3"
+                app:layout_constraintRight_toLeftOf="@+id/uparrowLast"
+                >
+
+            </ImageView>
+            <ImageView
+                android:padding="3dp"
+                android:layout_marginLeft="9dp"
+                android:visibility="invisible"
+                android:id="@+id/uparrowLast"
+                android:layout_width="25dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ellipse_1479"
+                app:layout_constraintTop_toTopOf="@+id/progressBar"
+                app:layout_constraintBottom_toBottomOf="@id/progressBar"
+                app:layout_constraintLeft_toRightOf="@+id/uparrowR3"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+
+            </ImageView>
 
             <TextView
                 android:id="@+id/tvv1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                app:layout_constraintLeft_toRightOf="@+id/im1"
                 app:layout_constraintStart_toStartOf="@id/progressBar"
-                app:layout_constraintTop_toBottomOf="@+id/im1"></TextView>
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar"></TextView>
 
             <TextView
                 android:id="@+id/tvv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="100"
-                app:layout_constraintBottom_toBottomOf="@+id/tvv1"
+                app:layout_constraintBottom_toBottomOf="@+id/progressBar"
                 app:layout_constraintEnd_toEndOf="@id/progressBar"
                 app:layout_constraintTop_toTopOf="@+id/tvv1"></TextView>
 
             <View
                 android:id="@+id/viewadd1"
                 android:layout_width="0dp"
+                android:visibility="gone"
                 android:layout_height="1dp"
                 android:layout_marginTop="15dp"
                 android:background="#fecfde"

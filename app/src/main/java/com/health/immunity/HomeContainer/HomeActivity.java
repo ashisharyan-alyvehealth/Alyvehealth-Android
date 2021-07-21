@@ -28,6 +28,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,6 +45,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.RadioGroup;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -61,6 +63,7 @@ import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.health.immunity.BaseActivity;
+import com.health.immunity.CommonUtils;
 import com.health.immunity.HomeContainer.model.TokenResponse;
 import com.health.immunity.HomeContainer.presenter.HomePresenter;
 import com.health.immunity.HomeContainer.presenter.IHomePresenter;
@@ -72,6 +75,7 @@ import com.health.immunity.aboutus.AboutUsFragment;
 import com.health.immunity.act.ActFragment;
 import com.health.immunity.alyvecash.AlyveCashFragment;
 import com.health.immunity.challenges.ChallengesFragment;
+import com.health.immunity.community.DashboardFragment;
 import com.health.immunity.databinding.ActivityHomeBinding;
 import com.health.immunity.expertchat.ExpertChatFragment;
 import com.health.immunity.insight.InsightFragment;
@@ -82,9 +86,11 @@ import com.health.immunity.pedo.ui.Fragment_Settings;
 import com.health.immunity.pedo.util.Logger;
 import com.health.immunity.pedo.util.Util;
 import com.health.immunity.profile.ProfileActivity;
+import com.health.immunity.profile.model.GetProfileResponse;
 import com.health.immunity.retrofit.RetrofitClient;
 import com.health.immunity.todo.TodoFragment;
 
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -104,12 +110,15 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     BottomNavigationView navView,bottomNav;
     BottomNavigationMenuView menuView;
     AlertDialog.Builder builderPedometer;
+    public static int userid =0;
     private boolean showSteps = true;
     GoogleSignInClient mGoogleSignInClient;
     GoogleSignInAccount account;
     private int todayOffset;
     private int total_start;
     private int goal;
+    private String strImage = "";
+    private int extend_count = 0;
     String fcmToken = "";
     private int since_boot;
     private int total_days;
@@ -148,11 +157,11 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         binding.tvwallet.setOnClickListener(this);
         binding.tvActivitylog.setOnClickListener(this);
         binding.imageProfic.setOnClickListener(this);
-        binding.bottomNav.setClipChildren(false);
-        binding.bottomNav.setClipToPadding(false);
-        binding.bottomNav.setClipToOutline(false);
-        menuView = (BottomNavigationMenuView) binding.bottomNav.getChildAt(0);
-        menuView.setClipChildren(false);
+//        binding.bottomNav.setClipChildren(false);
+//        binding.bottomNav.setClipToPadding(false);
+//        binding.bottomNav.setClipToOutline(false);
+//        menuView = (BottomNavigationMenuView) binding.bottomNav.getChildAt(0);
+//        menuView.setClipChildren(false);
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -192,7 +201,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 //        binding.bottomNav.setItemTextColor(myList);
 //        binding.bottomNav.setItemIconTintList(myList);
 //        binding.bottomNav.setItemRippleColor(myList1);
-        binding.bottomNav.setItemBackgroundResource(R.drawable.botton_back);
+ //       binding.bottomNav.setItemBackgroundResource(R.drawable.botton_back);
 
 
 
@@ -422,6 +431,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
                     return true;
                 case R.id.navigation_connect:
+                    DashboardFragment dashboardFragment=new DashboardFragment();
+                    viewFragment(dashboardFragment,"CONNECT");
 
                     return true;
                 case R.id.navigation_act:
@@ -492,6 +503,9 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         if (name.equals("ACT")) {
             fragmentTransaction.addToBackStack(name);
             binding.bottomNav.getMenu().getItem(2).setChecked(true);
+        }
+        if (name.equals("CONNECT")) {
+            fragmentTransaction.addToBackStack(name);
         }
 
         fragmentTransaction.commit();
@@ -564,6 +578,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             binding.swtchbtnpedo.setChecked(true);
 
         }
+        getProfileApiAgain();
         Database db = Database.getInstance(context);
 
         if (BuildConfig.DEBUG) db.logState();
@@ -651,6 +666,182 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         }
 
 
+    }
+    private void getProfileApiAgain() {
+
+        Call<GetProfileResponse> call = RetrofitClient.getUniqInstance().getApi()
+                .getProfileCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN));
+        call.enqueue(new Callback<GetProfileResponse>() {
+            @Override
+            public void onResponse(Call<GetProfileResponse> call, Response<GetProfileResponse> response) {
+                if (response.body() != null) {
+                    System.out.println("userid "+response.body().getJsonData().getId());
+                    userid=response.body().getJsonData().getId();
+
+                    if (response.body().getStatus().equalsIgnoreCase("true")) {
+
+                        if (!TextUtils.isEmpty(response.body().getJsonData().getGender())) {
+
+                            if (response.body().getJsonData().getGender().equalsIgnoreCase("Male")) {
+                                if (response.body().getJsonData().getUserImages() != null) {
+                                    strImage = IMAGE_BASE_URL + response.body().getJsonData().getUserImages();
+                                    System.out.println("strImage "+strImage);
+                                    Glide.with(context).load(strImage).into(binding.imageProfic);
+                                    Glide.with(context).load(strImage).into(binding.ivHeader);
+                                }
+                                if(response.body().getJsonData().getCommImages()!=null){
+                                    strImage=response.body().getJsonData().getCommImages();
+                                    System.out.println("strImage1 "+strImage);
+                                    System.out.println("imagelink"+strImage);
+                                    if(context!=null) {
+                                        Glide.with(context).load(strImage).into(binding.ivHeader);
+                                    }else {
+                                        Glide.with(getApplicationContext()).load(strImage).into(binding.ivHeader);
+                                    }
+                                }else{
+
+                                    if (response.body().getJsonData().getUserImages() != null) {
+                                        strImage = IMAGE_BASE_URL + response.body().getJsonData().getUserImages();
+                                        System.out.println("strImage "+strImage);
+                                        System.out.println("imagelink" + strImage);
+                                        Glide.with(context).load(strImage).into(binding.ivHeader);
+
+                                    }
+                                    else {
+
+                                        binding.ivHeader.setImageResource(R.drawable.changedp);
+                                    }
+
+                                }
+
+
+                            } else if (response.body().getJsonData().getGender().equalsIgnoreCase("Female")) {
+                                if (response.body().getJsonData().getUserImages() != null) {
+                                    strImage =IMAGE_BASE_URL +  response.body().getJsonData().getUserImages();
+                                    System.out.println("strImage "+strImage);
+                                    Glide.with(context).load(strImage).into(binding.imageProfic);
+                                    Glide.with(context).load(strImage).into(binding.ivHeader);
+                                }
+                                if(response.body().getJsonData().getCommImages()!=null){
+                                    strImage=response.body().getJsonData().getCommImages();
+                                    System.out.println("strImage1 "+strImage);
+                                    if(context!=null) {
+                                        Glide.with(context).load(strImage).into(binding.ivHeader);
+                                    }else {
+                                        Glide.with(getApplicationContext()).load(strImage).into(binding.ivHeader);
+                                    }
+                                }else{
+                                    if (response.body().getJsonData().getUserImages() != null) {
+                                        strImage = IMAGE_BASE_URL + response.body().getJsonData().getUserImages();
+                                        System.out.println("strImage2 "+strImage);
+                                        Glide.with(context).load(strImage).into(binding.ivHeader);
+                                    }else {
+                                        binding.ivHeader.setImageResource(R.drawable.changedp);
+                                    }
+                                }
+
+                            } else {
+                                if (response.body().getJsonData().getUserImages() != null) {
+                                    strImage = IMAGE_BASE_URL + response.body().getJsonData().getUserImages();
+                                    Glide.with(context).load(strImage).into(binding.imageProfic);
+                                    Glide.with(context).load(strImage).into(binding.ivHeader);
+                                }
+                                if(response.body().getJsonData().getCommImages()!=null){
+                                    strImage=IMAGE_BASE_URL + response.body().getJsonData().getCommImages();
+                                    Glide.with(context).load(strImage).into(binding.ivHeader);
+                                }else{
+                                    if (response.body().getJsonData().getUserImages() != null) {
+                                        strImage = IMAGE_BASE_URL + response.body().getJsonData().getUserImages();
+                                        Glide.with(context).load(strImage).into(binding.ivHeader);
+                                    }else {
+                                        binding.ivHeader.setImageResource(R.drawable.changedp);
+                                    }
+                                }
+
+                            }
+
+                        }
+
+
+
+                        if (response.body().getJsonData().getName() != null) {
+                            binding.namedash.setText(response.body().getJsonData().getName());
+                        }
+
+
+                        if (!TextUtils.isEmpty(response.body().getJsonData().getEmail()))
+                        {
+                            PreferenceHelper.setStringPreference(context, IConstant.EMAILACT,response.body().getJsonData().getEmail());
+                        }
+                        else
+                        {
+                            PreferenceHelper.setStringPreference(context, IConstant.EMAILACT,"");
+
+                        }
+                        if (!TextUtils.isEmpty(response.body().getJsonData().getPhoneNumber()))
+                        {
+                            binding.emaildash.setText(response.body().getJsonData().getPhoneNumber());
+                            PreferenceHelper.setStringPreference(context, IConstant.MOBILEACT,response.body().getJsonData().getPhoneNumber());
+                        }
+                        else
+                        {
+                            PreferenceHelper.setStringPreference(context, IConstant.MOBILEACT,"");
+
+                        }
+
+                        {
+                            extend_count = response.body().getJsonData().getExtendedInvitCount();
+                        }
+
+                        if (response.body().getJsonData().getOfficeLocation() != null) {
+
+                            CommonUtils.officelat = response.body().getJsonData().getOfficeLocation().getOfficeLat();
+                            CommonUtils.officelong = response.body().getJsonData().getOfficeLocation().getOfficeLon();
+                            PreferenceHelper.setStringPreference(context,IConstant.GEOLATOFF, String.valueOf(response.body().getJsonData().getOfficeLocation().getOfficeLat()));
+                            PreferenceHelper.setStringPreference(context,IConstant.GEOLONGOFF, String.valueOf(response.body().getJsonData().getOfficeLocation().getOfficeLon()));
+                            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+                            if (CommonUtils.officelat!=0.0 && CommonUtils.officelong!=0.0) {
+
+
+                                android.location.Address address = null;
+                                try {
+                                    address = geocoder.getFromLocation(CommonUtils.officelat, CommonUtils.officelong, 1).get(0);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                String addres = String.valueOf(address);
+                                addres = addres.substring(addres.lastIndexOf(":") + 1);
+                                String result = addres.substring(addres.indexOf("[") + 2, addres.indexOf("]") - 1);
+                                CommonUtils.profilelong = result;
+                            }
+
+
+
+                        }
+                        if (response.body().getJsonData().getHomeLocation() != null&&!TextUtils.isEmpty(response.body().getJsonData().getHomeLocation().getHomeLat().trim())) {
+
+                            CommonUtils.homelat = Double.parseDouble(response.body().getJsonData().getHomeLocation().getHomeLat());
+                            CommonUtils.homelong = Double.parseDouble(response.body().getJsonData().getHomeLocation().getHomeLon());
+
+                            PreferenceHelper.setStringPreference(context,IConstant.GEOLAT, String.valueOf(response.body().getJsonData().getHomeLocation().getHomeLat()));
+                            PreferenceHelper.setStringPreference(context,IConstant.GEOLONG, String.valueOf(response.body().getJsonData().getHomeLocation().getHomeLon()));
+
+                        }
+
+                    } else {
+                        showToast(response.body().getMessage());
+                    }
+                } else {
+                    showToast(SERVER_ERROR);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<GetProfileResponse> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     @Override

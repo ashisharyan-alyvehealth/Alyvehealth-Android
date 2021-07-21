@@ -3,6 +3,7 @@ package com.health.immunity.insight;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,8 @@ import com.health.immunity.R;
 import com.health.immunity.insight.model.GetKpiCall;
 
 import java.util.List;
+
+import static com.health.immunity.R.drawable.color_gradient;
 
 public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.NoticeHolder> {
 
@@ -52,14 +55,24 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Notice
         {
             float roundTotal = Float.parseFloat(myCommunitiesResponses.get(position).getValue());
             //  holder.im1.setText(myCommunitiesResponses.get(position).getAlias()+"\n"+String.format("%.2f", roundTotal));
-            holder.im1.setText(myCommunitiesResponses.get(position).getAlias()+"\n"+myCommunitiesResponses.get(position).getValue());
+            holder.im1.setText(myCommunitiesResponses.get(position).getAlias());
+            holder.name.setText(myCommunitiesResponses.get(position).getValue());
+            holder.progressBar.setVisibility(View.VISIBLE);
+            float prog= Float.parseFloat(myCommunitiesResponses.get(position).getUpperRange())/Float.parseFloat(myCommunitiesResponses.get(position).getValue());
+            if(myCommunitiesResponses.get(position).getAlias().startsWith("Step")){
+                holder.imageView.setImageResource(R.drawable.ic_steps);
+            }else {
+                holder.imageView.setImageResource(R.drawable.ic_distance);
+            }
+          //  holder.progressBar.setProgress((int)prog);
 
         }
         else
         {
 
             holder.im1.setText(myCommunitiesResponses.get(position).getAlias()+"\n"+"?");
-
+            holder.name.setText(myCommunitiesResponses.get(position).getAlias());
+            holder.progressBar.setVisibility(View.VISIBLE);
         }
 
         if (myCommunitiesResponses.get(position).getAlias().equalsIgnoreCase("Social distancing "))
@@ -191,8 +204,8 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Notice
         }
         else
         {
-            holder.progressBar.setProgress(0);
-            holder.progressBar.setSecondaryProgress(0);
+           // holder.progressBar.setProgress(0);
+           // holder.progressBar.setSecondaryProgress(0);
 
 
         }
@@ -206,72 +219,73 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Notice
 
             String values=String.valueOf(a2).substring(0,2).replace("."," ").trim();
             int v1= Integer.parseInt(values);
+            holder.progressBar.setProgress(v1);
 
-            if (v1==0)
-            {
-                holder.uparrowL0.setVisibility(View.VISIBLE);
-
-            }
-
-            else if (v1>0&&v1<=10)
-            {
-                holder.uparrowL1.setVisibility(View.VISIBLE);
-
-            }
-            else if (v1>10&&v1<=20)
-            {
-                holder.uparrowL2.setVisibility(View.VISIBLE);
-
-            }
-            else if (v1>20&&v1<=30)
-            {
-                holder.uparrowL3.setVisibility(View.VISIBLE);
-
-            }
-            else if (v1>30&&v1<=40)
-            {
-                holder.uparrowL4.setVisibility(View.VISIBLE);
-
-            }
-            else if (v1>40&&v1<=50)
-            {
-
-                holder.uparrow.setVisibility(View.VISIBLE);
-
-            }
-            else if (v1>50&&v1<=60)
-            {
-                holder.uparrowR1.setVisibility(View.VISIBLE);
-
-            }
-            else if (v1>60&&v1<=70)
-            {
-                holder.uparrowR2.setVisibility(View.VISIBLE);
-
-            }
-            else if (v1>70&&v1<=80)
-            {
-                holder.uparrowR3.setVisibility(View.VISIBLE);
-
-            }
-            else if (v1>80&&v1<=90)
-            {
-                holder.uparrowR4.setVisibility(View.VISIBLE);
-
-            }
-            else
-            {
-                holder.uparrowL0.setVisibility(View.GONE);
-                holder.uparrowL1.setVisibility(View.GONE);
-                holder.uparrowL2.setVisibility(View.GONE);
-                holder.uparrowL3.setVisibility(View.GONE);
-                holder.uparrowL4.setVisibility(View.GONE);
-                holder.uparrow.setVisibility(View.GONE);
-                holder.uparrowR1.setVisibility(View.GONE);
-                holder.uparrowR2.setVisibility(View.GONE);
-                holder.uparrowR3.setVisibility(View.GONE);
-                holder.uparrowR4.setVisibility(View.GONE);
-            }
+//            if (v1==0)
+//            {
+//                holder.uparrowL0.setVisibility(View.VISIBLE);
+//                holder.progressBar.setProgress(v1);
+//            }
+//
+//            else if (v1>0&&v1<=10)
+//            {
+//                holder.uparrowL1.setVisibility(View.VISIBLE);
+//                holder.progressBar.setProgress(v1);
+//            }
+//            else if (v1>10&&v1<=20)
+//            {
+//                holder.uparrowL2.setVisibility(View.VISIBLE);
+//                holder.progressBar.setProgress(v1);
+//            }
+//            else if (v1>20&&v1<=30)
+//            {
+//                holder.uparrowL3.setVisibility(View.VISIBLE);
+//                holder.progressBar.setProgress(v1);
+//            }
+//            else if (v1>30&&v1<=40)
+//            {
+//                holder.uparrowL4.setVisibility(View.VISIBLE);
+//                holder.progressBar.setProgress(v1);
+//            }
+//            else if (v1>40&&v1<=50)
+//            {
+//
+//                holder.uparrow.setVisibility(View.VISIBLE);
+//                holder.progressBar.setProgress(v1);
+//            }
+//            else if (v1>50&&v1<=60)
+//            {
+//                holder.uparrowR1.setVisibility(View.VISIBLE);
+//                holder.progressBar.setProgress(v1);
+//            }
+//            else if (v1>60&&v1<=70)
+//            {
+//                holder.uparrowR2.setVisibility(View.VISIBLE);
+//                holder.progressBar.setProgress(v1);
+//            }
+//            else if (v1>70&&v1<=80)
+//            {
+//                holder.uparrowR3.setVisibility(View.VISIBLE);
+//                holder.progressBar.setProgress(v1);
+//            }
+//            else if (v1>80&&v1<=90)
+//            {
+//                holder.uparrowR4.setVisibility(View.VISIBLE);
+//                holder.progressBar.setProgress(v1);
+//            }
+//            else
+//            {
+//                holder.uparrowL0.setVisibility(View.GONE);
+//                holder.uparrowL1.setVisibility(View.GONE);
+//                holder.uparrowL2.setVisibility(View.GONE);
+//                holder.uparrowL3.setVisibility(View.GONE);
+//                holder.uparrowL4.setVisibility(View.GONE);
+//                holder.uparrow.setVisibility(View.GONE);
+//                holder.uparrowR1.setVisibility(View.GONE);
+//                holder.uparrowR2.setVisibility(View.GONE);
+//                holder.uparrowR3.setVisibility(View.GONE);
+//                holder.uparrowR4.setVisibility(View.GONE);
+//            }
 
         }
 
@@ -446,13 +460,14 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Notice
 
     public class NoticeHolder extends RecyclerView.ViewHolder {
         private TextView im1,name,tvv1,tvv2,tvHelpInfo1;
-        private ImageView uparrowLast,ivcomparesetLast,ivcompareset1,ivcompareset2,ivcompareset3,ivcompareset4,ivcompareset5,ivcompareset6,ivcompareset7,ivcompareset8,ivcompareset9,ivcompareset10,
+        private ImageView imageView, uparrowLast,ivcomparesetLast,ivcompareset1,ivcompareset2,ivcompareset3,ivcompareset4,ivcompareset5,ivcompareset6,ivcompareset7,ivcompareset8,ivcompareset9,ivcompareset10,
                 inffo,imvideo,imviply,uparrowL0,uparrowR4,uparrowR3,uparrowR2,uparrowR1,uparrow,uparrowL4,uparrowL3,uparrowL2,uparrowL1;
         private ProgressBar progressBar;
 
         public NoticeHolder(@NonNull View itemView) {
             super(itemView);
-          //  name = itemView.findViewById(R.id.name);
+            imageView=itemView.findViewById(R.id.imageView);
+            name = itemView.findViewById(R.id.textView3);
             tvv1 = itemView.findViewById(R.id.tvv1);
             tvv2 = itemView.findViewById(R.id.tvv2);
             im1 = itemView.findViewById(R.id.im1);
