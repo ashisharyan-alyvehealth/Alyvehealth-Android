@@ -807,7 +807,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         RequestBody reqhomlon = RequestBody.create(homlonstr, MediaType.parse("multipart/form-data"));
         RequestBody reqhomadd = RequestBody.create(homeadd, MediaType.parse("multipart/form-data"));
         RequestBody reqoffcadd = RequestBody.create(offcadd, MediaType.parse("multipart/form-data"));
-        CommonUtils.showSpotoProgressDialog(context);
+//        CommonUtils.showSpotoProgressDialog(context);
         Call<ProfileResponse> call = RetrofitClient.getUniqInstance().getApi()
                 .profileCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN), name,numbers, dob, emails,perosnalemails,reqoffclan,reqoffclon,reqhomlat,reqhomlon,reqhomadd,reqoffcadd, body);
         call.enqueue(new Callback<ProfileResponse>() {
@@ -825,13 +825,13 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                 } else {
                     showToast(SERVER_ERROR);
                 }
-                CommonUtils.dismissSpotoProgressDialog();
+              //  CommonUtils.dismissSpotoProgressDialog();
             }
 
             @Override
             public void onFailure(Call<ProfileResponse> call, Throwable t) {
                 t.printStackTrace();
-                CommonUtils.dismissSpotoProgressDialog();
+             //   CommonUtils.dismissSpotoProgressDialog();
             }
         });
     }

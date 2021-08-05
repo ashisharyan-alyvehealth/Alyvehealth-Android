@@ -136,7 +136,13 @@ public class GraphActivity extends BaseActivity implements View.OnClickListener{
         ivHeader.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                HomeActivity.lastAct="Graph";
                 onBackPressed();
+//                finish();
+//                Intent intent=new Intent(context,HomeActivity.class);
+//                intent.putExtra("lastAct","graph");
+//                startActivity(intent);
+
             }
         });
 
@@ -194,9 +200,9 @@ public class GraphActivity extends BaseActivity implements View.OnClickListener{
                 //.textLength(300, ReadMoreOption.TYPE_CHARACTER)
                 .moreLabel(" View more ")
                 .lessLabel(" View less ")
-                /*   .moreLabelColor(R.color.red)
-                   .lessLabelColor(R.color.red)
-                */   .labelUnderLine(true)
+                  .moreLabelColor(Color.parseColor("#8775ed"))
+                   .lessLabelColor(Color.parseColor("#8775ed"))
+                   .labelUnderLine(true)
                 .expandAnimation(true)
                 .build();
         readMoreOption.addReadMoreTo(tv1, getIntent().getStringExtra("decs"));
@@ -474,7 +480,7 @@ public class GraphActivity extends BaseActivity implements View.OnClickListener{
         mChart.clear();
         mChart.removeAllViews();
         mChart.notifyDataSetChanged();
-        CommonUtils.showSpotoProgressDialog(context);
+      //  CommonUtils.showSpotoProgressDialog(context);
         Call<GraphResponse> call = RetrofitClient.getUniqInstance().getApi()
                 .GraphResponseCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN), type, id,userstr,agestr,genderstr,communitystr);
         call.enqueue(new Callback<GraphResponse>() {
@@ -717,13 +723,13 @@ public class GraphActivity extends BaseActivity implements View.OnClickListener{
                         }
                     }
                 }
-                CommonUtils.dismissSpotoProgressDialog();
+              //  CommonUtils.dismissSpotoProgressDialog();
             }
 
             @Override
             public void onFailure(Call<GraphResponse> call, Throwable t) {
                 t.printStackTrace();
-                CommonUtils.dismissSpotoProgressDialog();
+              //  CommonUtils.dismissSpotoProgressDialog();
             }
         });
     }
@@ -741,7 +747,7 @@ public class GraphActivity extends BaseActivity implements View.OnClickListener{
         mChart.clear();
         mChart.removeAllViews();
         mChart.notifyDataSetChanged();
-        CommonUtils.showSpotoProgressDialog(context);
+       // CommonUtils.showSpotoProgressDialog(context);
         Call<GraphResponse> call = RetrofitClient.getUniqInstance().getApi()
                 .GraphResponseCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN), type, id,userstr,agestr,genderstr,communitystr);
         call.enqueue(new Callback<GraphResponse>() {
@@ -986,13 +992,13 @@ public class GraphActivity extends BaseActivity implements View.OnClickListener{
                         }
                     }
                 }
-                CommonUtils.dismissSpotoProgressDialog();
+              //  CommonUtils.dismissSpotoProgressDialog();
             }
 
             @Override
             public void onFailure(Call<GraphResponse> call, Throwable t) {
                 t.printStackTrace();
-                CommonUtils.dismissSpotoProgressDialog();
+              //  CommonUtils.dismissSpotoProgressDialog();
             }
         });
     }
@@ -1010,7 +1016,7 @@ public class GraphActivity extends BaseActivity implements View.OnClickListener{
         mChart.clear();
         mChart.removeAllViews();
         mChart.notifyDataSetChanged();
-        CommonUtils.showSpotoProgressDialog(context);
+       // CommonUtils.showSpotoProgressDialog(context);
         Call<GraphResponse> call = RetrofitClient.getUniqInstance().getApi()
                 .GraphResponseCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN), type, id,userstr,agestr,genderstr,communitystr);
         call.enqueue(new Callback<GraphResponse>() {
@@ -1252,7 +1258,7 @@ public class GraphActivity extends BaseActivity implements View.OnClickListener{
                         }
                     }
                 }
-                CommonUtils.dismissSpotoProgressDialog();
+             //   CommonUtils.dismissSpotoProgressDialog();
             }
 
             @Override

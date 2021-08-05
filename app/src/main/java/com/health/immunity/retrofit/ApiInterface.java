@@ -1,20 +1,25 @@
 package com.health.immunity.retrofit;
 
 import com.google.gson.JsonObject;
+import com.health.immunity.HomeContainer.model.FitResponse;
 import com.health.immunity.HomeContainer.model.JsonObjectResponse;
 import com.health.immunity.HomeContainer.model.PEDORESPONSE;
 import com.health.immunity.HomeContainer.model.TokenResponse;
+import com.health.immunity.HomeContainer.model.updatrPedoIdResponse;
 import com.health.immunity.act.model.SourceResponse;
 import com.health.immunity.community.model.CommunityResponse;
 import com.health.immunity.community.model.CommunityUserListResponse;
 import com.health.immunity.community.model.DashboardResponse;
 import com.health.immunity.community.model.InsightResponse;
+import com.health.immunity.community.model.InvitResponse;
+import com.health.immunity.community.model.InviteMemberResponse;
 import com.health.immunity.community.model.LeaveCommunityResponse;
 import com.health.immunity.community.model.NoticeResponse;
 import com.health.immunity.community.model.ZoneResponse;
 import com.health.immunity.insight.model.GetKpiCall;
 import com.health.immunity.insight.model.GraphResponse;
 import com.health.immunity.insight.model.MyCommunitiesResponse;
+import com.health.immunity.login.model.GetTersmApi;
 import com.health.immunity.login.model.LoginMobile;
 import com.health.immunity.login.model.MobileOTPModel;
 import com.health.immunity.login.model.OnBoardResponse;
@@ -109,12 +114,12 @@ public interface ApiInterface {
 //    @FormUrlEncoded
 //    Call<MobileOTPModel> accessCodeCall(@Field("access_code") String access_code);
 //
-//    @POST("user-info")
-//    Call<OnBoardResponse> onBoardCall(@Body JsonObject jsonObject);
-//
-//    @POST("reOnboarding")
-//    Call<OnBoardResponse> hrOnBoardCall(@Header("Authorization") String token,
-//                                        @Body JsonObject jsonObject);
+    @POST("user-info")
+    Call<OnBoardResponse> onBoardCall(@Body JsonObject jsonObject);
+
+    @POST("reOnboarding")
+    Call<OnBoardResponse> hrOnBoardCall(@Header("Authorization") String token,
+                                        @Body JsonObject jsonObject);
     @POST("saveUserKpi")
     @FormUrlEncoded
     Call<JsonObjectResponse> fitCall(@Header("Authorization") String token,
@@ -155,19 +160,19 @@ public interface ApiInterface {
 //
 //
 //
-//    @POST("terms-condition")
-//    @FormUrlEncoded
-//    Call<GetTersmApi> getTermsCall(@Field("type") String type);
+    @POST("terms-condition")
+    @FormUrlEncoded
+    Call<GetTersmApi> getTermsCall(@Field("type") String type);
 //
 //
-//    @POST("terms-condition-save")
-//    @FormUrlEncoded
-//    Call<GetTersmApi> postTermsCall(@Field("mobile_number") String mobile_number,
-//                                    @Field("email") String email,
-//                                    @Field("device_id") String device_id,
-//                                    @Field("content_id") String content_id,
-//                                    @Field("id") String id,
-//                                    @Field("type") String type);
+    @POST("terms-condition-save")
+    @FormUrlEncoded
+    Call<GetTersmApi> postTermsCall(@Field("mobile_number") String mobile_number,
+                                    @Field("email") String email,
+                                    @Field("device_id") String device_id,
+                                    @Field("content_id") String content_id,
+                                    @Field("id") String id,
+                                    @Field("type") String type);
 //
 //    @POST("user-check-in")
 //    Call<OnBoardResponse> checkInCall(@Header("Authorization") String token,
@@ -251,11 +256,11 @@ public interface ApiInterface {
 //                                           @Field("latitude") String latitute,
 //                                           @Field("longitude") String longitute);
 //
-//    @POST("extended-invit")
-//    @FormUrlEncoded
-//    Call<InvitResponse> ExtendedCall(@Header("Authorization") String token,
-//                                     @Field("invit_number") String number);
-//
+    @POST("extended-invit")
+    @FormUrlEncoded
+    Call<InvitResponse> ExtendedCall(@Header("Authorization") String token,
+                                     @Field("invit_number") String number);
+
 //    @POST("user-device")
 //    @FormUrlEncoded
 //    Call<DeviceResponse> DeviceCall(@Header("Authorization") String token,
@@ -303,12 +308,12 @@ public interface ApiInterface {
                                           @Field("community_name") String communityname,
                                           @Field("description") String description);
 
-//    @POST("inviteMember")
-//    @FormUrlEncoded
-//    Call<InviteMemberResponse> inviteMemberCall(@Header("Authorization") String token,
-//                                                @Field("community_id") String commid,
-//                                                @Field("invited_mobile_number") String invnum/*,
-//                                                @Field("invited_name") String invname*/);
+    @POST("inviteMember")
+    @FormUrlEncoded
+    Call<InviteMemberResponse> inviteMemberCall(@Header("Authorization") String token,
+                                                @Field("community_id") String commid,
+                                                @Field("invited_mobile_number") String invnum/*,
+                                                @Field("invited_name") String invname*/);
 //
     @GET("myCommunities")
     Call<MyCommunitiesResponse> myCommunitiesCall(@Header("Authorization") String token);
@@ -364,23 +369,23 @@ public interface ApiInterface {
     @FormUrlEncoded
     Call<SourceResponse> sourceCall(@Field("source") String source);
 //
-//    @POST("sync/getGoogleFitData.php")
-//    @FormUrlEncoded
-//    Call<FitResponse> GoogleFitCall(@Field("auth_token") String token,
-//                                    @Field("step_data") String datastep,
-//                                    @Field("distance_data") String datadis,
-//                                    @Field("height_data") String datahei,
-//                                    @Field("weight_data") String datawei);
+    @POST("sync/getGoogleFitData.php")
+    @FormUrlEncoded
+    Call<FitResponse> GoogleFitCall(@Field("auth_token") String token,
+                                    @Field("step_data") String datastep,
+                                    @Field("distance_data") String datadis,
+                                    @Field("height_data") String datahei,
+                                    @Field("weight_data") String datawei);
 //
     @POST("updateZohoId")
     @FormUrlEncoded
     Call<updateZohoIdResponse> gitstatusCall(@Header("Authorization") String token,
                                              @Field("google_healthkit_status") String source);
-//    @POST("post_user_permission")
-//    @FormUrlEncoded
-//    Call<updatrPedoIdResponse> pedostatusCall(@Header("Authorization") String token,
-//                                             @Field("permission_type") int source,
-//                                             @Field("status") int status);
+    @POST("post_user_permission")
+    @FormUrlEncoded
+    Call<updatrPedoIdResponse> pedostatusCall(@Header("Authorization") String token,
+                                              @Field("permission_type") int source,
+                                              @Field("status") int status);
 //
 //
 //

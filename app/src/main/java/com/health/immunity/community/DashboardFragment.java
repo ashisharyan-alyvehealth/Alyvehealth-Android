@@ -99,6 +99,7 @@ public class DashboardFragment extends BaseFragment implements View.OnClickListe
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dashboard, container, false);
         View view = binding.getRoot();
         binding.imvv22.setVisibility(View.GONE);
+
         comClickInterface = new comClickInterface() {
             @Override
             public void setClick(int abc) {

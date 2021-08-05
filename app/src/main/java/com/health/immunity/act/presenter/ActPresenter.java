@@ -50,13 +50,19 @@ public class ActPresenter implements IActPresenter{
                                         view1.loadUrl(url[0]);
                                     }
                                     if(urlPos==997){
-                                        url[0] = "https://programs.alyve.health/acts?tabId=challenges";
+                                        url[0] = "https://programs.alyve.health/engage";
                                         view1.loadUrl(url[0]);
                                     }
                                     if(urlPos==996){
                                         url[0] = BASE_URL_REPORTS + token;
+                                      //  url[0] = "https://programs.alyve.health/acts?tabId=challenges";
                                         view1.loadUrl(url[0]);
                                     }
+                                    if(urlPos==995) {
+                                        url[0] = "https://programs.alyve.health/privacy";
+                                        view1.loadUrl(url[0]);
+                                    }
+
                                 }
                                 else{
                                 System.out.println("###############@@@@@@@@@@foryu" + response.body().getJsonData().get(urlPos).getTokenValue());

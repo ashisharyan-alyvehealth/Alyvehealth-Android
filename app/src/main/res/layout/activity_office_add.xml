@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dimen_20dp"
+        android:background="@color/white"
+        tools:context=".activity.onboard.OfficeAddActivity">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+
+            android:fontFamily="@font/nunito_bold"
+            android:textSize="@dimen/dimen_16sp"
+            android:textColor="@color/headingcolor"
+            android:id="@+id/textskip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SKIP"
+            app:layout_constraintTop_toTopOf="@id/ivBack"
+            app:layout_constraintBottom_toBottomOf="@id/ivBack"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_15dp"
+            android:progress="80"
+            android:layout_marginLeft="@dimen/dimen_70dp"
+            android:layout_marginRight="@dimen/dimen_70dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:alpha=".6"
+            android:fontFamily="@font/nunito_bold"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:textSize="@dimen/dimen_20sp"
+            android:textColor="@color/stepcolor"
+            android:id="@+id/textstep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STEP 4/5"
+            app:layout_constraintTop_toBottomOf="@id/progress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:gravity="center"
+            android:fontFamily="@font/nunito_bold"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:textSize="@dimen/dimen_28sp"
+            android:textColor="@color/headingcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Where is your\noffice?"
+            app:layout_constraintTop_toBottomOf="@id/textstep"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        <ImageView
+            android:layout_marginTop="@dimen/dimen_30dp"
+            android:id="@+id/tvFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/offc"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvName"/>
+
+
+
+
+
+        <TextView
+            android:drawableLeft="@drawable/location"
+            android:padding="@dimen/dimen_10sp"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/dimen_20dp"
+            android:layout_marginRight="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_40dp"
+            android:background="@drawable/grey_gradiant"
+            android:backgroundTint="@color/colorBG"
+            app:layout_constraintStart_toStartOf="@id/tvFemale"
+            app:layout_constraintEnd_toEndOf="@id/tvFemale"
+            app:layout_constraintTop_toBottomOf="@id/tvFemale"
+            app:layout_constraintBottom_toTopOf="@id/ivNext"
+            android:id="@+id/etLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Office Address"
+            android:imeOptions="actionDone"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/dimen_20sp"
+            android:fontFamily="@font/nunito_regular"/>
+
+
+
+        <Button
+            android:layout_margin="@dimen/dimen_50dp"
+            android:background="@drawable/gradiant"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etLocation"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/ivNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Continue"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_18sp"
+            android:fontFamily="@font/nunito_bold"/>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+    <!--
+    <?xml version="1.0" encoding="utf-8"?>
+    <layout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".activity.onboard.OfficeAddActivity">
+
+            <ProgressBar
+                android:id="@+id/progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_15dp"
+                android:progress="40"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:padding="@dimen/dimen_20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progress">
+
+                <ImageView
+                    android:id="@+id/ivLogo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/logo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_200dp"
+                    android:layout_marginBottom="@dimen/dimen_50dp"
+                    app:layout_constraintBottom_toTopOf="@+id/ivLogin"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        style="@style/text_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen_20dp"
+                        android:text="@string/you_are_a"
+                        android:textColor="@color/colorGrey"
+                        app:layout_constraintBottom_toTopOf="@+id/viewGend"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <View
+                        android:id="@+id/viewGend"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dimen_50dp"
+                        android:layout_marginBottom="@dimen/dimen_20dp"
+                        android:background="@drawable/selected_background"
+                        app:layout_constraintBottom_toTopOf="@+id/tvDisclose"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvFemale"
+                        style="@style/option_text_size"
+                        android:layout_width="@dimen/dimen_100dp"
+                        android:layout_height="0dp"
+                        android:gravity="center"
+                        android:text="@string/female"
+                        android:textColor="@color/colorBackground"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewGend"
+                        app:layout_constraintEnd_toEndOf="@+id/viewLangPref"
+                        app:layout_constraintStart_toStartOf="@+id/viewGend"
+                        app:layout_constraintTop_toTopOf="@+id/viewGend" />
+
+                    <View
+                        android:id="@+id/viewLangPref"
+                        android:layout_width="@dimen/dimen_2dp"
+                        android:layout_height="0dp"
+                        android:background="@color/colorBackground"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewGend"
+                        app:layout_constraintEnd_toStartOf="@+id/tvMale"
+                        app:layout_constraintStart_toEndOf="@+id/tvFemale"
+                        app:layout_constraintTop_toTopOf="@+id/viewGend" />
+
+                    <TextView
+                        android:id="@+id/tvMale"
+
+                        style="@style/option_text_size"
+                        android:layout_width="@dimen/dimen_100dp"
+                        android:layout_height="0dp"
+                        android:gravity="center"
+                        android:text="@string/male"
+                        android:textColor="@color/colorBackground"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewGend"
+                        app:layout_constraintEnd_toStartOf="@+id/viewMale"
+                        app:layout_constraintStart_toEndOf="@+id/viewLangPref"
+                        app:layout_constraintTop_toTopOf="@+id/viewGend" />
+
+                    <View
+                        android:id="@+id/viewMale"
+                        android:layout_width="@dimen/dimen_2dp"
+                        android:layout_height="0dp"
+                        android:background="@color/colorBackground"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewGend"
+                        app:layout_constraintEnd_toStartOf="@+id/tvNonBinary"
+                        app:layout_constraintStart_toEndOf="@+id/tvMale"
+                        app:layout_constraintTop_toTopOf="@+id/viewGend" />
+
+                    <TextView
+                        android:id="@+id/tvNonBinary"
+                        style="@style/option_text_size"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:gravity="center"
+                        android:text="@string/non_binary"
+                        android:textColor="@color/colorBackground"
+                        app:layout_constraintBottom_toBottomOf="@+id/viewGend"
+                        app:layout_constraintEnd_toEndOf="@+id/viewGend"
+                        app:layout_constraintStart_toStartOf="@+id/viewMale"
+                        app:layout_constraintTop_toTopOf="@+id/viewGend" />
+
+                    <TextView
+                        android:id="@+id/tvDisclose"
+
+                        style="@style/option_text_size"
+                        android:layout_width="@dimen/dimen_300dp"
+                        android:layout_height="@dimen/dimen_50dp"
+                        android:layout_marginBottom="@dimen/dimen_20dp"
+                        android:background="@drawable/selected_background"
+                        android:gravity="center"
+                        android:text="@string/do_not_wish_to_disclose"
+                        android:textColor="@color/colorBackground"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/ivLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_30dp"
+                    android:src="@drawable/vector_smart_object_copy"
+                    app:layout_constraintBottom_toTopOf="@+id/tvLocation"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvLocation"
+                    style="@style/text_size"
+                    android:textColor="@color/colorText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_20dp"
+                    android:text="@string/whats_is_your_office_location"
+                    app:layout_constraintBottom_toTopOf="@+id/etLocation"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/etLocation"
+                    style="@style/entry_text_size"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_40dp"
+                    android:drawableStart="@drawable/ic_location"
+                    android:maxLines="1"
+                    app:layout_constraintBottom_toTopOf="@+id/ivNext"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <View
+                    android:layout_marginBottom="@dimen/dimen_20dp"
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorPrimary"
+                    android:paddingTop="@dimen/dimen_5dp"
+                    app:layout_constraintBottom_toTopOf="@+id/ivNext"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etLocation" />
+
+                <ImageView
+                    android:id="@+id/ivNext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_right"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </layout>
+
+    -->

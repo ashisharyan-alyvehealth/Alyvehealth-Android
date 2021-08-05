@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.health.immunity.BaseActivity;
 import com.health.immunity.CommonUtils;
+import com.health.immunity.HomeContainer.HomeActivity;
 import com.health.immunity.IConstant;
 import com.health.immunity.PreferenceHelper;
 import com.health.immunity.login.model.LoginMobile;
@@ -31,9 +32,9 @@ public class LoginPresenter extends BaseActivity implements IloginPresenter{
 
     }
     @Override
-    public void doLogin(String Phonenum,String Otp) {
+    public void doLogin(String Phonenum,String Otp,Context context1) {
         view.onSuccess("reached here"+ Phonenum +"  "+ Otp);
-        verifyMobileOTPApi(Phonenum,Otp);
+        verifyMobileOTPApi(Phonenum,Otp,context1);
     }
 
     @Override
@@ -69,7 +70,7 @@ public class LoginPresenter extends BaseActivity implements IloginPresenter{
     }
 
 
-    private void verifyMobileOTPApi(String phone, String otp) {
+    private void verifyMobileOTPApi(String phone, String otp,Context context1) {
 
         Call<MobileOTPModel> call = RetrofitClient.getUniqInstance().getApi().mobileOtpCall(phone,otp);
         call.enqueue(new Callback<MobileOTPModel>() {
@@ -85,7 +86,9 @@ public class LoginPresenter extends BaseActivity implements IloginPresenter{
                                     response.body().getJsonData().getName(),response.body().getJsonData().getDateOfBirth(),response.body().getJsonData().getGender(),
                                     response.body().getJsonData().getEmail());
                         } else {
-                            Intent intent1 = new Intent(context, DummyTncActivity.class);
+
+
+                            Intent intent1 = new Intent(context1, DummyTncActivity.class);
                             intent1.putExtra("comesFrom", "");
                             intent1.putExtra("mobileNumber", OTPActivity.phoneNum);
                             startActivity(intent1);
@@ -116,7 +119,7 @@ public class LoginPresenter extends BaseActivity implements IloginPresenter{
             @Override
             public void onResponse(Call<OnBoardResponse> call, Response<OnBoardResponse> response) {
                 if (response.body() != null) {
-                    Intent intent1 = new Intent(context, DummyHomeActivity.class);
+                    Intent intent1 = new Intent(getApplicationContext(), HomeActivity.class);
                     intent1.putExtra("mobileNumber", OTPActivity.phoneNum);
                     intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent1);

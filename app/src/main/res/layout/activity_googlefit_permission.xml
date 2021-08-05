@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dimen_20dp"
+        android:background="@color/white"
+        tools:context=".activity.onboard.GooglefitPermission">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+
+            android:fontFamily="@font/nunito_bold"
+            android:textSize="@dimen/dimen_16sp"
+            android:textColor="@color/headingcolor"
+            android:id="@+id/textskip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SKIP"
+            app:layout_constraintTop_toTopOf="@id/ivBack"
+            app:layout_constraintBottom_toBottomOf="@id/ivBack"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_15dp"
+            android:progress="40"
+            android:layout_marginLeft="@dimen/dimen_70dp"
+            android:layout_marginRight="@dimen/dimen_70dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:alpha=".6"
+            android:fontFamily="@font/nunito_bold"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:textSize="@dimen/dimen_20sp"
+            android:textColor="@color/stepcolor"
+            android:id="@+id/textstep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STEP 2/5"
+            app:layout_constraintTop_toBottomOf="@id/progress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:fontFamily="@font/nunito_bold"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:textSize="@dimen/dimen_28sp"
+            android:textColor="@color/headingcolor"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Do you want to connect\nyour Google Fit?"
+            app:layout_constraintTop_toBottomOf="@id/textstep"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        <ImageView
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:id="@+id/tvFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            app:layout_constraintBottom_toTopOf="@id/swtchbtn"/>
+
+
+
+
+
+
+
+        <Switch
+            android:scaleX="2"
+            android:scaleY="2"
+            style="@style/option_text_size"
+            android:checked="false"
+            android:textOff="OFF"
+            android:textOn="ON"
+            android:switchMinWidth="@dimen/dimen_50dp"
+            android:layout_marginBottom="30dp"
+            android:id="@+id/swtchbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvFemale"
+            app:layout_constraintBottom_toTopOf="@id/ivNext"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"></Switch>
+
+
+
+        <Button
+            android:layout_margin="@dimen/dimen_50dp"
+            android:background="@drawable/gradiant"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/ivNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Continue"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_18sp"
+            android:fontFamily="@font/nunito_bold"/>
+
+
+
+        <!--  <ImageView
+              android:id="@+id/ivLogo"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:src="@drawable/logo"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent" />
+          <TextView
+              android:id="@+id/tvLoginMsg"
+
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="@dimen/dimen_20dp"
+              android:lineSpacingExtra="@dimen/dimen_5dp"
+              android:text="We will help you get your health in your hands. Connect your health app now!"
+              android:textColor="@android:color/black"
+              style="@style/text_size"
+              app:layout_constraintBottom_toTopOf="@+id/ivInfo"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent" />
+
+
+
+
+          <ImageView
+              android:id="@+id/ivInfo"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="@dimen/dimen_30dp"
+              android:src="@drawable/vector_smart_object_copy"
+              app:layout_constraintBottom_toTopOf="@+id/tvLogin"
+              app:layout_constraintStart_toStartOf="parent" />
+
+          <TextView
+              android:id="@+id/tvLogin"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginBottom="@dimen/dimen_20dp"
+              android:text="Connect your Google fit and we will keep you healthy!"
+              android:textColor="@android:color/black"
+              style="@style/text_size"
+              app:layout_constraintBottom_toTopOf="@+id/llg"
+              app:layout_constraintStart_toStartOf="parent" />
+
+
+          <LinearLayout
+              android:orientation="horizontal"
+              android:padding="@dimen/dimen_10dp"
+              android:id="@+id/llg"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginEnd="@dimen/dimen_20dp"
+              android:layout_marginBottom="@dimen/dimen_20dp"
+              android:background="@drawable/background_language"
+              app:layout_constraintBottom_toTopOf="@+id/ivCheck"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent" >
+              <ImageView
+                  android:layout_marginLeft="@dimen/dimen_10dp"
+                  android:text="Connect Google Fit"
+                  android:id="@+id/imvg"
+                  android:layout_width="@dimen/dimen_30dp"
+                  android:layout_height="@dimen/dimen_30dp"
+                  android:src="@drawable/google_fit_icon" />
+          <TextView
+              android:layout_gravity="center"
+              android:gravity="center_vertical"
+              android:layout_marginLeft="@dimen/dimen_10dp"
+              android:text="Connect Google Fit"
+              android:id="@+id/etEmail"
+              android:layout_width="wrap_content"
+              android:layout_height="match_parent"
+              style="@style/entry_text_size"
+              android:textColor="@color/colorPrimary"
+              android:inputType="text"
+              android:maxLines="1" />
+          </LinearLayout>
+
+
+
+
+  <TextView
+      android:id="@+id/tcskip"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Skip"
+      android:textColor="@color/colorPrimary"
+      style="@style/option_text_size"
+      app:layout_constraintBottom_toBottomOf="@id/ivCheck"
+      app:layout_constraintTop_toTopOf="@id/ivCheck"
+      app:layout_constraintRight_toLeftOf="@+id/ivCheck"></TextView>
+
+          <ImageView
+
+              android:id="@+id/ivCheck"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:scaleType="fitXY"
+              android:background="@drawable/ic_right"
+              android:visibility="visible"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintEnd_toEndOf="parent"
+              />-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

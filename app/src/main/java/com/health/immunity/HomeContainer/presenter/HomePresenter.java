@@ -174,7 +174,7 @@ public class HomePresenter implements IHomePresenter{
     public void startPedometerService() {
         context.startService(new Intent(context, SensorListener.class));
         PreferenceHelper.setStringPreference(context, IConstant.FIT_PEDOMETER,"1");
-        view.onSuccess("service started");
+       // view.onSuccess("service started");
 
     }
 
@@ -192,6 +192,7 @@ public class HomePresenter implements IHomePresenter{
                         System.out.println("pedonewapi"+" 3");
 
                         PreferenceHelper.setStringPreference(context, IConstant.FIT_PEDOMETER, "1");
+
 
                     }
                 })

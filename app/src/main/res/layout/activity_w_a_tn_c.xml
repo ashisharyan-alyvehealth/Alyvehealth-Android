@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dimen_20dp"
+        android:background="@color/white"
+        tools:context=".activity.onboard.WATnCActivity">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+
+            android:fontFamily="@font/nunito_bold"
+            android:textSize="@dimen/dimen_16sp"
+            android:textColor="@color/headingcolor"
+            android:id="@+id/textskip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SKIP"
+            app:layout_constraintTop_toTopOf="@id/ivBack"
+            app:layout_constraintBottom_toBottomOf="@id/ivBack"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_15dp"
+            android:progress="60"
+            android:layout_marginLeft="@dimen/dimen_70dp"
+            android:layout_marginRight="@dimen/dimen_70dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:alpha=".6"
+            android:fontFamily="@font/nunito_bold"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:textSize="@dimen/dimen_20sp"
+            android:textColor="@color/stepcolor"
+            android:id="@+id/textstep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STEP 3/5"
+            app:layout_constraintTop_toBottomOf="@id/progress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:fontFamily="@font/nunito_bold"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:textSize="@dimen/dimen_28sp"
+            android:textColor="@color/headingcolor"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Do you want alerts\non WhatsApp?"
+            app:layout_constraintTop_toBottomOf="@id/textstep"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        <ImageView
+            android:id="@+id/tvFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/watsapp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            app:layout_constraintBottom_toTopOf="@id/swtchbtn"/>
+
+
+
+
+
+
+
+        <Switch
+            android:scaleX="2"
+            android:scaleY="2"
+            style="@style/option_text_size"
+            android:checked="true"
+            android:textOff="OFF"
+            android:textOn="ON"
+            android:switchMinWidth="@dimen/dimen_50dp"
+            android:id="@+id/swtchbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvFemale"
+            app:layout_constraintBottom_toTopOf="@id/ivNext"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"></Switch>
+
+
+
+        <Button
+            android:layout_marginLeft="@dimen/dimen_50dp"
+            android:layout_marginRight="@dimen/dimen_50dp"
+            android:layout_marginBottom="@dimen/dimen_20dp"
+            android:background="@drawable/gradiant"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tvNamedesc"
+            android:id="@+id/ivNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Continue"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_18sp"
+            android:fontFamily="@font/nunito_bold"/>
+
+        <TextView
+            android:lineSpacingExtra="@dimen/dimen_10dp"
+            android:id="@+id/tvNamedesc"
+            android:fontFamily="@font/nunito_regular"
+            android:textSize="@dimen/dimen_18sp"
+            android:textColor="@color/app_bg_color"
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Don’t worry, we will never spam you\n&amp; your details will be secure."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
+    <!--
+    <?xml version="1.0" encoding="utf-8"?>
+    <layout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/dimen_20dp">
+
+            <ImageView
+                android:id="@+id/ivLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/ivWLogo"
+                android:layout_width="@dimen/dimen_30dp"
+                android:layout_height="@dimen/dimen_30dp"
+                android:src="@drawable/capa_1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvTerms"
+                app:layout_constraintBottom_toBottomOf="@id/tvTerms"/>
+
+            <TextView
+                android:layout_marginLeft="@dimen/dimen_10dp"
+                android:id="@+id/tvTerms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:text="WhatsApp Permission"
+                android:textColor="@color/colorPrimary"
+                style="@style/text_size"
+                app:layout_constraintStart_toEndOf="@id/ivWLogo"
+                app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:fillViewport="true"
+                android:paddingTop="@dimen/dimen_10dp"
+                android:paddingBottom="@dimen/dimen_10dp"
+                app:layout_constraintBottom_toTopOf="@+id/cbAgree"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTerms">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvTermsAnd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/text_size"
+                        tools:text="@string/terms_and_cond" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/first_terms_and_cond"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="@string/second_terms_and_cond"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="@string/third_terms_and_cond"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="@string/fourth_terms_and_cond"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="@string/fifth_terms_and_cond"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="@string/sixth_terms_and_cond"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="@string/seventh_terms_and_cond"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:text="For HR Portal:"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:text="@string/hr_agreement"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="Acceptance of the Terms :"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:text="@string/accept_terms_agreement"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="Description of the Service "
+                        android:textStyle="bold"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:text="@string/description_terms_agreement"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="Organization community manager / administrator"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:text="@string/organization_terms_agreement"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="Privacy Policy"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:text="@string/privacy_policy"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="@string/inform_collected_terms_and_cond"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="@string/use_of_inform"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="@string/use_of_retention"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:text="@string/use_of_rights"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="@string/use_of_data_security"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="@string/use_of_grievances"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="@string/use_of_liability"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:text="Data Ownership"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:text="@string/data_ownership"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:text="Communications from us"
+                        android:visibility="gone"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:text="@string/data_communication"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="Restrictions on Use"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:text="@string/restricion_desc"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:text="Disclaimer of Warranties"
+                        android:visibility="gone"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:text="@string/warranties_desc"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="Limitation of Liability"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:text="@string/liability_desc"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:visibility="gone"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:text="Indemnification"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:text="@string/indeminification"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:visibility="gone"
+                        android:text="Arbitration"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:text="@string/arbitration"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dimen_10dp"
+                        android:text="Suspension and Termination"
+                        android:visibility="gone"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/dimen_14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:text="@string/suspension"
+                        android:textSize="@dimen/dimen_14sp" />
+
+
+                </LinearLayout>
+            </ScrollView>
+
+            <CheckBox
+                android:checked="true"
+                android:visibility="visible"
+                android:id="@+id/cbAgree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dimen_20dp"
+                style="@style/option_text_size"
+                android:text="I agree"
+                app:layout_constraintBottom_toTopOf="@+id/btn"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:text="Proceed"
+                style="@style/option_text_size"
+                android:textColor="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintHorizontal_weight="5"
+                app:layout_constraintLeft_toRightOf="@id/btn1"
+               />
+
+            <Button
+                android:visibility="gone"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:id="@+id/btn1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:text="Reject"
+                style="@style/option_text_size"
+                android:textColor="@android:color/white"
+                app:layout_constraintRight_toLeftOf="@id/btn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintHorizontal_weight="5"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </layout>
+
+    -->

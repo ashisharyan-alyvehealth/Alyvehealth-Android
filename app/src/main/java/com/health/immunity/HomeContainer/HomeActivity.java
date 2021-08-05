@@ -29,10 +29,13 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
+import android.preference.PreferenceManager;
+import android.provider.Settings;
 import android.renderscript.ScriptGroup;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -44,6 +47,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.RadioGroup;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -51,10 +56,21 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.Scopes;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.Scope;
+import com.google.android.gms.fitness.Fitness;
 import com.google.android.gms.fitness.FitnessOptions;
+import com.google.android.gms.fitness.data.DataPoint;
+import com.google.android.gms.fitness.data.DataSet;
+import com.google.android.gms.fitness.data.DataSource;
 import com.google.android.gms.fitness.data.DataType;
+import com.google.android.gms.fitness.data.Field;
+import com.google.android.gms.fitness.request.DataReadRequest;
+import com.google.android.gms.fitness.result.DataReadResponse;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -62,9 +78,13 @@ import com.google.firebase.BuildConfig;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.gson.JsonObject;
 import com.health.immunity.BaseActivity;
 import com.health.immunity.CommonUtils;
 import com.health.immunity.HomeContainer.model.TokenResponse;
+import com.health.immunity.HomeContainer.model.FitResponse;
+import com.health.immunity.HomeContainer.model.JsonObjectResponse;
+import com.health.immunity.HomeContainer.model.updatrPedoIdResponse;
 import com.health.immunity.HomeContainer.presenter.HomePresenter;
 import com.health.immunity.HomeContainer.presenter.IHomePresenter;
 import com.health.immunity.HomeContainer.view.IHomeActivity;
@@ -73,11 +93,13 @@ import com.health.immunity.PreferenceHelper;
 import com.health.immunity.R;
 import com.health.immunity.aboutus.AboutUsFragment;
 import com.health.immunity.act.ActFragment;
+import com.health.immunity.act.model.SourceResponse;
 import com.health.immunity.alyvecash.AlyveCashFragment;
 import com.health.immunity.challenges.ChallengesFragment;
 import com.health.immunity.community.DashboardFragment;
 import com.health.immunity.databinding.ActivityHomeBinding;
 import com.health.immunity.expertchat.ExpertChatFragment;
+import com.health.immunity.insight.BodyAdapter;
 import com.health.immunity.insight.InsightFragment;
 import com.health.immunity.login.LoginActivity;
 import com.health.immunity.myprogram.MyProgramFragment;
@@ -85,9 +107,14 @@ import com.health.immunity.pedo.*;
 import com.health.immunity.pedo.ui.Fragment_Settings;
 import com.health.immunity.pedo.util.Logger;
 import com.health.immunity.pedo.util.Util;
+import com.health.immunity.privacypolicy.PrivacypolicyFragment;
 import com.health.immunity.profile.ProfileActivity;
 import com.health.immunity.profile.model.GetProfileResponse;
+import com.health.immunity.profile.model.updateZohoIdResponse;
+import com.health.immunity.retrofit.ApiInterface;
 import com.health.immunity.retrofit.RetrofitClient;
+import com.health.immunity.retrofit.ServiceGenerator;
+import com.health.immunity.screentime.ScreentimeActivity;
 import com.health.immunity.todo.TodoFragment;
 
 import java.io.IOException;
@@ -96,6 +123,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -110,18 +139,29 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     BottomNavigationView navView,bottomNav;
     BottomNavigationMenuView menuView;
     AlertDialog.Builder builderPedometer;
+    public static String totalStepsString = "", totalHeightsString, totalWeightsString, totalDistancesString;
+    long endTime, startTime;
     public static int userid =0;
+    public static int  permissionCount;
+    public static String lastAct="noone";
+    private static final int PERMISSIONS_REQUEST_READ_CONTACTS = 100;
     private boolean showSteps = true;
+    public static boolean report=false;
     GoogleSignInClient mGoogleSignInClient;
     GoogleSignInAccount account;
     private int todayOffset;
+    public static boolean vit=false;
     private int total_start;
+    public static Switch googleswitch;
     private int goal;
+    private static final int PERMISSIONS_REQUEST_WRITE_CAL = 1999;
     private String strImage = "";
+    String runningstr="",walkingstr="",zumbastr="",joggingstr="",aerobicsstr="",weightputstr="",heightputstr="",spo2putstr="";
     private int extend_count = 0;
     String fcmToken = "";
     private int since_boot;
     private int total_days;
+    private Context context1;
     FitnessOptions fitnessOptions;
     private String steps;
     private String distance;
@@ -131,6 +171,9 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     final public static String DEFAULT_STEP_UNIT = Locale.getDefault() == Locale.US ? "ft" : "cm";
     IHomePresenter presenter;
     private static final int MY_PERMISSIONS_REQUEST_ACTIVITY_RECOGNITION = 201;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,6 +182,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         presenter=new HomePresenter(this,context);
         drawer = findViewById(R.id.drawer_layout);
         navView=findViewById(R.id.bottomNav);
+        googleswitch=(Switch)findViewById(R.id.swtchbtn);
         builderPedometer = new AlertDialog.Builder(this);
         bottomNav=findViewById(R.id.bottomNav);
         binding.ivNavBar.setOnClickListener(this);
@@ -163,14 +207,246 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 //        menuView = (BottomNavigationMenuView) binding.bottomNav.getChildAt(0);
 //        menuView.setClipChildren(false);
 
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        setBottomNavigationView();
 
-                presenter.savePedometerData(steps,distance);
+
+
+        {
+
+           buildFitnessOptionRequest();
+            System.out.println("###############permission");
+
+            if (!TextUtils.isEmpty(getIntent().getStringExtra("weightbody")))
+            {
+                if (getIntent().getStringExtra("weightbody").equalsIgnoreCase("weight"))
+                {buildFitnessOptionRequest();
+
+                    weightputstr=getIntent().getStringExtra("weightvalue");
+                    if (GoogleSignIn.hasPermissions(GoogleSignIn.getLastSignedInAccount(this), fitnessOptions))
+                    {
+                        System.out.println("##########################wewe");
+                        insertWeightData(getIntent().getStringExtra("weightvalue"));
+
+                    }
+
+                    onfitweightClicked();
+                    System.out.println("##########################wewew");
+
+
+
+                    binding.bottomNav.getMenu().getItem(0).setChecked(true);
+                    Fragment argumentFragment = new InsightFragment();
+                    vit=true;
+                    Bundle data = new Bundle();//Use bundle to pass data
+                    data.putString("vitalcoming", "vital");//put string, int, etc in bundle with a key value
+                    argumentFragment.setArguments(data);//Finally set argument bundle to fragment
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.homeContainer, argumentFragment);
+                    fragmentTransaction.commit();
+
+                }
+
             }
-        }, 3000);
+            else if (!TextUtils.isEmpty(getIntent().getStringExtra("heightbody")))
+            {buildFitnessOptionRequest();
+                if (getIntent().getStringExtra("heightbody").equalsIgnoreCase("height"))
+                {
+                    heightputstr=getIntent().getStringExtra("heightvalue");
+                    buildFitnessOptionRequest();
+
+                    if (GoogleSignIn.hasPermissions(GoogleSignIn.getLastSignedInAccount(this), fitnessOptions))
+                    {
+                        insertHeightData(getIntent().getStringExtra("heightvalue"));
+                    }
+
+
+
+                    onfitheightClicked();
+
+
+                    binding.bottomNav.getMenu().getItem(0).setChecked(true);
+                    Fragment argumentFragment = new InsightFragment();
+                    vit=true;
+                    Bundle data = new Bundle();//Use bundle to pass data
+                    data.putString("vitalcoming", "vital");//put string, int, etc in bundle with a key value
+                    argumentFragment.setArguments(data);//Finally set argument bundle to fragment
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.homeContainer, argumentFragment);
+                    fragmentTransaction.commit();
+
+                }
+
+            }
+            else if (!TextUtils.isEmpty(getIntent().getStringExtra("spo2body")))
+            {buildFitnessOptionRequest();
+                if (getIntent().getStringExtra("spo2body").equalsIgnoreCase("spo2"))
+                {
+                    spo2putstr=getIntent().getStringExtra("spo2value");
+
+                    onfitspo2Clicked();
+
+                    binding.bottomNav.getMenu().getItem(0).setChecked(true);
+                    Fragment argumentFragment = new InsightFragment();
+                    vit=true;
+                    Bundle data = new Bundle();//Use bundle to pass data
+                    data.putString("vitalcoming", "vital");//put string, int, etc in bundle with a key value
+                    argumentFragment.setArguments(data);//Finally set argument bundle to fragment
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.homeContainer, argumentFragment);
+                    fragmentTransaction.commit();
+
+
+                }
+
+            }
+
+            else if (!TextUtils.isEmpty(getIntent().getStringExtra("actcoming")))
+            {
+                if (getIntent().getStringExtra("actcoming").equalsIgnoreCase("act"))
+                {
+                    binding.bottomNav.getMenu().getItem(2).setChecked(true);
+
+                    Fragment argumentFragment = new ActFragment();
+                    Bundle data = new Bundle();//Use bundle to pass data
+                    data.putString("actcoming", "act");//put string, int, etc in bundle with a key value
+                    argumentFragment.setArguments(data);//Finally set argument bundle to fragment
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.homeContainer, argumentFragment);
+                    fragmentTransaction.commit();
+                }
+
+
+            }
+            else if (!TextUtils.isEmpty(getIntent().getStringExtra("homeactcompare")))
+            {
+
+                binding.bottomNav.getMenu().getItem(0).setChecked(true);
+                Fragment argumentFragment = new InsightFragment();
+                Bundle data = new Bundle();//Use bundle to pass data
+                data.putString("comparecoming", getIntent().getStringExtra("homeactcompare"));
+                data.putString("comparenamecoming", getIntent().getStringExtra("homeactcomparename"));
+                argumentFragment.setArguments(data);//Finally set argument bundle to fragment
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.homeContainer, argumentFragment);
+                fragmentTransaction.commit();
+
+
+
+
+            }
+            else  if(lastAct.equals("Graph")){
+                lastAct="noone";
+                binding.bottomNav.getMenu().getItem(0).setChecked(true);
+                Fragment argumentFragment = new InsightFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.homeContainer, argumentFragment);
+                fragmentTransaction.commit();
+
+            }else
+            {
+
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.homeContainer, new ActFragment());
+                fragmentTransaction.commit();
+                binding.bottomNav.getMenu().getItem(2).setChecked(true);
+            }
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .requestScopes(new Scope(Scopes.FITNESS_ACTIVITY_READ), new Scope(Scopes.FITNESS_BODY_READ), new Scope(Scopes.FITNESS_LOCATION_READ))
+                .requestIdToken("303818861029-tkuc5is3lsi2a56l8tk1og5p4hckc10h.apps.googleusercontent.com")
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALENDAR) == PackageManager.PERMISSION_GRANTED) {
+            binding.swtchbtncal.setChecked(true);
+        }
+
+        account = GoogleSignIn.getLastSignedInAccount(this);
+        if(PreferenceHelper.getStringPreference(context,IConstant.FIT_PEDOMETER).equals("1")) {
+            pedoFitStatusUpdateApi(1,1);
+         //   binding.swtchbtnpedo.setChecked(true);
+        }else{
+            pedoFitStatusUpdateApi(1,0);
+         //   binding.swtchbtnpedo.setChecked(false);
+        }
+
+        if(account != null) {
+            binding.swtchbtn.setChecked(true);
+            pedoFitStatusUpdateApi(2,1);
+            System.out.println("##########################acc"+account.getEmail());
+            PreferenceHelper.setStringPreference(context,PERSONAL_EMAIL_ADD,account.getEmail());
+            getSteps();
+            getDistancemeter();
+            getHeightnew();
+            getWeightnew();
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    oneplusfitClicked();
+                    presenter.savePedometerUserKPI(steps,distance);
+
+                }
+            }, 3000);
+            if(totalStepsString==" "){
+                presenter.saveUserKPI(steps,distance);
+            }
+
+        }else {
+
+            pedoFitStatusUpdateApi(2,0);
+            if(PreferenceHelper.getStringPreference(context,IConstant.FIT_PEDOMETER).equals("1")) {
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        presenter.savePedometerData(steps, distance);
+                    }
+                }, 3000);
+            }
+        }
+
+        binding.swtchbtncal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(binding.swtchbtncal.isChecked()) {
+                    checkcalpermission();
+                }else {
+                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    Uri uri = Uri.fromParts("package", getPackageName(), null);
+                    intent.setData(uri);
+                    startActivity(intent);
+                }
+
+            }
+        });
+
+        sourcePermissioncountApi();
+
+
+
 
 //
 //        int[][] states = new int[][] {
@@ -197,17 +473,27 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 //        ColorStateList myList = new ColorStateList(states, colors);
 //        ColorStateList myList1 = new ColorStateList(states, colors1);
 
-        setBottomNavigationView();
+
 //        binding.bottomNav.setItemTextColor(myList);
 //        binding.bottomNav.setItemIconTintList(myList);
 //        binding.bottomNav.setItemRippleColor(myList1);
  //       binding.bottomNav.setItemBackgroundResource(R.drawable.botton_back);
 
-
-
-        ActFragment actFragment= new ActFragment();
-        viewFragment(actFragment,"ACT");
-        System.out.println("Reached here");
+//        if(lastAct.equals("Graph")){
+//            lastAct="noone";
+//            binding.bottomNav.getMenu().getItem(0).setChecked(true);
+//            Fragment argumentFragment = new InsightFragment();
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//            fragmentTransaction.replace(R.id.homeContainer, argumentFragment);
+//            fragmentTransaction.commit();
+//
+//        }else {
+//
+//            ActFragment actFragment = new ActFragment();
+//            viewFragment(actFragment, "ACT");
+//            System.out.println("Reached here");
+//        }
 
 
 
@@ -223,6 +509,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                 if (binding.swtchbtn.isChecked())
                 {
                     binding.swtchbtn.setChecked(true);
+                    buildFitnessOptionRequest();
                     if (!GoogleSignIn.hasPermissions(GoogleSignIn.getLastSignedInAccount(context), fitnessOptions)) {
                        requestGoogleFitPermission();
                     }
@@ -233,22 +520,22 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                 {
                     PreferenceHelper.setStringPreference(context, IConstant.FIT_STATUS_BACK,"0");
                     binding.swtchbtn.setChecked(false);
-                  //  usefitApi("0");
-                   // signOut();
+                    usefitApi("0");
+                    signOut();
                 }
 
             }
         });
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .requestScopes(new Scope(Scopes.FITNESS_ACTIVITY_READ), new Scope(Scopes.FITNESS_BODY_READ), new Scope(Scopes.FITNESS_LOCATION_READ))
-                .requestIdToken("303818861029-tkuc5is3lsi2a56l8tk1og5p4hckc10h.apps.googleusercontent.com")
-                .build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-        account = GoogleSignIn.getLastSignedInAccount(this);
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestEmail()
+//                .requestScopes(new Scope(Scopes.FITNESS_ACTIVITY_READ), new Scope(Scopes.FITNESS_BODY_READ), new Scope(Scopes.FITNESS_LOCATION_READ))
+//                .requestIdToken("303818861029-tkuc5is3lsi2a56l8tk1og5p4hckc10h.apps.googleusercontent.com")
+//                .build();
+//
+//        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+//
+//        account = GoogleSignIn.getLastSignedInAccount(this);
 
 
 
@@ -292,8 +579,29 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
                     break;
                 case R.id.ivHeader:
+                    buildFitnessOptionRequest();
+                    if (!GoogleSignIn.hasPermissions(GoogleSignIn.getLastSignedInAccount(context), fitnessOptions)) {
+                        binding.swtchbtn.setChecked(false);
+                    }else {
+                        binding.swtchbtn.setChecked(true);
+                    }
 
-                    drawer.openDrawer(GravityCompat.START);
+                    if (!presenter.checkPedometerPermission()) {
+                        // showToast("permission not found");
+                        binding.swtchbtnpedo.setChecked(false);
+                        presenter.stopPedometerService();
+                    }else {
+                        binding.swtchbtnpedo.setChecked(true);
+                    }
+                    if (ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+                       binding.swtchbtncal.setChecked(false);
+                    }else {
+                        binding.swtchbtncal.setChecked(true);
+
+                    }
+
+
+                        drawer.openDrawer(GravityCompat.START);
 
                     break;
 
@@ -303,7 +611,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                     drawer.closeDrawer(GravityCompat.START);
 
                 {
-
                     PreferenceHelper.clearAllPreferences(context);
                     PreferenceHelper.setBooleanPreference(context, IConstant.IS_LOGIN, false);
                     Intent intent = new Intent(context, LoginActivity.class);
@@ -343,17 +650,27 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
                     break;
                 case R.id.tvPrvcy:
+                    drawer.closeDrawer(GravityCompat.START);
+//                    PrivacypolicyFragment myProgramFragment=new PrivacypolicyFragment();
+//                    viewFragment(myProgramFragment,"PRG");
 
+                    Intent intent2=new Intent(context, ScreentimeActivity.class);
+                    startActivity(intent2);
                     break;
 
                 case R.id.tvmyprograms:
                     drawer.closeDrawer(GravityCompat.START);
-                    MyProgramFragment myProgramFragment=new MyProgramFragment();
-                    viewFragment(myProgramFragment,"PRG");
+                    MyProgramFragment myProgramFragment1=new MyProgramFragment();
+                    viewFragment(myProgramFragment1,"err");
                     break;
 
                 case R.id.tvmyreports:
+                    InsightFragment preventFragment = new InsightFragment();
+                    viewFragment(preventFragment, "INSIGHT");
+                    HomeActivity.report=true;
+                    binding.bottomNav.getMenu().getItem(0).setChecked(true);
 
+                    drawer.closeDrawer(GravityCompat.START);
                     break;
 
                 case R.id.imvdwn:
@@ -401,6 +718,127 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         return true;
 
     }
+    private void sourcePermissioncountApi() {
+        int[] n = {1};
+        Call<SourceResponse> call = RetrofitClient.getUniqInstance().getApi()
+                .sourceCall("permission");
+        call.enqueue(new Callback<SourceResponse>() {
+            @Override
+            public void onResponse(Call<SourceResponse> call, Response<SourceResponse> response) {
+                if(response.body()!=null){
+                    permissionCount =Integer.parseInt(response.body().getJsonData().get(0).getTokenValue());
+                    System.out.println("RESPONSE2 "+permissionCount);
+                 //   checkfitperm(Integer.parseInt(response.body().getJsonData().get(0).getTokenValue()));
+                     checkfitperm(3);
+                     checkPedoperm(3);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SourceResponse> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    public void checkfitperm(int a){
+        int name;
+        int b=a;
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        System.out.println("GoogleFitPperrmission@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + preferences.getInt("AskedPermissionCount",0));
+        System.out.println("GoogleFitPperrmissioncount@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + permissionCount);
+
+        if(preferences.getInt("AskedPermissionCount",0)<b) {
+            if (!GoogleSignIn.hasPermissions(GoogleSignIn.getLastSignedInAccount(context), fitnessOptions)) {
+                GoogleSignIn.requestPermissions((Activity) context, REQUEST_OAUTH_REQUEST_CODE,
+                        GoogleSignIn.getLastSignedInAccount(context),
+                        fitnessOptions);
+
+                name = preferences.getInt("AskedPermissionCount", 0);
+                /* Edit the value here*/
+                editor.putInt("AskedPermissionCount", name + 1);
+                editor.apply();
+                System.out.println("GoogleFitPperrmission@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + name);
+
+
+            } else {
+                PreferenceHelper.setStringPreference(context, IConstant.FIT_STATUS_BACK, "0");
+                usefitApi("0");
+            }
+        }
+
+    }
+    public void checkPedoperm(int a){
+        int name;
+        int b=a;
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        System.out.println("GoogleFitPperrmission@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + preferences.getInt("AskedPermissionCount",0));
+        System.out.println("GoogleFitPperrmissioncount@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + permissionCount);
+
+        if(preferences.getInt("AskedPermissionCountpedo",0)<b) {
+            if (!presenter.checkPedometerPermission()) {
+                // showToast("permission not found");
+                requestPedometerPermission();
+
+
+                name = preferences.getInt("AskedPermissionCountpedo", 0);
+                /* Edit the value here*/
+                editor.putInt("AskedPermissionCountpedo", name + 1);
+                editor.apply();
+                System.out.println("GoogleFitPperrmission@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + name);
+
+
+            } else {
+                PreferenceHelper.setStringPreference(context, IConstant.PEDO_STATUS_BACK, "0");
+               // usefitApi("0");
+            }
+        }
+
+    }
+
+
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        {
+
+
+            if (requestCode == LOCATION_REQUEST_CODE) {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+
+                    if (ContextCompat.checkSelfPermission(this,
+                            Manifest.permission.ACCESS_FINE_LOCATION)
+                            == PackageManager.PERMISSION_GRANTED) {
+
+                        binding.swtchbtnloc.setChecked(true);
+                    }
+                }
+            }
+
+            if (requestCode == PERMISSIONS_REQUEST_WRITE_CAL) {
+
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALENDAR) == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(context, "Calendar Permission granted", Toast.LENGTH_SHORT).show();
+                    binding.swtchbtncal.setChecked(true);
+                    //  addEvent();
+                    // startPayment();
+                } else {
+                    //startPayment();
+                    binding.swtchbtncal.setChecked(false);
+                    Toast.makeText(context, "Calendar Permission Denied", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -410,16 +848,82 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                     != PackageManager.PERMISSION_GRANTED) {
                 // Permission is not granted
                 binding.swtchbtnpedo.setChecked(false);
-                pedometerOnChecked();
+                //pedometerOnChecked();
+                PreferenceHelper.setStringPreference(context, IConstant.FIT_PEDOMETER, "0");
 
             } else {
                 binding.swtchbtnpedo.setChecked(true);
-
+                presenter.startPedometerService();
                 PreferenceHelper.setStringPreference(context, IConstant.FIT_PEDOMETER, "1");
             }
 
         }
+        else if (requestCode == REQUEST_OAUTH_REQUEST_CODE) {
+            com.google.android.gms.tasks.Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+
+        }
     }
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+
+            // Signed in successfully, show authenticated UI.
+            if(account != null)
+            {
+                PreferenceHelper.setStringPreference(context, IConstant.FIT_STATUS_BACK,"1");
+                binding.swtchbtn.setChecked(true);
+                usefitApi("1");
+
+
+            }
+            else
+            {
+
+                binding.swtchbtn.setChecked(false);
+
+            }
+
+            //Toast.makeText(this, "11"+account.getIdToken(), Toast.LENGTH_SHORT).show();
+
+
+        } catch (ApiException e)
+        {
+            //Toast.makeText(this, "22"+e.getMessage(), Toast.LENGTH_LONG).show();
+
+            //Log.e("BABABA", e.toString());
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+        }
+    }
+
+    private void usefitApi(String id) {
+        Call<updateZohoIdResponse> call = RetrofitClient.getUniqInstance().getApi()
+                .gitstatusCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN), id);
+        call.enqueue(new Callback<updateZohoIdResponse>() {
+            @Override
+            public void onResponse(Call<updateZohoIdResponse> call, Response<updateZohoIdResponse> response) {
+                if (response.body() != null) {
+                    if (response.code() == 200) {
+                        if (response.body().getStatus().equalsIgnoreCase("true")) {
+
+                            PreferenceHelper.setStringPreference(context, IConstant.FIT_STATUS_BACK,"1");
+
+
+                            //Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<updateZohoIdResponse> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
 
     @Override
     public void setBottomNavigationView() {
@@ -454,6 +958,12 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         });
 
     }
+
+
+
+
+
+
 
 
 
@@ -516,7 +1026,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                     fragmentManager.popBackStack("PRG", POP_BACK_STACK_INCLUSIVE);
                     fragmentManager.removeOnBackStackChangedListener(this);
                     binding.bottomNav.getMenu().getItem(2).setChecked(true);
-                    animateBottomIcon(2,true);
+                   // animateBottomIcon(2,true);
                 }
 
                 if (fragmentManager.getBackStackEntryCount() <= count) {
@@ -544,13 +1054,13 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                     fragmentManager.popBackStack("TODO", POP_BACK_STACK_INCLUSIVE);
                     fragmentManager.removeOnBackStackChangedListener(this);
                     binding.bottomNav.getMenu().getItem(2).setChecked(true);
-                    animateBottomIcon(4,true);
+                   // animateBottomIcon(4,true);
                 }
                 if (fragmentManager.getBackStackEntryCount() <= count) {
                     fragmentManager.popBackStack("PREVENT", POP_BACK_STACK_INCLUSIVE);
                     fragmentManager.removeOnBackStackChangedListener(this);
                     binding.bottomNav.getMenu().getItem(2).setChecked(true);
-                    animateBottomIcon(2,true);
+                  //  animateBottomIcon(2,true);
                 }
             }
         });
@@ -571,13 +1081,29 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                 != PackageManager.PERMISSION_GRANTED ) {
             // Permission is not granted
             binding.swtchbtnpedo.setChecked(false);
+            PreferenceHelper.setStringPreference(context, IConstant.FIT_PEDOMETER, "0");
+
 
         }
         else
         {
             binding.swtchbtnpedo.setChecked(true);
+            presenter.startPedometerService();
+            PreferenceHelper.setStringPreference(context, IConstant.FIT_PEDOMETER, "1");
 
         }
+        if (account==null) {
+            // Permission is not granted
+            binding.swtchbtn.setChecked(false);
+
+        }
+        else
+        {
+            binding.swtchbtn.setChecked(true);
+
+        }
+
+
         getProfileApiAgain();
         Database db = Database.getInstance(context);
 
@@ -634,6 +1160,12 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     public void onError(String msg) {
     showToast(msg);
     }
+    private void checkcalpermission(){
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(HomeActivity.this, new String[]{Manifest.permission.WRITE_CALENDAR}, PERMISSIONS_REQUEST_WRITE_CAL);
+            return;
+        }
+    }
 
     @Override
     public void pedometerOnChecked() {
@@ -643,14 +1175,14 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             if (binding.swtchbtnpedo.isChecked()) {
                 if(Build.VERSION.SDK_INT >= 29) {
                     if (!presenter.checkPedometerPermission()) {
-                        showToast("permission not found");
+                       // showToast("permission not found");
                         requestPedometerPermission();
 
 
                     } else {
                         showToast("to start service");
                         presenter.startPedometerService();
-
+                        PreferenceHelper.setStringPreference(context, IConstant.FIT_PEDOMETER, "1");
                     }
                 }else {
                     presenter.requestPedometerPermissionCustomDialog(builderPedometer);
@@ -659,14 +1191,506 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             }else {
                 binding.swtchbtnpedo.setChecked(false);
                 presenter.stopPedometerService();
+                PreferenceHelper.setStringPreference(context, IConstant.FIT_PEDOMETER, "0");
+                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                Uri uri = Uri.fromParts("package", getPackageName(), null);
+                intent.setData(uri);
+                startActivity(intent);
             }
         }else {
             binding.swtchbtnpedo.setChecked(false);
+            PreferenceHelper.setStringPreference(context, IConstant.FIT_PEDOMETER, "0");
             onError("Error: No Accelerometer.");
         }
 
 
     }
+    private void signOut() {
+        mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<Void> task) {
+
+                        // Toast.makeText(context, "Sign out Successfully", Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                });
+    }
+
+
+    public void getSteps() {
+        Calendar startCal = Calendar.getInstance();
+        Calendar endCal = Calendar.getInstance();
+        startCal.set(endCal.get(Calendar.YEAR), endCal.get(Calendar.MONTH), endCal.get(Calendar.DAY_OF_MONTH)-6, 0, 0);
+        startTime = startCal.getTimeInMillis();
+        endTime = endCal.getTimeInMillis();
+        try {
+            getData();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getData() throws InterruptedException, ExecutionException {
+
+
+        final Task<DataReadResponse> response = Fitness.getHistoryClient(HomeActivity.this, account)
+                .readData(new DataReadRequest.Builder()
+                        .read(DataType.TYPE_STEP_COUNT_DELTA)
+                        .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
+                        .build());
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                totalStepsString = "";
+                DataReadResponse readDataResult = null;
+                try {
+                    readDataResult = Tasks.await(response);
+                    final DataSet dataSet = readDataResult.getDataSet(DataType.TYPE_STEP_COUNT_DELTA);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            int steps = 0;
+                            // Toast.makeText(HomeActivity.this, "Size: "+dataSet.getDataPoints().size(), Toast.LENGTH_SHORT).show();
+
+                            Calendar date = Calendar.getInstance();
+                            for(int i=0;i<dataSet.getDataPoints().size();i++)
+                            {
+                                long time = dataSet.getDataPoints().get(i).getTimestamp(TimeUnit.MILLISECONDS);
+                                date.setTimeInMillis(time);
+                                System.out.println("##############stepsnew1"+ dataSet.getDataPoints().get(i).getOriginalDataSource().getStreamName());
+                                if(! "user_input".equals(dataSet.getDataPoints().get(i).getOriginalDataSource().getStreamName())) {
+                                    totalStepsString += dataSet.getDataPoints().get(i).getValue(Field.FIELD_STEPS).toString() + " " + date.get(Calendar.DAY_OF_MONTH) + ",";
+                                }
+                            }
+
+                            System.out.println("##############stepsnew"+totalStepsString);
+                        }
+                    });
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+
+    private void getDistance() throws InterruptedException, ExecutionException {
+        final Task<DataReadResponse> response = Fitness.getHistoryClient(HomeActivity.this, account)
+                .readData(new DataReadRequest.Builder()
+                        .read(DataType.TYPE_DISTANCE_DELTA)
+                        .setTimeRange(startTime, endTime, TimeUnit.MILLISECONDS)
+                        .build());
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DataReadResponse readDataResult = null;
+                totalDistancesString = "";
+                try {
+                    readDataResult = Tasks.await(response);
+                    final DataSet dataSet = readDataResult.getDataSet(DataType.TYPE_DISTANCE_DELTA);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Calendar date = Calendar.getInstance();
+                            for(int i=0;i<dataSet.getDataPoints().size();i++)
+                            {
+                                long time = dataSet.getDataPoints().get(i).getTimestamp(TimeUnit.MILLISECONDS);
+                                date.setTimeInMillis(time);
+                                totalDistancesString += dataSet.getDataPoints().get(i).getValue(Field.FIELD_DISTANCE).toString()+" "+date.get(Calendar.DAY_OF_MONTH)+",";
+                            }
+                            System.out.println("##############distnew"+totalStepsString);
+
+
+
+                        }
+                    });
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    private void pedoFitStatusUpdateApi(int id, int status) {
+        Call<updatrPedoIdResponse> call = RetrofitClient.getUniqInstance().getApi()
+                .pedostatusCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN), id, status);
+        call.enqueue(new Callback<updatrPedoIdResponse>() {
+            @Override
+            public void onResponse(Call<updatrPedoIdResponse> call, Response<updatrPedoIdResponse> response) {
+                System.out.println("pedonewapi" + response.toString());
+            }
+
+            @Override
+            public void onFailure(Call<updatrPedoIdResponse> call, Throwable t) {
+                System.out.println("pedonewapi1" + t);
+            }
+        });
+    }
+
+    public void getDistancemeter() {
+        Calendar startCal = Calendar.getInstance();
+        Calendar endCal = Calendar.getInstance();
+        startCal.set(endCal.get(Calendar.YEAR), endCal.get(Calendar.MONTH), endCal.get(Calendar.DAY_OF_MONTH)-6, 0, 0);
+        startTime = startCal.getTimeInMillis();
+        endTime = endCal.getTimeInMillis();
+        try {
+            getDistance();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getWeightnew() {
+        Calendar startCal = Calendar.getInstance();
+        Calendar endCal = Calendar.getInstance();
+        startCal.set(endCal.get(Calendar.YEAR), endCal.get(Calendar.MONTH), endCal.get(Calendar.DAY_OF_MONTH), 0, 0);
+        startTime = startCal.getTimeInMillis();
+        endTime = endCal.getTimeInMillis();
+        try {
+            getWeight();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void getHeightnew() {
+        Calendar startCal = Calendar.getInstance();
+        Calendar endCal = Calendar.getInstance();
+        startCal.set(endCal.get(Calendar.YEAR), endCal.get(Calendar.MONTH), endCal.get(Calendar.DAY_OF_MONTH), 0, 0);
+        startTime = startCal.getTimeInMillis();
+        endTime = endCal.getTimeInMillis();
+        try {
+            getHeight();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+    private void getWeight() throws InterruptedException, ExecutionException {
+        final Task<DataReadResponse> response = Fitness.getHistoryClient(HomeActivity.this, account)
+                .readData(new DataReadRequest.Builder()
+                        .read(DataType.TYPE_WEIGHT)
+                        .setTimeRange(1, endTime, TimeUnit.MILLISECONDS)
+                        .setLimit(1)
+                        .build());
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DataReadResponse readDataResult = null;
+                try {
+                    readDataResult = Tasks.await(response);
+                    final DataSet dataSet = readDataResult.getDataSet(DataType.TYPE_WEIGHT);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            String string = "";
+                            Calendar date = Calendar.getInstance();
+
+                            // Toast.makeText(HomeActivity.this, "Size: "+dataSet.getDataPoints().size(), Toast.LENGTH_SHORT).show();
+                            for(int i=0;i<dataSet.getDataPoints().size();i++)
+                            {
+
+                                string += dataSet.getDataPoints().get(i).getValue(Field.FIELD_WEIGHT).toString() +" "+date.get(Calendar.DAY_OF_MONTH)+",";
+                                //dataSet.getDataPoints().get(i).getTimestamp()
+                                //TODO: Print dates using TimeUnit
+
+                                Log.v("Weight", dataSet.getDataPoints().get(i).getValue(Field.FIELD_WEIGHT).toString());
+                            }
+                            totalWeightsString=string;
+                            System.out.println("##############################wwer"+totalWeightsString);
+
+                        }
+                    });
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    private void getHeight() throws InterruptedException, ExecutionException {
+        final Task<DataReadResponse> response = Fitness.getHistoryClient(HomeActivity.this, account)
+                .readData(new DataReadRequest.Builder()
+                        .read(DataType.TYPE_HEIGHT)
+                        .setTimeRange(1, endTime, TimeUnit.MILLISECONDS)
+                        .setLimit(1)
+                        .build());
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DataReadResponse readDataResult = null;
+                try {
+                    readDataResult = Tasks.await(response);
+                    final DataSet dataSet = readDataResult.getDataSet(DataType.TYPE_HEIGHT);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            String string = "";
+                            Calendar date = Calendar.getInstance();
+
+                            for(int i=0;i<dataSet.getDataPoints().size();i++)
+                            {
+                                string += dataSet.getDataPoints().get(i).getValue(Field.FIELD_HEIGHT).toString()+" "+date.get(Calendar.DAY_OF_MONTH)+",";
+                                //dataSet.getDataPoints().get(i).getTimestamp()
+                                //TODO: Print dates using TimeUnit
+                                Log.v("HEIGHT", dataSet.getDataPoints().get(i).getValue(Field.FIELD_HEIGHT).toString());
+                            }
+                            totalHeightsString=string;
+                            System.out.println("#####################totalhe"+totalHeightsString);
+
+                        }
+                    });
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    public void oneplusfitClicked(){
+
+        //CommonUtils.showSpotoProgressDialog(context);
+
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!fit"+totalStepsString);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!"+totalDistancesString);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!"+totalHeightsString);
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!"+totalWeightsString);
+
+
+        ApiInterface jsonPostService = ServiceGenerator.createService(ApiInterface.class, "https://protect.immunityhealth.me/");
+
+        Call<FitResponse> call = jsonPostService.GoogleFitCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN),totalStepsString,totalDistancesString,totalHeightsString,totalWeightsString);
+        call.enqueue(new Callback<FitResponse>() {
+
+            @Override
+            public void onResponse(Call<FitResponse> call, Response<FitResponse> response) {
+                CommonUtils.dismissSpotoProgressDialog();
+
+                try{
+
+                    CommonUtils.dismissSpotoProgressDialog();
+
+                    Log.e("response-success", response.body().getStatus());
+                    Log.e("response-success", response.body().toString());
+
+
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<FitResponse> call, Throwable t) {
+                CommonUtils.dismissSpotoProgressDialog();
+
+                Log.e("response-failure", t.toString());
+            }
+        });
+    }
+
+
+    private void insertWeightData(String weightput) {
+        Calendar cal = Calendar.getInstance();
+        Date now = new Date();
+        cal.setTime(now);
+        long endTime = cal.getTimeInMillis();
+        cal.add(Calendar.HOUR_OF_DAY, -1);
+        long startTime = cal.getTimeInMillis();
+        DataSource dataSource =
+                new DataSource.Builder()
+                        .setAppPackageName(this)
+                        .setDataType(DataType.TYPE_WEIGHT)
+                        .setStreamName(TAG + " - step count")
+                        .setType(DataSource.TYPE_RAW)
+                        .build();
+
+        float stepCountDelta = Float.parseFloat((weightput));
+        DataSet dataSet = DataSet.create(dataSource);
+        DataPoint dataPoint = dataSet.createDataPoint().setTimeInterval(startTime, endTime, TimeUnit.MILLISECONDS);
+        dataPoint.getValue(Field.FIELD_WEIGHT).setFloat(stepCountDelta);
+        dataSet.add(dataPoint);
+        Fitness.getHistoryClient(this, GoogleSignIn.getLastSignedInAccount(this))
+                .insertData(dataSet)
+                .addOnCompleteListener(
+                        new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    // At this point, the data has been inserted and can be read.
+                                    Log.i(TAG, "Data insert was successful!");
+                                } else {
+                                    Log.e(TAG, "There was a problem inserting the dataset.", task.getException());
+                                }
+                            }
+                        });
+    }
+    public void insertHeightData(String heightput) {
+        int stepCountDelta = Integer.parseInt(heightput);
+        float height = ((float) stepCountDelta) / 100.0f;
+        Calendar cal = Calendar.getInstance();
+        Date now = new Date();
+        cal.setTime(now);
+        long endTime = cal.getTimeInMillis();
+        cal.add(Calendar.HOUR_OF_DAY, -1);
+        long startTime = cal.getTimeInMillis();
+        DataSource dataSource =
+                new DataSource.Builder()
+                        .setAppPackageName(this)
+                        .setDataType(DataType.TYPE_HEIGHT)
+                        .setStreamName(TAG + " - step count")
+                        .setType(DataSource.TYPE_RAW)
+                        .build();
+
+        DataSet dataSet = DataSet.create(dataSource);
+        DataPoint dataPoint = dataSet.createDataPoint().setTimeInterval(startTime, endTime, TimeUnit.MILLISECONDS);
+        dataPoint.getValue(Field.FIELD_HEIGHT).setFloat(height);
+        dataSet.add(dataPoint);
+        Fitness.getHistoryClient(this, GoogleSignIn.getLastSignedInAccount(this))
+                .insertData(dataSet)
+                .addOnCompleteListener(
+                        new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    // At this point, the data has been inserted and can be read.
+                                    Log.i(TAG, "Data insert was successful!");
+                                } else {
+                                    Log.e(TAG, "There was a problem inserting the dataset.", task.getException());
+                                }
+                            }
+                        });
+    }
+
+
+
+
+    public void onfitspo2Clicked(){
+      //  CommonUtils.showSpotoProgressDialog(context);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("SPO2",spo2putstr);
+        System.out.println("onfitClicked1"+jsonObject);
+        Call<JsonObjectResponse> call =  RetrofitClient.getUniqInstance().getApi()
+                .fitCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN), String.valueOf(jsonObject));
+        call.enqueue(new Callback<JsonObjectResponse>() {
+
+            @Override
+            public void onResponse(Call<JsonObjectResponse> call, Response<JsonObjectResponse> response) {
+             //   CommonUtils.dismissSpotoProgressDialog();
+                try{
+                    Log.e("response-success11", response.body().getMessage());
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+            @Override
+            public void onFailure(Call<JsonObjectResponse> call, Throwable t) {
+              //  CommonUtils.dismissSpotoProgressDialog();
+
+                Log.e("response-failure", call.toString());
+            }
+        });
+    }
+
+    //
+
+
+    public void onfitheightClicked(){
+        CommonUtils.showSpotoProgressDialog(context);
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("Height",heightputstr);
+        System.out.println("onfitClicked2"+jsonObject);
+        Call<JsonObjectResponse> call =  RetrofitClient.getUniqInstance().getApi()
+                .fitCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN), String.valueOf(jsonObject));
+      //  CommonUtils.dismissSpotoProgressDialog();
+
+        call.enqueue(new Callback<JsonObjectResponse>() {
+            @Override
+            public void onResponse(Call<JsonObjectResponse> call, Response<JsonObjectResponse> response) {
+                CommonUtils.dismissSpotoProgressDialog();
+                try{
+                    Log.e("response-success", response.body().getMessage());
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+            @Override
+            public void onFailure(Call<JsonObjectResponse> call, Throwable t) {
+                CommonUtils.dismissSpotoProgressDialog();
+
+                Log.e("response-failure", call.toString());
+            }
+        });
+    }
+    public void onfitweightClicked(){
+       // CommonUtils.showSpotoProgressDialog(context);
+        JsonObject jsonObject = new JsonObject();
+
+        jsonObject.addProperty("Weight",weightputstr);
+        System.out.println("onfitClicked3"+jsonObject);
+        Call<JsonObjectResponse> call =  RetrofitClient.getUniqInstance().getApi()
+                .fitCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN), String.valueOf(jsonObject));
+        call.enqueue(new Callback<JsonObjectResponse>() {
+
+            @Override
+            public void onResponse(Call<JsonObjectResponse> call, Response<JsonObjectResponse> response) {
+            //    CommonUtils.dismissSpotoProgressDialog();
+                try{
+                    Log.e("response-success", response.body().getMessage());
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+            }
+            @Override
+            public void onFailure(Call<JsonObjectResponse> call, Throwable t) {
+              //  CommonUtils.dismissSpotoProgressDialog();
+
+                Log.e("response-failure", call.toString());
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
     private void getProfileApiAgain() {
 
         Call<GetProfileResponse> call = RetrofitClient.getUniqInstance().getApi()
@@ -863,10 +1887,15 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     @Override
     public void requestGoogleFitPermission() {
+        buildFitnessOptionRequest();
         GoogleSignIn.requestPermissions((Activity) context, REQUEST_OAUTH_REQUEST_CODE,
                 GoogleSignIn.getLastSignedInAccount(context),
                 fitnessOptions);
 
+    }
+
+    @Override
+    public void setHeight(String height) {
     }
 
     private void animateBottomIcon(int itemIndex, boolean isChecked) {

@@ -14,5 +14,6 @@ public interface IHomeActivity {
      void pedometerOnChecked();
      void buildFitnessOptionRequest();
      void requestGoogleFitPermission();
+     void setHeight(String height);
 
 }

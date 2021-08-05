@@ -23,6 +23,7 @@ public class BaseActivity extends AppCompatActivity implements IConstant {
     public String TAG;
     public Toolbar mainToolbar;
     public WebView webView;
+    public String lastActivity="noone";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

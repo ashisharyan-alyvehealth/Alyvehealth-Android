@@ -333,7 +333,7 @@ public class YourcommunityAdapter extends RecyclerView.Adapter<YourcommunityAdap
 
     //
     private void invirepoApi(String id, String status) {
-        CommonUtils.showSpotoProgressDialog(context);
+       // CommonUtils.showSpotoProgressDialog(context);
         Call<LeaveCommunityResponse> call = RetrofitClient.getUniqInstance().getApi()
                 .invitationResponseCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN), id, status);
         call.enqueue(new Callback<LeaveCommunityResponse>() {
@@ -350,13 +350,13 @@ public class YourcommunityAdapter extends RecyclerView.Adapter<YourcommunityAdap
                         }
                     }
                 }
-                CommonUtils.dismissSpotoProgressDialog();
+             //   CommonUtils.dismissSpotoProgressDialog();
             }
 
             @Override
             public void onFailure(Call<LeaveCommunityResponse> call, Throwable t) {
                 t.printStackTrace();
-                CommonUtils.dismissSpotoProgressDialog();
+             //   CommonUtils.dismissSpotoProgressDialog();
             }
         });
     }
@@ -397,7 +397,7 @@ public class YourcommunityAdapter extends RecyclerView.Adapter<YourcommunityAdap
     //
 
     private void LeaveApi(String id, String status) {
-        CommonUtils.showSpotoProgressDialog(context);
+      //  CommonUtils.showSpotoProgressDialog(context);
         Call<LeaveCommunityResponse> call = RetrofitClient.getUniqInstance().getApi()
                 .leaveCommunityResponseCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN), id, status);
         call.enqueue(new Callback<LeaveCommunityResponse>() {
@@ -416,13 +416,13 @@ public class YourcommunityAdapter extends RecyclerView.Adapter<YourcommunityAdap
                         }
                     }
                 }
-                CommonUtils.dismissSpotoProgressDialog();
+             //   CommonUtils.dismissSpotoProgressDialog();
             }
 
             @Override
             public void onFailure(Call<LeaveCommunityResponse> call, Throwable t) {
                 t.printStackTrace();
-                CommonUtils.dismissSpotoProgressDialog();
+             //   CommonUtils.dismissSpotoProgressDialog();
             }
         });
     }

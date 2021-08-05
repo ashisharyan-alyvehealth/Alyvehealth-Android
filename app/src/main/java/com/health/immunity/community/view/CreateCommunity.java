@@ -96,9 +96,7 @@ public class CreateCommunity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent=new Intent(getBaseContext(), HomeActivity.class);
-        intent.putExtra("BackcomCount",true);
-        startActivity(intent);
+        super.onBackPressed();
 
     }
 
@@ -159,7 +157,7 @@ public class CreateCommunity extends BaseActivity {
     }
 
     private void createcommunityApi(String sub, String desc) {
-        CommonUtils.showSpotoProgressDialog(context);
+        //CommonUtils.showSpotoProgressDialog(context);
         Call<CommunityResponse> call = RetrofitClient.getUniqInstance().getApi()
                 .communityCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN), sub, desc);
         call.enqueue(new Callback<CommunityResponse>() {
@@ -184,13 +182,13 @@ public class CreateCommunity extends BaseActivity {
                 } else {
                     showToast(SERVER_ERROR);
                 }
-                CommonUtils.dismissSpotoProgressDialog();
+               // CommonUtils.dismissSpotoProgressDialog();
             }
 
             @Override
             public void onFailure(Call<CommunityResponse> call, Throwable t) {
                 t.printStackTrace();
-                CommonUtils.dismissSpotoProgressDialog();
+              //  CommonUtils.dismissSpotoProgressDialog();
             }
         });
     }
@@ -198,7 +196,7 @@ public class CreateCommunity extends BaseActivity {
 
 
     private void usercommApi(String id) {
-        CommonUtils.showSpotoProgressDialog(context);
+       // CommonUtils.showSpotoProgressDialog(context);
         Call<CommunityUserListResponse> call = RetrofitClient.getUniqInstance().getApi()
                 .communityUserListResponseCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN), id);
         call.enqueue(new Callback<CommunityUserListResponse>() {
@@ -218,13 +216,13 @@ public class CreateCommunity extends BaseActivity {
                         }
                     }
                 }
-                CommonUtils.dismissSpotoProgressDialog();
+               // CommonUtils.dismissSpotoProgressDialog();
             }
 
             @Override
             public void onFailure(Call<CommunityUserListResponse> call, Throwable t) {
                 t.printStackTrace();
-                CommonUtils.dismissSpotoProgressDialog();
+              //  CommonUtils.dismissSpotoProgressDialog();
             }
         });
     }

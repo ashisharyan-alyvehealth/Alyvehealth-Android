@@ -51,6 +51,8 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Notice
 
         holder.tvv1.setText(myCommunitiesResponses.get(position).getLowerRange());
         holder.tvv2.setText(myCommunitiesResponses.get(position).getUpperRange());
+        holder.tvHelpInfo1.setVisibility(View.INVISIBLE);
+        holder.tvHelpInfo1.setEnabled(false);
         if (!TextUtils.isEmpty(myCommunitiesResponses.get(position).getValue()))
         {
             float roundTotal = Float.parseFloat(myCommunitiesResponses.get(position).getValue());
@@ -66,12 +68,17 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Notice
             }
           //  holder.progressBar.setProgress((int)prog);
 
+
         }
         else
         {
-
-            holder.im1.setText(myCommunitiesResponses.get(position).getAlias()+"\n"+"?");
-            holder.name.setText(myCommunitiesResponses.get(position).getAlias());
+            if(myCommunitiesResponses.get(position).getAlias().startsWith("Step")){
+                holder.imageView.setImageResource(R.drawable.ic_steps);
+            }else {
+                holder.imageView.setImageResource(R.drawable.ic_distance);
+            }
+            holder.im1.setText(myCommunitiesResponses.get(position).getAlias());
+            holder.name.setText("-");
             holder.progressBar.setVisibility(View.VISIBLE);
         }
 
@@ -81,89 +88,89 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Notice
         }
         else
         {
-            holder.tvHelpInfo1.setVisibility(View.VISIBLE);
+          //  holder.tvHelpInfo1.setVisibility(View.VISIBLE);
         }
 
 
-        holder.tvHelpInfo1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FitnessOptions fitnessOptions = FitnessOptions.builder()
-                        .addDataType(DataType.TYPE_STEP_COUNT_CUMULATIVE)
-                        .addDataType(DataType.TYPE_STEP_COUNT_DELTA)
-                        .addDataType(DataType.AGGREGATE_STEP_COUNT_DELTA)
-                        .addDataType(DataType.TYPE_DISTANCE_CUMULATIVE)
-                        .addDataType(DataType.TYPE_DISTANCE_DELTA)
-                        .addDataType(DataType.AGGREGATE_DISTANCE_DELTA)
-                        .addDataType(DataType.AGGREGATE_ACTIVITY_SUMMARY)
-                        .addDataType(DataType.TYPE_WEIGHT)
-                        .addDataType(DataType.TYPE_HEIGHT)
-                        .addDataType(DataType.AGGREGATE_HEIGHT_SUMMARY)
-                        .addDataType(DataType.AGGREGATE_WEIGHT_SUMMARY)
-                        .addDataType(DataType.TYPE_HEART_RATE_BPM)
-                        .addDataType(DataType.TYPE_BODY_FAT_PERCENTAGE)
-                        .addDataType(DataType.TYPE_WORKOUT_EXERCISE)
-                        .addDataType(DataType.TYPE_ACTIVITY_SEGMENT)
-                        .build();
-
-             /*   if (!GoogleSignIn.hasPermissions(GoogleSignIn.getLastSignedInAccount(context), fitnessOptions))
-                {
-                    AlertDialog dialogBuilder = new AlertDialog.Builder(context).create();
-                    View dialogView = LayoutInflater.from(context).inflate(R.layout.custom_dialog_profile, null);
-                    Button button1 = (Button) dialogView.findViewById(R.id.buttonSubmit);
-                    Button button2 = (Button) dialogView.findViewById(R.id.buttonCancel);
-                    TextView textView = (TextView) dialogView.findViewById(R.id.textView);
-                    textView.setText("Please connect to google fit to proceed");
-
-                    button2.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-
-
-                            dialogBuilder.dismiss();
-
-                        }
-                    });
-                    button1.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-
-                            dialogBuilder.dismiss();
-
-                            if (!GoogleSignIn.hasPermissions(GoogleSignIn.getLastSignedInAccount(context), fitnessOptions))
-                            {
-                                GoogleSignIn.requestPermissions((Activity) context, REQUEST_OAUTH_REQUEST_CODE,
-                                        GoogleSignIn.getLastSignedInAccount(context),
-                                        fitnessOptions);
-                            }
-
-                        }
-                    });
-
-                    dialogBuilder.setView(dialogView);
-                    dialogBuilder.show();
-
-                   *//* Toast.makeText(context, "Please enable google fit permission", Toast.LENGTH_LONG).show();
-                    context.startActivity(new Intent(context, ProfileActivity.class));*//*
-
-                }
-                else*/
-                {
-                    Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage("com.google.android.apps.fitness");
-                    if (launchIntent != null)
-                    {
-                        context.startActivity(launchIntent);
-                    }
-                    else
-                    {
-                        Toast.makeText(context, "Please install Google Fit app", Toast.LENGTH_LONG).show();
-                    }
-                }
-
-
-
-            }
-        });
+//        holder.tvHelpInfo1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                FitnessOptions fitnessOptions = FitnessOptions.builder()
+//                        .addDataType(DataType.TYPE_STEP_COUNT_CUMULATIVE)
+//                        .addDataType(DataType.TYPE_STEP_COUNT_DELTA)
+//                        .addDataType(DataType.AGGREGATE_STEP_COUNT_DELTA)
+//                        .addDataType(DataType.TYPE_DISTANCE_CUMULATIVE)
+//                        .addDataType(DataType.TYPE_DISTANCE_DELTA)
+//                        .addDataType(DataType.AGGREGATE_DISTANCE_DELTA)
+//                        .addDataType(DataType.AGGREGATE_ACTIVITY_SUMMARY)
+//                        .addDataType(DataType.TYPE_WEIGHT)
+//                        .addDataType(DataType.TYPE_HEIGHT)
+//                        .addDataType(DataType.AGGREGATE_HEIGHT_SUMMARY)
+//                        .addDataType(DataType.AGGREGATE_WEIGHT_SUMMARY)
+//                        .addDataType(DataType.TYPE_HEART_RATE_BPM)
+//                        .addDataType(DataType.TYPE_BODY_FAT_PERCENTAGE)
+//                        .addDataType(DataType.TYPE_WORKOUT_EXERCISE)
+//                        .addDataType(DataType.TYPE_ACTIVITY_SEGMENT)
+//                        .build();
+//
+//             /*   if (!GoogleSignIn.hasPermissions(GoogleSignIn.getLastSignedInAccount(context), fitnessOptions))
+//                {
+//                    AlertDialog dialogBuilder = new AlertDialog.Builder(context).create();
+//                    View dialogView = LayoutInflater.from(context).inflate(R.layout.custom_dialog_profile, null);
+//                    Button button1 = (Button) dialogView.findViewById(R.id.buttonSubmit);
+//                    Button button2 = (Button) dialogView.findViewById(R.id.buttonCancel);
+//                    TextView textView = (TextView) dialogView.findViewById(R.id.textView);
+//                    textView.setText("Please connect to google fit to proceed");
+//
+//                    button2.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//
+//
+//                            dialogBuilder.dismiss();
+//
+//                        }
+//                    });
+//                    button1.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//
+//                            dialogBuilder.dismiss();
+//
+//                            if (!GoogleSignIn.hasPermissions(GoogleSignIn.getLastSignedInAccount(context), fitnessOptions))
+//                            {
+//                                GoogleSignIn.requestPermissions((Activity) context, REQUEST_OAUTH_REQUEST_CODE,
+//                                        GoogleSignIn.getLastSignedInAccount(context),
+//                                        fitnessOptions);
+//                            }
+//
+//                        }
+//                    });
+//
+//                    dialogBuilder.setView(dialogView);
+//                    dialogBuilder.show();
+//
+//                   *//* Toast.makeText(context, "Please enable google fit permission", Toast.LENGTH_LONG).show();
+//                    context.startActivity(new Intent(context, ProfileActivity.class));*//*
+//
+//                }
+//                else*/
+//                {
+//                    Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage("com.google.android.apps.fitness");
+//                    if (launchIntent != null)
+//                    {
+//                        context.startActivity(launchIntent);
+//                    }
+//                    else
+//                    {
+//                        Toast.makeText(context, "Please install Google Fit app", Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//
+//
+//
+//            }
+//        });
 
 
 

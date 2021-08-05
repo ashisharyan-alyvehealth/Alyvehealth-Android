@@ -80,13 +80,13 @@ public class CommonUtils implements IConstant {
     }
 
     public static void dismissSpotoProgressDialog() {
-//        try {
-//            if (dialogProgressSpots != null)
-//                dialogProgressSpots.cancel();
-//            dialogProgressSpots = null;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        try {
+            if (dialogProgressSpots != null)
+                dialogProgressSpots.cancel();
+            dialogProgressSpots = null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 
         try {

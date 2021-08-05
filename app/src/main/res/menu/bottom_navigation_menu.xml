@@ -17,7 +17,7 @@
 
     <item
         android:id="@+id/navigation_discover"
-        android:icon="@drawable/discover1"
+        android:icon="@drawable/engage"
         android:title="ENGAGE" />
     <item
         android:id="@+id/navigation_todo"

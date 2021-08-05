@@ -21,6 +21,8 @@ import com.health.immunity.R;
 import com.health.immunity.community.adapter.ContactsListAdapter;
 import com.health.immunity.community.adapter.onClickInterface;
 import com.health.immunity.community.model.ContactsList;
+import com.health.immunity.community.model.InvitResponse;
+import com.health.immunity.community.model.InviteMemberResponse;
 import com.health.immunity.community.utility.ContactsLoader;
 import com.health.immunity.retrofit.RetrofitClient;
 
@@ -152,88 +154,88 @@ public class ContactsPickerActivity extends BaseActivity {
         });
     }
     private void inviteApi(String sub, String desc) {
-//        CommonUtils.showSpotoProgressDialog(context);
-//        Call<InviteMemberResponse> call = RetrofitClient.getUniqInstance().getApi()
-//                .inviteMemberCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN), sub, desc);
-//        call.enqueue(new Callback<InviteMemberResponse>() {
-//            @Override
-//            public void onResponse(Call<InviteMemberResponse> call, Response<InviteMemberResponse> response) {
-//                if (response.body() != null) {
-//                    if (response.code() == 200) {
-//                        if (response.body().getStatus().equalsIgnoreCase("true")) {
-//                            showToast(response.body().getMessage());
-//                            Intent resultIntent = new Intent();
-//                            resultIntent.putParcelableArrayListExtra("SelectedContacts", contactsListAdapter.selectedContactsList.contactArrayList);
-//                            setResult(RESULT_OK,resultIntent);
-//                            finish();
-//                        } else {
-//                            showToast(response.body().getMessage());
-//                        }
-//                    } else {
-//                        showToast(SERVER_ERROR);
-//                    }
-//                } else {
-//                    showToast(SERVER_ERROR);
-//                }
-//                CommonUtils.dismissSpotoProgressDialog();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<InviteMemberResponse> call, Throwable t) {
-//                t.printStackTrace();
-//                CommonUtils.dismissSpotoProgressDialog();
-//            }
-//        });
+        CommonUtils.showSpotoProgressDialog(context);
+        Call<InviteMemberResponse> call = RetrofitClient.getUniqInstance().getApi()
+                .inviteMemberCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN), sub, desc);
+        call.enqueue(new Callback<InviteMemberResponse>() {
+            @Override
+            public void onResponse(Call<InviteMemberResponse> call, Response<InviteMemberResponse> response) {
+                if (response.body() != null) {
+                    if (response.code() == 200) {
+                        if (response.body().getStatus().equalsIgnoreCase("true")) {
+                            showToast(response.body().getMessage());
+                            Intent resultIntent = new Intent();
+                            resultIntent.putParcelableArrayListExtra("SelectedContacts", contactsListAdapter.selectedContactsList.contactArrayList);
+                            setResult(RESULT_OK,resultIntent);
+                            finish();
+                        } else {
+                            showToast(response.body().getMessage());
+                        }
+                    } else {
+                        showToast(SERVER_ERROR);
+                    }
+                } else {
+                    showToast(SERVER_ERROR);
+                }
+                CommonUtils.dismissSpotoProgressDialog();
+            }
+
+            @Override
+            public void onFailure(Call<InviteMemberResponse> call, Throwable t) {
+                t.printStackTrace();
+                CommonUtils.dismissSpotoProgressDialog();
+            }
+        });
     }
     private void qextendedApi() {
         CommonUtils.showSpotoProgressDialog(context);
 
 
-//        Call<InvitResponse> call = RetrofitClient.getUniqInstance().getApi()
-//                .ExtendedCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN), arr);
-//        call.enqueue(new Callback<InvitResponse>() {
-//            @Override
-//            public void onResponse(Call<InvitResponse> call, Response<InvitResponse> response) {
-//                if (response.body() != null) {
-//                    if (response.code() == 200) {
-//                        if (response.body().getStatus().equalsIgnoreCase("true")) {
-//                            final Dialog dialog = new Dialog(context);
-//                            dialog.setContentView(R.layout.dialog);
-//                            TextView txt = dialog.findViewById(R.id.txt);
-//
-//                            if (response.body().getCount() == 10) {
-//                                txt.setText(" " + response.body().getMessage());
-//                            } else {
-//                                txt.setText(sentcount + " " + "invites successfully sent");
-//                            }
-//                            Button dialogButton = dialog.findViewById(R.id.btn_done);
-//                            dialogButton.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View v) {
-//                                    dialog.dismiss();
-//                                    finish();
-//                                }
-//                            });
-//
-//                            dialog.show();
-//                        } else {
-//                            showToast(response.body().getMessage());
-//                        }
-//                    } else {
-//                        showToast(SERVER_ERROR);
-//                    }
-//                } else {
-//                    showToast(SERVER_ERROR);
-//                }
-//                CommonUtils.dismissSpotoProgressDialog();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<InvitResponse> call, Throwable t) {
-//                t.printStackTrace();
-//                CommonUtils.dismissSpotoProgressDialog();
-//            }
-//        });
+        Call<InvitResponse> call = RetrofitClient.getUniqInstance().getApi()
+                .ExtendedCall("Bearer " + PreferenceHelper.getStringPreference(context, IConstant.TOKEN), arr);
+        call.enqueue(new Callback<InvitResponse>() {
+            @Override
+            public void onResponse(Call<InvitResponse> call, Response<InvitResponse> response) {
+                if (response.body() != null) {
+                    if (response.code() == 200) {
+                        if (response.body().getStatus().equalsIgnoreCase("true")) {
+                            final Dialog dialog = new Dialog(context);
+                            dialog.setContentView(R.layout.dialog);
+                            TextView txt = dialog.findViewById(R.id.txt);
+
+                            if (response.body().getCount() == 10) {
+                                txt.setText(" " + response.body().getMessage());
+                            } else {
+                                txt.setText(sentcount + " " + "invites successfully sent");
+                            }
+                            Button dialogButton = dialog.findViewById(R.id.btn_done);
+                            dialogButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                    finish();
+                                }
+                            });
+
+                            dialog.show();
+                        } else {
+                            showToast(response.body().getMessage());
+                        }
+                    } else {
+                        showToast(SERVER_ERROR);
+                    }
+                } else {
+                    showToast(SERVER_ERROR);
+                }
+                CommonUtils.dismissSpotoProgressDialog();
+            }
+
+            @Override
+            public void onFailure(Call<InvitResponse> call, Throwable t) {
+                t.printStackTrace();
+                CommonUtils.dismissSpotoProgressDialog();
+            }
+        });
     }
 
 
@@ -260,4 +262,3 @@ public class ContactsPickerActivity extends BaseActivity {
 
 
 }
-

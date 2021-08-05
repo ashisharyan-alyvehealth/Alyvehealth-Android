@@ -68,10 +68,14 @@ public class MyWebViewClient extends WebViewClient {
             context.startActivity(intent);
 
         }
-        else if( url.startsWith("https://api.whatsapp.com/")  ) {
-
+        else if( url.startsWith("whatsapp://")  ) {
+            // view.getContext().startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+            //overrideUrlLoading = true;
+            String [] whatsappcontact =url.split("phone=");
             try{
-                String contact = "+91 9137985606";
+                //    Toast.makeText(context,view.getUrl(),Toast.LENGTH_SHORT).show();
+                System.out.println("#################"+view.getUrl());
+                String contact = whatsappcontact[1];
                 PackageManager packageManager = context.getPackageManager();
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 String urlw = "https://api.whatsapp.com/send?phone="+ contact ;
@@ -86,7 +90,9 @@ public class MyWebViewClient extends WebViewClient {
                 Log.e("ERROR WHATSAPP",e.toString());
                 Toast.makeText(context, "Whatsapp app not installed in your phone", Toast.LENGTH_SHORT).show();
             }
-
+            view.goBack();
+               /* Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
+                startActivity(browserIntent);*/
         }
        else if (url.startsWith("intent://")) {
             try {

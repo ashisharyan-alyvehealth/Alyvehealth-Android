@@ -76,10 +76,11 @@
                     android:background="@color/colorPrimary"
                     android:layout_height="match_parent">
 
-                    <TextView
+                    <EditText
                         android:id="@+id/tvUserName"
                         style="@style/text_size"
                         android:textStyle="bold"
+                        android:enabled="false"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/dimen_20dp"

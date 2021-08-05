@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/dimen_20dp"
+        android:background="@color/white"
+        tools:context=".login.view.SurveyGenderActivity">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_15dp"
+            android:progress="50"
+            android:layout_marginLeft="@dimen/dimen_70dp"
+            android:layout_marginRight="@dimen/dimen_70dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:alpha=".6"
+            android:fontFamily="@font/nunito_bold"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:textSize="@dimen/dimen_20sp"
+            android:textColor="@color/stepcolor"
+            android:id="@+id/textstep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="STEP 1/2"
+            app:layout_constraintTop_toBottomOf="@id/progress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tvName"
+            android:fontFamily="@font/nunito_bold"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:textSize="@dimen/dimen_28sp"
+            android:textColor="@color/headingcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What's your gender?"
+            app:layout_constraintTop_toBottomOf="@id/textstep"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/ll1"
+            android:layout_marginTop="@dimen/dimen_25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:layout_marginRight="@dimen/dimen_5dp"
+                android:layout_weight=".5"
+                android:id="@+id/tvFemale"
+                android:layout_width="170dp"
+                android:layout_height="240dp"
+                android:src="@drawable/femaledeselect"
+                />
+
+            <ImageView
+                android:layout_marginLeft="@dimen/dimen_5dp"
+                android:layout_weight=".5"
+                android:id="@+id/tvMale"
+                android:layout_width="170dp"
+                android:layout_height="240dp"
+                android:src="@drawable/maledeselect" />
+        </LinearLayout>
+
+        <Button
+            android:layout_marginTop="@dimen/dimen_25dp"
+            android:layout_marginLeft="@dimen/dimen_25dp"
+            android:layout_marginRight="@dimen/dimen_25dp"
+            android:background="@drawable/grey_gradiant"
+            android:backgroundTint="@color/colorBG"
+            app:layout_constraintStart_toStartOf="@id/ll1"
+            app:layout_constraintEnd_toEndOf="@id/ll1"
+            app:layout_constraintTop_toBottomOf="@id/ll1"
+            android:id="@+id/tvNonBinary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OTHERS"
+            android:textColor="@color/stepcolor"
+            android:textSize="@dimen/dimen_16sp"
+            android:fontFamily="@font/nunito_bold"/>
+
+        <Button
+            android:enabled="false"
+            android:layout_margin="@dimen/dimen_50dp"
+            android:background="@drawable/disable_gradiant"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvNonBinary"
+            app:layout_constraintBottom_toTopOf="@id/tvDisclose"
+            android:id="@+id/ivNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Continue"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_18sp"
+            android:fontFamily="@font/nunito_bold"/>
+
+        <TextView
+            android:id="@+id/tvDisclose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dimen_20dp"
+            android:text="Prefer not to choose"
+            android:textColor="@color/stepcolor"
+            android:textSize="@dimen/dimen_18sp"
+            android:fontFamily="@font/nunito_regular"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+        <!-- <androidx.constraintlayout.widget.ConstraintLayout
+             android:layout_marginTop="@dimen/dimen_50dp"
+             android:layout_width="match_parent"
+             android:layout_height="0dp"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toBottomOf="@+id/progress">
+
+
+
+             <ImageView
+                 android:id="@+id/ivLogin"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginBottom="@dimen/dimen_30dp"
+                 android:src="@drawable/vector_smart_object_copy"
+                 app:layout_constraintBottom_toTopOf="@+id/tvName"
+                 app:layout_constraintStart_toStartOf="parent" />
+
+
+
+             <LinearLayout
+                 android:id="@+id/viewGend"
+                 android:layout_width="match_parent"
+                 android:layout_height="@dimen/dimen_50dp"
+                 android:layout_marginBottom="@dimen/dimen_20dp"
+                 android:background="@drawable/background_language"
+                 android:orientation="horizontal"
+                 app:layout_constraintBottom_toTopOf="@+id/tvDisclose"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent">
+
+
+
+                 <View
+                     android:id="@+id/viewLangPref"
+                     android:layout_width="0dp"
+                     android:layout_height="match_parent"
+                     android:background="@color/colorPrimary" />
+
+
+
+                 <View
+                     android:id="@+id/viewMale"
+                     android:layout_width="0dp"
+                     android:layout_height="match_parent"
+                     android:background="@color/colorPrimary" />
+
+
+
+             </LinearLayout>
+
+             <TextView
+                 android:id="@+id/tvDisclose"
+                 style="@style/option_text_size"
+                 android:layout_width="@dimen/dimen_300dp"
+                 android:layout_height="@dimen/dimen_50dp"
+                 android:layout_marginBottom="@dimen/dimen_20dp"
+                 android:background="@drawable/background_language"
+                 android:gravity="center"
+                 android:text="@string/do_not_wish_to_disclose"
+                 android:textColor="@color/colorPrimary"
+                 app:layout_constraintBottom_toTopOf="@id/ivNext"
+                 app:layout_constraintStart_toStartOf="parent" />
+
+             <ImageView
+                 android:id="@+id/ivNext"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/ic_right"
+                 android:visibility="visible"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent" />
+
+         </androidx.constraintlayout.widget.ConstraintLayout>-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

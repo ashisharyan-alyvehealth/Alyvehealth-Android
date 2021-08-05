@@ -22,6 +22,7 @@ import com.google.android.gms.fitness.FitnessOptions;
 import com.google.android.gms.fitness.data.DataType;
 import com.health.immunity.CommonUtils;
 import com.health.immunity.HomeContainer.HomeActivity;
+import com.health.immunity.HomeContainer.view.IHomeActivity;
 import com.health.immunity.R;
 import com.health.immunity.insight.model.GetKpiCall;
 import com.health.immunity.insight.model.MinMaxFilter;
@@ -35,7 +36,7 @@ public class BodyAdapter extends RecyclerView.Adapter<BodyAdapter.NoticeHolder> 
     private List<GetKpiCall.Body> myCommunitiesResponses ;
 
     float a,a1;
-
+   IHomeActivity iHomeActivity;
 
     public BodyAdapter(Context context, List<GetKpiCall.Body> myCommunitiesResponses) {
         this.context = context;
@@ -64,11 +65,17 @@ public class BodyAdapter extends RecyclerView.Adapter<BodyAdapter.NoticeHolder> 
 
 
         } else {
-            holder.im1.setText(myCommunitiesResponses.get(position).getAlias() + "\n" + "?");
-            holder.name.setText(myCommunitiesResponses.get(position).getAlias());
+            holder.im1.setText(myCommunitiesResponses.get(position).getAlias());
+            holder.name.setText("-");
             holder.progressBar.setVisibility(View.VISIBLE);
         }
-
+        if(myCommunitiesResponses.get(position).getAlias().startsWith("BMI")){
+            holder.imageView.setImageResource(R.drawable.ic_bmi);
+        }else if(myCommunitiesResponses.get(position).getAlias().startsWith("Weight")) {
+            holder.imageView.setImageResource(R.drawable.ic_weight1);
+        }else if(myCommunitiesResponses.get(position).getAlias().startsWith("SPO")) {
+            holder.imageView.setImageResource(R.drawable.ic_spo2_1);
+        }
 
         holder.tvHelpInfo1.setVisibility(View.VISIBLE);
 
@@ -236,7 +243,12 @@ public class BodyAdapter extends RecyclerView.Adapter<BodyAdapter.NoticeHolder> 
                                     Intent intent = new Intent(context, HomeActivity.class);
                                     intent.putExtra("heightbody", "height");
                                     intent.putExtra("heightvalue", editText.getText().toString().trim());
+//                                    iHomeActivity=new HomeActivity(view.getContext());
+//                                    iHomeActivity.setHeight(editText.getText().toString().trim());
                                     context.startActivity(intent);
+                                  // BodyAdapter.this.notify();
+                                  // notifyDataSetChanged();
+                                 //  notifyItemChanged(position);
 
 
                                 }
@@ -690,11 +702,12 @@ public class BodyAdapter extends RecyclerView.Adapter<BodyAdapter.NoticeHolder> 
 
     public class NoticeHolder extends RecyclerView.ViewHolder {
         private TextView im1,name,tvv1,tvv2,tvHelpInfo1;
-        private ImageView uparrowLast,ivcomparesetLast,ivcompareset1,ivcompareset2,ivcompareset3,ivcompareset4,ivcompareset5,ivcompareset6,ivcompareset7,ivcompareset8,ivcompareset9,ivcompareset10,imvideo,imviply,inffo,uparrowL0,uparrowR4,uparrowR3,uparrowR2,uparrowR1,uparrow,uparrowL4,uparrowL3,uparrowL2,uparrowL1;
+        private ImageView imageView, uparrowLast,ivcomparesetLast,ivcompareset1,ivcompareset2,ivcompareset3,ivcompareset4,ivcompareset5,ivcompareset6,ivcompareset7,ivcompareset8,ivcompareset9,ivcompareset10,imvideo,imviply,inffo,uparrowL0,uparrowR4,uparrowR3,uparrowR2,uparrowR1,uparrow,uparrowL4,uparrowL3,uparrowL2,uparrowL1;
         private ProgressBar progressBar;
 
         public NoticeHolder(@NonNull View itemView) {
             super(itemView);
+            imageView=itemView.findViewById(R.id.imageView);
             name = itemView.findViewById(R.id.textView3);
             tvv1 = itemView.findViewById(R.id.tvv1);
             tvv2 = itemView.findViewById(R.id.tvv2);
