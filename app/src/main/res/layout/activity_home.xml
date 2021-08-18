@@ -12,24 +12,34 @@ xmlns:tools="http://schemas.android.com/tools">
     tools:openDrawer="start">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:background="@android:color/white"
         android:orientation="vertical"
         android:layout_height="match_parent"
         tools:context=".activity.HomeActivity">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/ivHeader"
+            android:id="@+id/ivHeader1"
             android:alpha="4.5"
             android:layout_width="@dimen/dimen_30dp"
             android:layout_height="@dimen/dimen_30dp"
             android:layout_margin="7dp"
-            android:src="@drawable/changedp" />
+            android:src="@drawable/menu" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivHeader"
+            android:layout_width="@dimen/dimen_30dp"
+            android:layout_height="@dimen/dimen_30dp"
+            android:layout_margin="7dp"
+            android:layout_marginTop="4dp"
+            android:alpha="4.5"
+            android:src="@drawable/changedp"
+            app:layout_constraintEnd_toStartOf="@+id/ivScan"
+            app:layout_constraintHorizontal_bias="0.649"
+            app:layout_constraintStart_toEndOf="@+id/ivHeader1"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:visibility="invisible"

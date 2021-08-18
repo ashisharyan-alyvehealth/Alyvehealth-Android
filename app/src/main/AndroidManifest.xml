@@ -63,19 +63,29 @@
 
         <activity
             android:name=".login.view.SurveyNameActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".login.view.GetOnBoard"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".login.view.SurveyDOBActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".login.utility.GooglefitPermission"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".login.utility.WebviewFallback"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".login.view.OfficeAddActivity"
             android:screenOrientation="portrait"
@@ -88,49 +98,74 @@
             tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".login.view.WATnCActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".login.view.WelcomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".login.view.SurveyGenderActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".community.view.NewCreateActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".community.view.ContactsPickerActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".community.view.CreateCommunity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".insight.FilterActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".insight.GraphActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".profile.MapActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            tools:ignore="LockedOrientationActivity" />
+            tools:ignore="LockedOrientationActivity"
+            />
         <activity
             android:name=".profile.ProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".HomeContainer.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"
             >
         </activity>
         <activity
             android:name=".login.view.DummyTncActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".login.view.DummyHomeActivity" />
 
         <activity
             android:name=".splash.SplashActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -158,13 +193,19 @@
 
         <activity
             android:name=".login.view.OTPActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".login.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -16,7 +16,9 @@ import android.Manifest;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -30,6 +32,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Geocoder;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -117,6 +120,8 @@ import com.health.immunity.retrofit.ServiceGenerator;
 import com.health.immunity.screentime.ScreentimeActivity;
 import com.health.immunity.todo.TodoFragment;
 
+import org.jsoup.Jsoup;
+
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -150,6 +155,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     GoogleSignInClient mGoogleSignInClient;
     GoogleSignInAccount account;
     private int todayOffset;
+    String currentVersion;
     public static boolean vit=false;
     private int total_start;
     public static Switch googleswitch;
@@ -189,6 +195,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         binding.ivScan.setOnClickListener(this);
         binding.homeTv.setOnClickListener(this);
         binding.ivHeader.setOnClickListener(this);
+        binding.ivHeader1.setOnClickListener(this);
         binding.tvVer.setText("Version "+setVersionName());
         binding.tvLogout.setOnClickListener(this);
         binding.tvedit.setOnClickListener(this);
@@ -208,7 +215,16 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 //        menuView.setClipChildren(false);
 
         setBottomNavigationView();
+        try
+        {
+            currentVersion = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+        }
+        catch (PackageManager.NameNotFoundException e)
+        {
+            e.printStackTrace();
+        }
 
+        new GetVersionCode().execute();
 
 
         {
@@ -578,7 +594,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
 
                     break;
-                case R.id.ivHeader:
+                case R.id.ivHeader1:
                     buildFitnessOptionRequest();
                     if (!GoogleSignIn.hasPermissions(GoogleSignIn.getLastSignedInAccount(context), fitnessOptions)) {
                         binding.swtchbtn.setChecked(false);
@@ -651,11 +667,11 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                     break;
                 case R.id.tvPrvcy:
                     drawer.closeDrawer(GravityCompat.START);
-//                    PrivacypolicyFragment myProgramFragment=new PrivacypolicyFragment();
-//                    viewFragment(myProgramFragment,"PRG");
+                    PrivacypolicyFragment myProgramFragment=new PrivacypolicyFragment();
+                    viewFragment(myProgramFragment,"PRG");
 
-                    Intent intent2=new Intent(context, ScreentimeActivity.class);
-                    startActivity(intent2);
+//                    Intent intent2=new Intent(context, ScreentimeActivity.class);
+//                    startActivity(intent2);
                     break;
 
                 case R.id.tvmyprograms:
@@ -2012,5 +2028,81 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
     }
 
+    private class GetVersionCode extends AsyncTask<Void, String, String>
+    {
+        @Override
+        protected String doInBackground(Void... voids) {
+            String newVersion = null;
+            try {
+                newVersion = Jsoup.connect("https://play.google.com/store/apps/details?id=" + HomeActivity.this.getPackageName() + "&hl=it")
+                        .timeout(30000)
+                        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+                        .referrer("http://www.google.com")
+                        .get()
+                        .select(".hAyfc .htlgb")
+                        .get(7)
+                        .ownText();
+                return newVersion;
+            } catch (Exception e) {
+                return newVersion;
+            }
+
+        }
+
+
+        @Override
+
+        protected void onPostExecute(String onlineVersion) {
+
+            super.onPostExecute(onlineVersion);
+
+            if (onlineVersion != null && !onlineVersion.isEmpty()) {
+
+                if (Float.valueOf(currentVersion) < Float.valueOf(onlineVersion)) {
+
+                    AlertDialog.Builder  dialogUpdate= new AlertDialog.Builder(HomeActivity.this,AlertDialog.THEME_TRADITIONAL).setTitle("New Version Available")
+                            .setIcon(getResources().getDrawable(android.R.drawable.stat_sys_download))
+                            .setMessage("New version of app is available. Update your app")
+                            .setCancelable(false)
+                            .setNeutralButton("UPDATE", new DialogInterface.OnClickListener()
+                            {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // TODO Auto-generated method stub
+
+                                    try
+                                    {
+                                        startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("market://details?id="+getPackageName())));
+                                    }
+                                    catch (ActivityNotFoundException e)
+                                    {
+                                        // TODO: handle exception
+
+                                        startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName())));
+
+                                    }
+
+
+
+
+                                }
+                            });
+
+                    AlertDialog updatedialog = dialogUpdate.create();
+                    updatedialog.show();
+
+
+
+                }
+                else
+                {
+                }
+
+            }
+
+            Log.d("update", "Current version " + currentVersion + "playstore version " + onlineVersion);
+
+        }
+    }
 
 }
