@@ -82,6 +82,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.JsonObject;
 import com.health.immunity.BaseActivity;
 import com.health.immunity.CommonUtils;
+import com.health.immunity.HomeContainer.model.Coin;
 import com.health.immunity.HomeContainer.model.TokenResponse;
 import com.health.immunity.HomeContainer.model.FitResponse;
 import com.health.immunity.HomeContainer.model.JsonObjectResponse;
@@ -135,6 +136,9 @@ import retrofit2.Response;
 
 import static androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
 import static com.health.immunity.R.drawable.ic_fitcoinz;
+
+import static com.health.immunity.R.drawable.ic_soulpoints;
+
 
 public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, IHomeActivity, SensorEventListener {
     private static final int REQUEST_OAUTH_REQUEST_CODE = 1;
@@ -585,41 +589,20 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
 
 
-    }
-    public void updateCoin(int coinUser){
-        String coinUsers= String.valueOf(coinUser).trim();
-        String path ="/users/user_id_"+coinUsers+"/coins_balance";
-        System.out.println("user"+path);
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference(path);
-
-        ref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                System.out.println("dataSnapshot"+dataSnapshot.child("/gold").getValue());
-                gold=dataSnapshot.child("/gold").getValue();
-                if(gold==null){
-                    gold=0;
-                }
-                silver=dataSnapshot.child("/silver").getValue();
-                if(silver==null){
-                    silver=0;
-                }
+    Runnable updateTextRunnable=new Runnable(){
+        public void run() {
+            if(coinSwitch==1){
+                binding.coinBal.setText(""+gold);
+                binding.coinImg.setImageResource(ic_fitcoinz);
+                coinSwitch=2;
+            }else{
+                binding.coinBal.setText(""+silver);
+                binding.coinImg.setImageResource(R.drawable.ic_soulpoints);
                 coinSwitch=1;
-                if(coinHandler==1){
-                    handlerCoin.post(updateTextRunnable);
-                    coinHandler=0;
-                }
             }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
-
-
-    }
+            handlerCoin.postDelayed(this, 3000);
+        }
+    };
 
     Runnable updateTextRunnable=new Runnable(){
         public void run() {

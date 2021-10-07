@@ -7,12 +7,13 @@
     <!-- Stroke around the background, width and color -->
     <stroke android:width="0dp" android:color="@color/colorCoinBack"/>
 
+
     <!-- The corners of the shape -->
     <corners android:radius="40dp"/>
 
     <!-- Padding for the background, e.g the Text inside a TextView will be 
     located differently -->
     <padding android:left="5dp" android:right="5dp"
-        android:bottom="5dp" android:top="5dp" />
+        android:bottom="5dp" android:top="5dp" />]
 
 </shape>
