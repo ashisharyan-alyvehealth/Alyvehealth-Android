@@ -33,7 +33,7 @@
 
             <TextView
                 android:layout_marginLeft="@dimen/dimen_5dp"
-                android:text="My value"
+                android:text="My Value"
                 android:id="@+id/healthyrange"
                 android:layout_marginBottom="@dimen/dimen_20dp"
                 style="@style/micro_text_size"
@@ -99,11 +99,11 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_marginTop="@dimen/dimen_10dp"
-
+                android:layout_marginBottom="@dimen/dimen_10dp"
                 android:visibility="visible"
                 android:id="@+id/rvactivity"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/myrange" />

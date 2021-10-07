@@ -28,14 +28,47 @@ xmlns:tools="http://schemas.android.com/tools">
             android:layout_margin="7dp"
             android:src="@drawable/menu" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <LinearLayout
+            android:layout_margin="7dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/coin_bg"
+            android:scaleType="centerInside"
+            android:src="#ffffff"
+            android:layout_width="wrap_content"
+            android:maxWidth="@dimen/dimen_90dp"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toStartOf="@+id/ivHeader"
+            app:layout_constraintHorizontal_bias="0.649"
+            app:layout_constraintStart_toEndOf="@+id/ivHeader1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/dividerdash"
+            >
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:src="@drawable/ic_fitcoinz"
+               android:id="@+id/coin_img"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="150"
+                android:id="@+id/coin_bal"/>
+
+        </LinearLayout>
+
+        <ImageView
             android:id="@+id/ivHeader"
-            android:layout_width="@dimen/dimen_30dp"
+            android:layout_width="@dimen/dimen_90dp"
             android:layout_height="@dimen/dimen_30dp"
             android:layout_margin="7dp"
             android:layout_marginTop="4dp"
             android:alpha="4.5"
-            android:src="@drawable/changedp"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:src="#ffffff"
             app:layout_constraintEnd_toStartOf="@+id/ivScan"
             app:layout_constraintHorizontal_bias="0.649"
             app:layout_constraintStart_toEndOf="@+id/ivHeader1"

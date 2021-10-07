@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.fitness.FitnessOptions;
@@ -331,6 +332,78 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Notice
 
             }
         });
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!TextUtils.isEmpty(myCommunitiesResponses.get(position).getHealthyLowerRange()) && !TextUtils.isEmpty(myCommunitiesResponses.get(position).getHealthyUpperRange()))
+                {
+                    a = (Float.parseFloat(myCommunitiesResponses.get(position).getHealthyLowerRange()));
+                    a1 = (Float.parseFloat(myCommunitiesResponses.get(position).getHealthyUpperRange()));
+                    Intent intent=new Intent(context, GraphActivity.class);
+                    intent.putExtra("toolbarname",myCommunitiesResponses.get(position).getAlias());
+                    intent.putExtra("getrangesource",myCommunitiesResponses.get(position).getHealthy_range_source());
+                    intent.putExtra("kpi_id",myCommunitiesResponses.get(position).getId());
+                    intent.putExtra("decs",myCommunitiesResponses.get(position).getDescription());
+                    intent.putExtra("healthyupeer",a1);
+                    intent.putExtra("healthylower",a);
+                    intent.putExtra("limitchck","yes");
+                    context.startActivity(intent);
+                }
+                else
+                {
+                    Intent intent=new Intent(context, GraphActivity.class);
+                    intent.putExtra("toolbarname",myCommunitiesResponses.get(position).getAlias());
+                    intent.putExtra("getrangesource",myCommunitiesResponses.get(position).getHealthy_range_source());
+
+                    intent.putExtra("kpi_id",myCommunitiesResponses.get(position).getId());
+                    intent.putExtra("decs",myCommunitiesResponses.get(position).getDescription());
+                    intent.putExtra("healthyupeer",0);
+                    intent.putExtra("healthylower",0);
+                    intent.putExtra("limitchck","no");
+                    context.startActivity(intent);
+
+                }
+
+
+            }
+        });
+
+        holder.tvHelpInfoImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!TextUtils.isEmpty(myCommunitiesResponses.get(position).getHealthyLowerRange()) && !TextUtils.isEmpty(myCommunitiesResponses.get(position).getHealthyUpperRange()))
+                {
+                    a = (Float.parseFloat(myCommunitiesResponses.get(position).getHealthyLowerRange()));
+                    a1 = (Float.parseFloat(myCommunitiesResponses.get(position).getHealthyUpperRange()));
+                    Intent intent=new Intent(context, GraphActivity.class);
+                    intent.putExtra("toolbarname",myCommunitiesResponses.get(position).getAlias());
+                    intent.putExtra("getrangesource",myCommunitiesResponses.get(position).getHealthy_range_source());
+                    intent.putExtra("kpi_id",myCommunitiesResponses.get(position).getId());
+                    intent.putExtra("decs",myCommunitiesResponses.get(position).getDescription());
+                    intent.putExtra("healthyupeer",a1);
+                    intent.putExtra("healthylower",a);
+                    intent.putExtra("limitchck","yes");
+                    context.startActivity(intent);
+                }
+                else
+                {
+                    Intent intent=new Intent(context, GraphActivity.class);
+                    intent.putExtra("toolbarname",myCommunitiesResponses.get(position).getAlias());
+                    intent.putExtra("getrangesource",myCommunitiesResponses.get(position).getHealthy_range_source());
+
+                    intent.putExtra("kpi_id",myCommunitiesResponses.get(position).getId());
+                    intent.putExtra("decs",myCommunitiesResponses.get(position).getDescription());
+                    intent.putExtra("healthyupeer",0);
+                    intent.putExtra("healthylower",0);
+                    intent.putExtra("limitchck","no");
+                    context.startActivity(intent);
+
+                }
+
+
+            }
+        });
+
 
         holder.progressBar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -467,12 +540,15 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.Notice
 
     public class NoticeHolder extends RecyclerView.ViewHolder {
         private TextView im1,name,tvv1,tvv2,tvHelpInfo1;
-        private ImageView imageView, uparrowLast,ivcomparesetLast,ivcompareset1,ivcompareset2,ivcompareset3,ivcompareset4,ivcompareset5,ivcompareset6,ivcompareset7,ivcompareset8,ivcompareset9,ivcompareset10,
+        private ImageView imageView,tvHelpInfoImage, uparrowLast,ivcomparesetLast,ivcompareset1,ivcompareset2,ivcompareset3,ivcompareset4,ivcompareset5,ivcompareset6,ivcompareset7,ivcompareset8,ivcompareset9,ivcompareset10,
                 inffo,imvideo,imviply,uparrowL0,uparrowR4,uparrowR3,uparrowR2,uparrowR1,uparrow,uparrowL4,uparrowL3,uparrowL2,uparrowL1;
         private ProgressBar progressBar;
+        private CardView cardView;
 
         public NoticeHolder(@NonNull View itemView) {
             super(itemView);
+            cardView=itemView.findViewById(R.id.cardView);
+            tvHelpInfoImage=itemView.findViewById(R.id.tvHelpInfoimage);
             imageView=itemView.findViewById(R.id.imageView);
             name = itemView.findViewById(R.id.textView3);
             tvv1 = itemView.findViewById(R.id.tvv1);

@@ -150,8 +150,9 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                 onBackPressed();
             }
         });
-
+        isClickable = true;
         initViews();
+        isEnabled();
         if (CommonUtils.isInternetAvail(context)) {
             getProfileApi();
         }
@@ -262,10 +263,11 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
 
     @Override
     public void onBackPressed() {
-        finish();
-        Intent intent= new Intent(this, HomeActivity.class);
-//        intent.putExtra("backActivitycount",true);
-        startActivity(intent);
+//        finish();
+//        Intent intent= new Intent(this, HomeActivity.class);
+////        intent.putExtra("backActivitycount",true);
+//        startActivity(intent);
+        super.onBackPressed();
     }
 
     @Override
@@ -816,8 +818,9 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                 if (response.body() != null) {
                     if (response.body().getStatus().equalsIgnoreCase("true")) {
                         finish();
-                        startActivity(new Intent(context, ProfileActivity.class));
+                     //   startActivity(new Intent(context, ProfileActivity.class));
 //                        finish();
+                        onBackPressed();
                         //  showToast(response.body().getMessage());
                     } else {
                         showToast(response.body().getMessage());

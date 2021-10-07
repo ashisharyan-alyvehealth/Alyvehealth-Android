@@ -229,7 +229,7 @@ public class GraphActivity extends BaseActivity implements View.OnClickListener{
                     if (TextUtils.isEmpty(agestr)&&TextUtils.isEmpty(genderstr)&&TextUtils.isEmpty(userstr))
                     {
 
-                        tvloren.setText(Html.fromHtml("<font color='#000000'>" + "Your comparision set is "+ "</font>"+"All Ages"+ "<font color='#000000'>"+" & "+"</font>" +"All Genders"+ "<font color='#000000'>"+" & "+"</font>"+"All Immunity Users." ));
+                        tvloren.setText(Html.fromHtml("<font color='#000000'>" + "Your comparision set is "+ "</font>"+"All Ages"+ "<font color='#000000'>"+" & "+"</font>" +"All Genders"+ "<font color='#000000'>"+" & "+"</font>"+"All Alyve Users." ));
 
                     } else
                     {
@@ -245,7 +245,7 @@ public class GraphActivity extends BaseActivity implements View.OnClickListener{
                             }
 
 
-                            tvloren.setText(Html.fromHtml("<font color='#000000'>" + "Your comparision set is "+ "</font>"+CommonUtils.communityagename+ "<font color='#000000'>"+" & "+"</font>" +CommonUtils.communitygendername+ "<font color='#000000'>"+" & "+"</font>"+"All Immunity Users." ));
+                            tvloren.setText(Html.fromHtml("<font color='#000000'>" + "Your comparision set is "+ "</font>"+CommonUtils.communityagename+ "<font color='#000000'>"+" & "+"</font>" +CommonUtils.communitygendername+ "<font color='#000000'>"+" & "+"</font>"+"All Alyve Users." ));
 
                         }
 

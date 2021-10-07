@@ -17,8 +17,8 @@ android {
         applicationId "com.health.immunity"
         minSdkVersion 22
         targetSdkVersion 29
-        versionCode 40
-        versionName "4.0"
+        versionCode 50
+        versionName "5.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         project.archivesBaseName = "Immunity_App_Ver_" + versionCode + "_" + buildDate
@@ -45,7 +45,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.google.android.play:core:1.6.3'
+    implementation 'com.google.android.play:core:1.10.0'
     //for new version updater
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
@@ -107,6 +107,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:17.4.1'
     implementation 'com.google.firebase:firebase-messaging:20.1.7'
     implementation 'com.google.firebase:firebase-crashlytics:17.0.0'
+    implementation 'com.google.firebase:firebase-database:20.0.2'
     implementation files('libs/graphlib-src.jar')
 
     implementation 'com.github.carlosmuvi:SegmentedProgressBar:0.8.1'

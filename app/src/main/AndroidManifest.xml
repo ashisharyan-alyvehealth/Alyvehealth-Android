@@ -67,6 +67,11 @@
             tools:ignore="LockedOrientationActivity"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".community.utility.Youtube"
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".login.view.GetOnBoard"
             android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="LockedOrientationActivity"
