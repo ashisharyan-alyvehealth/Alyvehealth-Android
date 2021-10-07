@@ -2,7 +2,6 @@ package com.health.immunity.HomeContainer;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -11,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
 
 import android.Manifest;
 import android.animation.ObjectAnimator;
@@ -23,9 +23,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -39,17 +36,12 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
-import android.renderscript.ScriptGroup;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Pair;
-import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -78,6 +70,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.BuildConfig;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -97,12 +95,12 @@ import com.health.immunity.R;
 import com.health.immunity.aboutus.AboutUsFragment;
 import com.health.immunity.act.ActFragment;
 import com.health.immunity.act.model.SourceResponse;
+import com.health.immunity.act.presenter.MyViewModel;
 import com.health.immunity.alyvecash.AlyveCashFragment;
 import com.health.immunity.challenges.ChallengesFragment;
 import com.health.immunity.community.DashboardFragment;
 import com.health.immunity.databinding.ActivityHomeBinding;
 import com.health.immunity.expertchat.ExpertChatFragment;
-import com.health.immunity.insight.BodyAdapter;
 import com.health.immunity.insight.InsightFragment;
 import com.health.immunity.login.LoginActivity;
 import com.health.immunity.myprogram.MyProgramFragment;
@@ -117,8 +115,8 @@ import com.health.immunity.profile.model.updateZohoIdResponse;
 import com.health.immunity.retrofit.ApiInterface;
 import com.health.immunity.retrofit.RetrofitClient;
 import com.health.immunity.retrofit.ServiceGenerator;
-import com.health.immunity.screentime.ScreentimeActivity;
 import com.health.immunity.todo.TodoFragment;
+import com.health.immunity.webviewUtilityClasses.MyWebViewClient;
 
 import org.jsoup.Jsoup;
 
@@ -136,6 +134,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
+import static com.health.immunity.R.drawable.ic_fitcoinz;
 
 public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, IHomeActivity, SensorEventListener {
     private static final int REQUEST_OAUTH_REQUEST_CODE = 1;
@@ -153,13 +152,19 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     private boolean showSteps = true;
     public static boolean report=false;
     GoogleSignInClient mGoogleSignInClient;
+    public static FragmentTransaction fragmentTransaction;
     GoogleSignInAccount account;
     private int todayOffset;
+    Object gold=0;
+    Object silver=0;
+    int coinSwitch=-1;
+    int steps_today=0;
     String currentVersion;
     public static boolean vit=false;
     private int total_start;
     public static Switch googleswitch;
     private int goal;
+    public static String webViewUrl="";
     private static final int PERMISSIONS_REQUEST_WRITE_CAL = 1999;
     private String strImage = "";
     String runningstr="",walkingstr="",zumbastr="",joggingstr="",aerobicsstr="",weightputstr="",heightputstr="",spo2putstr="";
@@ -177,6 +182,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     final public static String DEFAULT_STEP_UNIT = Locale.getDefault() == Locale.US ? "ft" : "cm";
     IHomePresenter presenter;
     private static final int MY_PERMISSIONS_REQUEST_ACTIVITY_RECOGNITION = 201;
+    int coinHandler=-1;
+    Handler handlerCoin=new Handler();
 
 
 
@@ -188,6 +195,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         presenter=new HomePresenter(this,context);
         drawer = findViewById(R.id.drawer_layout);
         navView=findViewById(R.id.bottomNav);
+        coinHandler=1;
         googleswitch=(Switch)findViewById(R.id.swtchbtn);
         builderPedometer = new AlertDialog.Builder(this);
         bottomNav=findViewById(R.id.bottomNav);
@@ -208,11 +216,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         binding.tvwallet.setOnClickListener(this);
         binding.tvActivitylog.setOnClickListener(this);
         binding.imageProfic.setOnClickListener(this);
-//        binding.bottomNav.setClipChildren(false);
-//        binding.bottomNav.setClipToPadding(false);
-//        binding.bottomNav.setClipToOutline(false);
-//        menuView = (BottomNavigationMenuView) binding.bottomNav.getChildAt(0);
-//        menuView.setClipChildren(false);
+
 
         setBottomNavigationView();
         try
@@ -377,8 +381,13 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
 
         }
-
-
+       binding.coinLayout.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               AlyveCashFragment alyveCashFragment=new AlyveCashFragment();
+               viewFragment(alyveCashFragment,"WALLET");
+           }
+       });
 
 
 
@@ -420,8 +429,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                 @Override
                 public void run() {
 
-                    oneplusfitClicked();
-                    presenter.savePedometerUserKPI(steps,distance);
+                    oneplusfitClicked(); //googlefit daata saved
+                    presenter.savePedometerUserKPI(steps,distance); //pedometer data saved
 
                 }
             }, 3000);
@@ -443,7 +452,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                 }, 3000);
             }
         }
-
+        getProfileApiAgain();
         binding.swtchbtncal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -560,7 +569,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "MyApp::MyWakelockTag");
         wakeLock.acquire();
 
-
+        FirebaseApp.initializeApp(context);
         FirebaseMessaging.getInstance();
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(this, new OnSuccessListener<InstanceIdResult>() {
             @Override
@@ -574,7 +583,58 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         });
 
 
+
+
     }
+    public void updateCoin(int coinUser){
+        String coinUsers= String.valueOf(coinUser).trim();
+        String path ="/users/user_id_"+coinUsers+"/coins_balance";
+        System.out.println("user"+path);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference(path);
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                System.out.println("dataSnapshot"+dataSnapshot.child("/gold").getValue());
+                gold=dataSnapshot.child("/gold").getValue();
+                if(gold==null){
+                    gold=0;
+                }
+                silver=dataSnapshot.child("/silver").getValue();
+                if(silver==null){
+                    silver=0;
+                }
+                coinSwitch=1;
+                if(coinHandler==1){
+                    handlerCoin.post(updateTextRunnable);
+                    coinHandler=0;
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
+
+    }
+
+    Runnable updateTextRunnable=new Runnable(){
+        public void run() {
+            if(coinSwitch==1){
+                binding.coinBal.setText(""+gold);
+                binding.coinImg.setImageResource(ic_fitcoinz);
+                coinSwitch=2;
+            }else{
+                binding.coinBal.setText(""+silver);
+                binding.coinImg.setImageResource(R.drawable.ic_soulpoints);
+                coinSwitch=1;
+            }
+            handlerCoin.postDelayed(this, 3000);
+        }
+    };
 
 
 
@@ -602,13 +662,14 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                         binding.swtchbtn.setChecked(true);
                     }
 
-                    if (!presenter.checkPedometerPermission()) {
+                    if (!presenter.checkPedometerPermission() && !PreferenceHelper.getStringPreference(context,IConstant.FIT_PEDOMETER).equals("1")) {
                         // showToast("permission not found");
                         binding.swtchbtnpedo.setChecked(false);
                         presenter.stopPedometerService();
                     }else {
                         binding.swtchbtnpedo.setChecked(true);
                     }
+
                     if (ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
                        binding.swtchbtncal.setChecked(false);
                     }else {
@@ -629,6 +690,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                 {
                     PreferenceHelper.clearAllPreferences(context);
                     PreferenceHelper.setBooleanPreference(context, IConstant.IS_LOGIN, false);
+                    binding.swtchbtn.setChecked(false);
                     Intent intent = new Intent(context, LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
@@ -939,7 +1001,10 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             }
         });
     }
-
+ public void startActFrag(){
+     ActFragment actFragment= new ActFragment();
+     viewFragment(actFragment,"ACT");
+ }
 
     @Override
     public void setBottomNavigationView() {
@@ -998,7 +1063,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void viewFragment(Fragment fragment, String name) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.homeContainer, fragment);
         final int count = fragmentManager.getBackStackEntryCount();
         if (name.equals("INSIGHT")) {
@@ -1093,8 +1158,10 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     protected void onResume() {
         super.onResume();
 
+
+
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACTIVITY_RECOGNITION)
-                != PackageManager.PERMISSION_GRANTED ) {
+                != PackageManager.PERMISSION_GRANTED && !PreferenceHelper.getStringPreference(context,IConstant.FIT_PEDOMETER).equals("1")) {
             // Permission is not granted
             binding.swtchbtnpedo.setChecked(false);
             PreferenceHelper.setStringPreference(context, IConstant.FIT_PEDOMETER, "0");
@@ -1120,7 +1187,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         }
 
 
-        getProfileApiAgain();
+
         Database db = Database.getInstance(context);
 
         if (BuildConfig.DEBUG) db.logState();
@@ -1132,6 +1199,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
         goal = prefs.getInt("goal", DEFAULT_GOAL);
         since_boot = db.getCurrentSteps();
+        System.out.println("Since_boot_Value"+ since_boot);
         int pauseDifference = since_boot - prefs.getInt("pauseCount", since_boot);
 
         // register a sensorlistener to live update the UI if a step is taken
@@ -1164,6 +1232,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         total_start = db.getTotalWithoutToday();
         total_days = db.getDays();
         db.close();
+
+
 
     }
 
@@ -1205,13 +1275,18 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                 }
 
             }else {
-                binding.swtchbtnpedo.setChecked(false);
-                presenter.stopPedometerService();
-                PreferenceHelper.setStringPreference(context, IConstant.FIT_PEDOMETER, "0");
-                Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                Uri uri = Uri.fromParts("package", getPackageName(), null);
-                intent.setData(uri);
-                startActivity(intent);
+                if(Build.VERSION.SDK_INT >= 29) {
+                    binding.swtchbtnpedo.setChecked(false);
+                    presenter.stopPedometerService();
+                    PreferenceHelper.setStringPreference(context, IConstant.FIT_PEDOMETER, "0");
+                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    Uri uri = Uri.fromParts("package", getPackageName(), null);
+                    intent.setData(uri);
+                    startActivity(intent);
+                }else{
+                    binding.swtchbtnpedo.setChecked(false);
+                    presenter.stopPedometerService();
+                }
             }
         }else {
             binding.swtchbtnpedo.setChecked(false);
@@ -1717,17 +1792,19 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                 if (response.body() != null) {
                     System.out.println("userid "+response.body().getJsonData().getId());
                     userid=response.body().getJsonData().getId();
-
+                     updateCoin(userid);
                     if (response.body().getStatus().equalsIgnoreCase("true")) {
 
                         if (!TextUtils.isEmpty(response.body().getJsonData().getGender())) {
 
                             if (response.body().getJsonData().getGender().equalsIgnoreCase("Male")) {
-                                if (response.body().getJsonData().getUserImages() != null) {
+                                if (response.body().getJsonData().getUserImages() != null ) {
                                     strImage = IMAGE_BASE_URL + response.body().getJsonData().getUserImages();
                                     System.out.println("strImage "+strImage);
-                                    Glide.with(context).load(strImage).into(binding.imageProfic);
-                                    Glide.with(context).load(strImage).into(binding.ivHeader);
+                                    if(context!=null) {
+                                        Glide.with(context).load(strImage).into(binding.imageProfic);
+                                      //  Glide.with(context).load(strImage).into(binding.ivHeader);
+                                    }
                                 }
                                 if(response.body().getJsonData().getCommImages()!=null){
                                     strImage=response.body().getJsonData().getCommImages();
@@ -1735,23 +1812,11 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                                     System.out.println("imagelink"+strImage);
                                     if(context!=null) {
                                         Glide.with(context).load(strImage).into(binding.ivHeader);
+                                        System.out.println("strImage "+strImage);
                                     }else {
                                         Glide.with(getApplicationContext()).load(strImage).into(binding.ivHeader);
-                                    }
-                                }else{
-
-                                    if (response.body().getJsonData().getUserImages() != null) {
-                                        strImage = IMAGE_BASE_URL + response.body().getJsonData().getUserImages();
                                         System.out.println("strImage "+strImage);
-                                        System.out.println("imagelink" + strImage);
-                                        Glide.with(context).load(strImage).into(binding.ivHeader);
-
                                     }
-                                    else {
-
-                                        binding.ivHeader.setImageResource(R.drawable.changedp);
-                                    }
-
                                 }
 
 
@@ -1759,24 +1824,20 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                                 if (response.body().getJsonData().getUserImages() != null) {
                                     strImage =IMAGE_BASE_URL +  response.body().getJsonData().getUserImages();
                                     System.out.println("strImage "+strImage);
-                                    Glide.with(context).load(strImage).into(binding.imageProfic);
-                                    Glide.with(context).load(strImage).into(binding.ivHeader);
+                                    if (context!=null) {
+                                        Glide.with(context).load(strImage).into(binding.imageProfic);
+                                      //  Glide.with(context).load(strImage).into(binding.ivHeader);
+                                    }
                                 }
                                 if(response.body().getJsonData().getCommImages()!=null){
                                     strImage=response.body().getJsonData().getCommImages();
                                     System.out.println("strImage1 "+strImage);
                                     if(context!=null) {
                                         Glide.with(context).load(strImage).into(binding.ivHeader);
+                                        System.out.println("strImage "+strImage);
                                     }else {
                                         Glide.with(getApplicationContext()).load(strImage).into(binding.ivHeader);
-                                    }
-                                }else{
-                                    if (response.body().getJsonData().getUserImages() != null) {
-                                        strImage = IMAGE_BASE_URL + response.body().getJsonData().getUserImages();
-                                        System.out.println("strImage2 "+strImage);
-                                        Glide.with(context).load(strImage).into(binding.ivHeader);
-                                    }else {
-                                        binding.ivHeader.setImageResource(R.drawable.changedp);
+                                        System.out.println("strImage "+strImage);
                                     }
                                 }
 
@@ -1784,18 +1845,12 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
                                 if (response.body().getJsonData().getUserImages() != null) {
                                     strImage = IMAGE_BASE_URL + response.body().getJsonData().getUserImages();
                                     Glide.with(context).load(strImage).into(binding.imageProfic);
-                                    Glide.with(context).load(strImage).into(binding.ivHeader);
+                                    //Glide.with(context).load(strImage).into(binding.ivHeader);
                                 }
                                 if(response.body().getJsonData().getCommImages()!=null){
                                     strImage=IMAGE_BASE_URL + response.body().getJsonData().getCommImages();
                                     Glide.with(context).load(strImage).into(binding.ivHeader);
-                                }else{
-                                    if (response.body().getJsonData().getUserImages() != null) {
-                                        strImage = IMAGE_BASE_URL + response.body().getJsonData().getUserImages();
-                                        Glide.with(context).load(strImage).into(binding.ivHeader);
-                                    }else {
-                                        binding.ivHeader.setImageResource(R.drawable.changedp);
-                                    }
+                                    System.out.println("strImage "+strImage);
                                 }
 
                             }
@@ -1974,19 +2029,27 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     private void updatePie() {
         if (BuildConfig.DEBUG) Logger.log("UI - update steps: " + since_boot);
         // todayOffset might still be Integer.MIN_VALUE on first start
-        int steps_today = Math.max(todayOffset + since_boot, 0);
-        String stepsstr=Integer.toString(steps_today);
+       steps_today = Math.max(todayOffset + since_boot, 0);
+
+
         Database db = Database.getInstance(context);
         Pair<Date, Integer> record = db.getRecordData();
         ArrayList<String> aListLanguages = new ArrayList<String>();
 
-        for (int i=1;i<7;i++)
+           long date1= Util.getToday();
+        // steps_today = (db.getSteps(date1)) + db.getCurrentSteps();
+                System.out.println("since"+steps_today);
+        String stepsstr=Integer.toString(steps_today);
+
+        for (int i=1;i<30;i++)
         {
             Calendar date = Calendar.getInstance();
+            System.out.println("since"+"  "+date);
             date.setTimeInMillis(Util.getToday());
             date.add(Calendar.DATE, -i);
             System.out.println("####################+"+"  "+date.getTimeInMillis());
             String s= String.valueOf(db.getSteps(date.getTimeInMillis()));
+            System.out.println("since_s"+"  "+date);
             if (s.contains("-"))
             {
                 aListLanguages.add("0");
@@ -2004,7 +2067,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         // Collections.reverse(aListLanguages);
         String s = TextUtils.join(", ", aListLanguages);
         Log.d("LOGTAG", steps_today+","+s);
-        steps=steps_today+","+s;
+        steps=" "+steps_today+","+s;
         System.out.println("####################+re"+steps);
         System.out.println("####################+re"+record);
         db.close();

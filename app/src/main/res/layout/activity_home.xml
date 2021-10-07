@@ -26,16 +26,64 @@ xmlns:tools="http://schemas.android.com/tools">
             android:layout_width="@dimen/dimen_30dp"
             android:layout_height="@dimen/dimen_30dp"
             android:layout_margin="7dp"
-            android:src="@drawable/menu" />
+            android:src="@drawable/ic_menu" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <LinearLayout
+            android:id="@+id/coinLayout"
+            android:background="@drawable/coin_bg"
+            android:src="#ffffff"
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toStartOf="@+id/ivHeader"
+            app:layout_constraintStart_toEndOf="@+id/ivHeader1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/dividerdash"
+            >
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/ic_fitcoinz"
+               android:textAlignment="center"
+               android:id="@+id/coin_img"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textAppearance="@font/nunito_bold"
+                android:textColor="#666666"
+                android:textSize="@dimen/dimen_14dp"
+                android:text="--"
+                android:id="@+id/coin_bal"/>
+
+        </LinearLayout>
+<!--        <TextView-->
+<!--            android:id="@+id/coinLayout"-->
+<!--            android:background="@drawable/coin_bg"-->
+<!--            android:src="#ffffff"-->
+<!--            android:drawableLeft="@drawable/ic_fitcoinz"-->
+<!--            android:text="3444"-->
+<!--            android:drawablePadding="@dimen/dimen_5dp"-->
+<!--            android:textSize="@dimen/dimen_12dp"-->
+<!--            android:layout_width="@dimen/dimen_80dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:orientation="horizontal"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/ivHeader"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/ivHeader1"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/dividerdash"-->
+<!--            />-->
+
+        <ImageView
             android:id="@+id/ivHeader"
-            android:layout_width="@dimen/dimen_30dp"
+            android:layout_width="@dimen/dimen_90dp"
             android:layout_height="@dimen/dimen_30dp"
             android:layout_margin="7dp"
             android:layout_marginTop="4dp"
             android:alpha="4.5"
-            android:src="@drawable/changedp"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:src="#ffffff"
             app:layout_constraintEnd_toStartOf="@+id/ivScan"
             app:layout_constraintHorizontal_bias="0.649"
             app:layout_constraintStart_toEndOf="@+id/ivHeader1"
@@ -508,7 +556,7 @@ xmlns:tools="http://schemas.android.com/tools">
                             android:drawablePadding="@dimen/dimen_10dp"
                             android:fontFamily="@font/nunito_bold"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="My Programs"
+                            android:text="My Purchases"
                             android:textColor="@color/white"
                             android:textSize="@dimen/dimen_16sp"
                             app:layout_constraintStart_toStartOf="parent"
@@ -580,11 +628,11 @@ xmlns:tools="http://schemas.android.com/tools">
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/dimen_15dp"
-                            android:drawableLeft="@drawable/aboutcash"
+                            android:drawableLeft="@drawable/ic_alyve_wallet_icon"
                             android:drawablePadding="@dimen/dimen_15dp"
                             android:fontFamily="@font/nunito_bold"
                             android:padding="@dimen/dimen_5dp"
-                            android:text="Alyve Cash"
+                            android:text="Alyve Wallet"
                             android:layout_marginStart="@dimen/dimen_16dp"
                             android:textColor="@color/white"
                             android:textSize="@dimen/dimen_16sp"

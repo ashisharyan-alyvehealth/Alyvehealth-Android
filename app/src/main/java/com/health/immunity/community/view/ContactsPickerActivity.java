@@ -74,6 +74,7 @@ public class ContactsPickerActivity extends BaseActivity {
                 onBackPressed();
             }
         });
+
         contactsChooser = findViewById(R.id.lst_contacts_chooser);
         btnDone = findViewById(R.id.btn_done);
         txtFilter = findViewById(R.id.txt_filter);
@@ -153,6 +154,12 @@ public class ContactsPickerActivity extends BaseActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
     private void inviteApi(String sub, String desc) {
         CommonUtils.showSpotoProgressDialog(context);
         Call<InviteMemberResponse> call = RetrofitClient.getUniqInstance().getApi()

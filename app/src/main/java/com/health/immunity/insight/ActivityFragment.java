@@ -98,7 +98,6 @@ public class ActivityFragment extends BaseFragment {
         getKpiApi();
 
 
-
     }
 
     private void getKpiApi() {

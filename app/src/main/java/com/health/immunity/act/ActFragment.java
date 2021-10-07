@@ -16,13 +16,17 @@ import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.health.immunity.HomeContainer.HomeActivity;
 import com.health.immunity.IConstant;
 import com.health.immunity.PreferenceHelper;
 import com.health.immunity.R;
 import com.health.immunity.act.presenter.ActPresenter;
 import com.health.immunity.act.presenter.IActPresenter;
 import com.health.immunity.act.view.IActFragment;
+import com.health.immunity.databinding.ActivityHomeBinding;
 import com.health.immunity.databinding.FragmentActBinding;
+import com.health.immunity.webviewUtilityClasses.ActWebViewClient;
 import com.health.immunity.webviewUtilityClasses.MyWebViewClient;
 
 import static android.app.Activity.RESULT_OK;
@@ -41,10 +45,12 @@ public class ActFragment extends Fragment implements IActFragment {
     private static final String ARG_PARAM2 = "param2";
     private ValueCallback<Uri[]> mUploadMessage;
     private static final int FILECHOOSER_RESULTCODE = 9994;
-
+    ActivityHomeBinding activityHomeBinding;
     Context context;
     String actUrl = " ";
     IActPresenter presenter;
+    BottomNavigationView bottomNavigationView;
+    Fragment fragment1= getParentFragment();
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -68,6 +74,7 @@ public class ActFragment extends Fragment implements IActFragment {
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -91,10 +98,12 @@ public class ActFragment extends Fragment implements IActFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_act, container, false);
         View view = binding.getRoot();
         context = view.getContext();
+        bottomNavigationView=getActivity().findViewById(R.id.bottomNav);
+        bottomNavigationView.getMenu().getItem(2).setChecked(true);
         WebView webView = (WebView) view.findViewById(R.id.webView);
         webView.setWebChromeClient(new MyChromeclient());
         presenter.setWebViewSettings(webView);
-        webView.setWebViewClient(new MyWebViewClient(context, webView));
+        webView.setWebViewClient(new ActWebViewClient(context, webView));
         presenter.getUrlFromSourceAPI(webView, PreferenceHelper.getStringPreference(context, IConstant.TOKEN), 0);
         return view;
 

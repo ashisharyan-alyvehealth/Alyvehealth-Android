@@ -67,6 +67,11 @@
             tools:ignore="LockedOrientationActivity"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".community.utility.Youtube"
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="LockedOrientationActivity"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".login.view.GetOnBoard"
             android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="LockedOrientationActivity"
@@ -151,6 +156,7 @@
             android:name=".HomeContainer.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="LockedOrientationActivity"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait"
             >
         </activity>
@@ -203,6 +209,7 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".MainActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize"
             android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="LockedOrientationActivity"
             android:screenOrientation="portrait"></activity>

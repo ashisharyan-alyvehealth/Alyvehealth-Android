@@ -51,6 +51,11 @@ public class NewCreateActivity extends BaseActivity {
         initViews();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
     private void initViews() {
         binding.ivHeader.setOnClickListener(new View.OnClickListener() {
             @Override

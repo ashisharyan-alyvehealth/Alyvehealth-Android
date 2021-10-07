@@ -55,6 +55,8 @@ public class BodyAdapter extends RecyclerView.Adapter<BodyAdapter.NoticeHolder> 
 
         holder.tvv1.setText(myCommunitiesResponses.get(position).getLowerRange());
         holder.tvv2.setText(myCommunitiesResponses.get(position).getUpperRange());
+        holder.tvHelpInfoImage.setVisibility(View.INVISIBLE);
+        holder.tvHelpInfoImage.setEnabled(false);
         //     holder.im1.setText(myCommunitiesResponses.get(position).getAlias()+"\n"+myCommunitiesResponses.get(position).getValue());
         if (!TextUtils.isEmpty(myCommunitiesResponses.get(position).getValue())) {
             float roundTotal = Float.parseFloat(myCommunitiesResponses.get(position).getValue());
@@ -72,9 +74,9 @@ public class BodyAdapter extends RecyclerView.Adapter<BodyAdapter.NoticeHolder> 
         if(myCommunitiesResponses.get(position).getAlias().startsWith("BMI")){
             holder.imageView.setImageResource(R.drawable.ic_bmi);
         }else if(myCommunitiesResponses.get(position).getAlias().startsWith("Weight")) {
-            holder.imageView.setImageResource(R.drawable.ic_weight1);
+            holder.imageView.setImageResource(R.drawable.ic_weight);
         }else if(myCommunitiesResponses.get(position).getAlias().startsWith("SPO")) {
-            holder.imageView.setImageResource(R.drawable.ic_spo2_1);
+            holder.imageView.setImageResource(R.drawable.ic_spo2);
         }
 
         holder.tvHelpInfo1.setVisibility(View.VISIBLE);
@@ -702,11 +704,12 @@ public class BodyAdapter extends RecyclerView.Adapter<BodyAdapter.NoticeHolder> 
 
     public class NoticeHolder extends RecyclerView.ViewHolder {
         private TextView im1,name,tvv1,tvv2,tvHelpInfo1;
-        private ImageView imageView, uparrowLast,ivcomparesetLast,ivcompareset1,ivcompareset2,ivcompareset3,ivcompareset4,ivcompareset5,ivcompareset6,ivcompareset7,ivcompareset8,ivcompareset9,ivcompareset10,imvideo,imviply,inffo,uparrowL0,uparrowR4,uparrowR3,uparrowR2,uparrowR1,uparrow,uparrowL4,uparrowL3,uparrowL2,uparrowL1;
+        private ImageView imageView,tvHelpInfoImage, uparrowLast,ivcomparesetLast,ivcompareset1,ivcompareset2,ivcompareset3,ivcompareset4,ivcompareset5,ivcompareset6,ivcompareset7,ivcompareset8,ivcompareset9,ivcompareset10,imvideo,imviply,inffo,uparrowL0,uparrowR4,uparrowR3,uparrowR2,uparrowR1,uparrow,uparrowL4,uparrowL3,uparrowL2,uparrowL1;
         private ProgressBar progressBar;
 
         public NoticeHolder(@NonNull View itemView) {
             super(itemView);
+            tvHelpInfoImage=itemView.findViewById(R.id.tvHelpInfoimage);
             imageView=itemView.findViewById(R.id.imageView);
             name = itemView.findViewById(R.id.textView3);
             tvv1 = itemView.findViewById(R.id.tvv1);

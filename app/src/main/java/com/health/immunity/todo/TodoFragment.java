@@ -30,6 +30,7 @@ public class TodoFragment extends Fragment implements IActFragment {
     Context context;
     String todoUrl=" ";
     IActPresenter presenter;
+    WebView webView;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -81,7 +82,7 @@ public class TodoFragment extends Fragment implements IActFragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_todo, container, false);
         View view = binding.getRoot();
         context=view.getContext();
-        WebView webView = (WebView)view.findViewById(R.id.webView);
+        webView = (WebView)view.findViewById(R.id.webView);
         presenter.setWebViewSettings(webView);
         webView.setWebViewClient(new MyWebViewClient(context,webView));
         presenter.getUrlFromSourceAPI(webView, PreferenceHelper.getStringPreference(context, IConstant.TOKEN),1);
@@ -90,6 +91,14 @@ public class TodoFragment extends Fragment implements IActFragment {
 
         return view;
     }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        webView.destroy();
+    }
+
+
 
     @Override
     public void setUrl(String urlz) {

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/dimen_150dp"
+    android:padding="@dimen/dimen_20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -63,7 +64,6 @@
         android:layout_height="1dp"
         android:layout_marginStart="@dimen/dimen_15dp"
         android:visibility="invisible"
-
         android:layout_marginEnd="@dimen/dimen_15dp"
         android:background="#fecfde"
         app:layout_constraintEnd_toEndOf="parent"
