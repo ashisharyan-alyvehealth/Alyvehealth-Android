@@ -36,7 +36,6 @@ public class ChallengesFragment extends Fragment implements IActFragment {
     private String mParam1;
     private String mParam2;
     Context context;
-    Fragment fragment1;
     String actUrl=" ";
     IActPresenter presenter;
     public ChallengesFragment() {
@@ -70,7 +69,6 @@ public class ChallengesFragment extends Fragment implements IActFragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         presenter=new ActPresenter(this,context);
-        fragment1=fragment;
 
     }
 
@@ -85,8 +83,8 @@ public class ChallengesFragment extends Fragment implements IActFragment {
         context=view.getContext();
         WebView webView = (WebView)view.findViewById(R.id.webView);
         presenter.setWebViewSettings(webView);
-        webView.setWebViewClient(new MyWebViewClient(context,webView,getActivity()));
-        presenter.getUrlFromSourceAPI(webView, PreferenceHelper.getStringPreference(context, IConstant.TOKEN),3);
+        webView.setWebViewClient(new MyWebViewClient(context,webView));
+        presenter.getUrlFromSourceAPI(webView, PreferenceHelper.getStringPreference(context, IConstant.TOKEN),997);
         return view;
     }
 

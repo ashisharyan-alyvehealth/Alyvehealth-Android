@@ -1,35 +1,33 @@
 package com.health.immunity;
 
 public interface IConstant {
- // String BASE_URL = "https://protect.immunityhealth.me/api/";
- //   String BASE_URL = "https://uat.immunityhealth.me/api/";
-    String BASE_URL = "https://preprod.immunityhealth.me/api/";
+  String BASE_URL = "https://protect.immunityhealth.me/api/";
+   // String BASE_URL = "https://uat.immunityhealth.me/api/";
+   // String BASE_URL = "https://preprod.immunityhealth.me/api/";
  // String BASE_URL = "http://demo31.laraveldevloper.in/api/";
 
 
 //  String CAL_URL="https://protect-alyve-health.netlify.app/local-calendar/calendar/";
- // String CAL_URL="https://programs.alyve.health/local-calendar/";
-  String CAL_URL="https://preprod-alyve-health.netlify.app/local-calendar/calendar/";
- // String CAL_URL="https://uat-alyve-health.netlify.app/local-calendar/calendar/";
+  String CAL_URL="https://programs.alyve.health/local-calendar/";
+ // String CAL_URL="https://preprod-alyve-health.netlify.app/local-calendar/calendar/";
+//  String CAL_URL="https://uat-alyve-health.netlify.app/local-calendar/calendar/";
 
-  //String Expert_CHAT_URL="https://protect-alyve-health.netlify.app/expert-list";
-   String Expert_CHAT_URL="https://preprod-alyve-health.netlify.app/expert-list";
- // String Expert_CHAT_URL="https://uat-alyve-health.netlify.app/expert-listing";
+  String Expert_CHAT_URL="https://protect-alyve-health.netlify.app/expert-list";
+ //  String Expert_CHAT_URL="https://preprod-alyve-health.netlify.app/expert-list";
+  //String Expert_CHAT_URL="https://uat-alyve-health.netlify.app/expert-listing";
 
- // String MY_PRG_URL="https://programs.alyve.health/acts?tabId=participating";
- // String MY_PRG_URL="https://preprod-alyve-health.netlify.app/acts?tabId=participating";
- // String MY_PRG_URL=" https://uat-alyve-health.netlify.app/acts?tabId=participating";
-   String MY_PRG_URL="https://alyve-challenges.netlify.app/acts?tabId=participating";
+  String MY_PRG_URL="https://programs.alyve.health/acts?tabId=participating";
+  //String MY_PRG_URL="https://preprod-alyve-health.netlify.app/acts?tabId=participating";
+//  String MY_PRG_URL="https://preprod-alyve-health.netlify.app/expert-list";
 
 
-  // String BASE_URL_REPORTS="https://protect-alyve-health.netlify.app/reports/";
-   String BASE_URL_REPORTS="https://preprod-alyve-health.netlify.app/reports/";
-  // String BASE_URL_REPORTS="https://uat-alyve-health.netlify.app/reports/";
+   String BASE_URL_REPORTS="https://protect-alyve-health.netlify.app/reports/";
+   //String BASE_URL_REPORTS="https://preprod-alyve-health.netlify.app/reports/";
 
   String PREPROD_TOKEN="eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNDlkMmY4ZmVkNTMwNWMyZTM4YjkwYmNlYWY3YjhhNzRjN2RjYWM4OTNjMTIyZmRjMTcyNmJhZDFlODNiODQ4YTYwMDM3Zjg0MmUyYjFhM2UiLCJpYXQiOjE2MTExMjMxMDQsIm5iZiI6MTYxMTEyMzEwNCwiZXhwIjoxNzY4ODg5NTA0LCJzdWIiOiI0NiIsInNjb3BlcyI6W119.nfHs4cORtvtqkgxIimlzMyz44OMnS_fIrnHjxXJbVucmdzLa_N0raxka0HFPbcbWoSSEstipgQdTS4iI1F5m1UnpApxqBn9Gh2n05fTQnO-0oDAJmw62amawZdixRgDlaUIbNYLTh_oYYp2wEie3U20wJ_EZx41x-8mINbQw_g7gCBi4umH0b26BMVcSo0YnN9YiwVOe_UfkYOzKgdOy4RN6fGxNIp-ODA_3V_gGMw9Vh1xrYtF15zDiCD6b8p2XLoHFc5qYRYhLJT5ZK8OcnTF0sNcJ7A2i4yRYEUiijs0BF5AX_b0z5f7o4n5ddsg7W1wf454pg-1MDPabeQGilkIixkofaKb7Dp_6_3Dra9v8wU8CE8eBDSuy3mGUm403RdhVRoJpYE_rzpWpqTjlqJiFEtdOpyjb2W31OtFOuPBkxDkJvM_eDhifn0lhdz97-7FEswbzh0XqwqYlYvYAMnHBp0z3VZCZNl_ikDcZBTic7lZvJRW4wm8E3Ovyp3Zr5oosIDcc8sZBdSk8lZiLhJ9CxVGMGTAcMHAKdJu_zDDJOucxj6VEDxe1M9a2lFGqRid_8ZFYBT0pI4TAtURYmRr-PecmLbsFx00AXr_qIx9i8tbLAKecBXdfWVSuZnZH-fMz_Cr3CaYVq2nRGr3yQvclqfNI1sz_r88db2b5M-o";
- // String IMAGE_BASE_URL = "https://protect.immunityhealth.me/assets/user_images/";
- //  String IMAGE_BASE_URL = "https://uat.immunityhealth.me/assets/user_images/";
-   String IMAGE_BASE_URL = "https://preprod.immunityhealth.me/assets/user_images/";
+  String IMAGE_BASE_URL = "https://protect.immunityhealth.me/assets/user_images/";
+  // String IMAGE_BASE_URL = "https://uat.immunityhealth.me/assets/user_images/";
+  // String IMAGE_BASE_URL = "https://preprod.immunityhealth.me/assets/user_images/";
  //   String IMAGE_BASE_URL = "http://demo31.laraveldevloper.in/assets/user_images/";
     String GO_ONLINE = "Go Online";
     String SUCCESS = "Success";
