@@ -1,34 +1,75 @@
 {
   "project_info": {
-    "project_number": "819751261295",
-    "project_id": "immunity-test",
-    "storage_bucket": "immunity-test.appspot.com"
+    "project_number": "508946527389",
+    "firebase_url": "https://immunity-274317.firebaseio.com",
+    "project_id": "immunity-274317",
+    "storage_bucket": "immunity-274317.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:819751261295:android:9c7ffa634664dae764699a",
+        "mobilesdk_app_id": "1:508946527389:android:b21bdbd34e050510f5d074",
         "android_client_info": {
           "package_name": "com.health.immunity"
         }
       },
       "oauth_client": [
         {
-          "client_id": "819751261295-tm0iitoauv8id24939gkdl3k49c43hf8.apps.googleusercontent.com",
+          "client_id": "508946527389-0c57vgif2bvgt3fke5c2lro31g3u633b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.health.immunity",
+            "certificate_hash": "523f2e2a19a041c6f43ba870f23a54017f696949"
+          }
+        },
+        {
+          "client_id": "508946527389-nmda93gnpghia26370doomnjhqrjrptf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.health.immunity",
+            "certificate_hash": "8e8feae6f4a90da066acb408feaaefd1c79b20e8"
+          }
+        },
+        {
+          "client_id": "508946527389-o5sljetafo762mthdpf87boqqeqfmum3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.health.immunity",
+            "certificate_hash": "6f1f8e40296461a1217e62d6a7378c31002093ad"
+          }
+        },
+        {
+          "client_id": "508946527389-qubdm4ogm2ifo5t6sief55cidpemnn16.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.health.immunity",
+            "certificate_hash": "799c9e279bc555d721b70522413fc9aad66855b7"
+          }
+        },
+        {
+          "client_id": "508946527389-l8lhuk7qfgv9onm2vfp2hn7jvid04e4o.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAcK4vB7pc6jRF_rn8RLCWQQiK88g6byH0"
+          "current_key": "AIzaSyDmkurT9uAHLe9dlq7XP9GcWXrvJ2YzQ1c"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "819751261295-tm0iitoauv8id24939gkdl3k49c43hf8.apps.googleusercontent.com",
+              "client_id": "508946527389-l8lhuk7qfgv9onm2vfp2hn7jvid04e4o.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "508946527389-g6khjjng1t13sspr95g8gaufnm3ru0ko.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.immunityapp.dev",
+                "app_store_id": "1524781805"
+              }
             }
           ]
         }

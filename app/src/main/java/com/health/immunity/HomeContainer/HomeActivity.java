@@ -2,6 +2,7 @@ package com.health.immunity.HomeContainer;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -10,7 +11,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
 
 import android.Manifest;
 import android.animation.ObjectAnimator;
@@ -23,6 +23,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -36,12 +39,17 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
+import android.renderscript.ScriptGroup;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Pair;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -96,12 +104,12 @@ import com.health.immunity.R;
 import com.health.immunity.aboutus.AboutUsFragment;
 import com.health.immunity.act.ActFragment;
 import com.health.immunity.act.model.SourceResponse;
-import com.health.immunity.act.presenter.MyViewModel;
 import com.health.immunity.alyvecash.AlyveCashFragment;
 import com.health.immunity.challenges.ChallengesFragment;
 import com.health.immunity.community.DashboardFragment;
 import com.health.immunity.databinding.ActivityHomeBinding;
 import com.health.immunity.expertchat.ExpertChatFragment;
+import com.health.immunity.insight.BodyAdapter;
 import com.health.immunity.insight.InsightFragment;
 import com.health.immunity.login.LoginActivity;
 import com.health.immunity.myprogram.MyProgramFragment;
@@ -116,8 +124,8 @@ import com.health.immunity.profile.model.updateZohoIdResponse;
 import com.health.immunity.retrofit.ApiInterface;
 import com.health.immunity.retrofit.RetrofitClient;
 import com.health.immunity.retrofit.ServiceGenerator;
+import com.health.immunity.screentime.ScreentimeActivity;
 import com.health.immunity.todo.TodoFragment;
-import com.health.immunity.webviewUtilityClasses.MyWebViewClient;
 
 import org.jsoup.Jsoup;
 
@@ -136,9 +144,7 @@ import retrofit2.Response;
 
 import static androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE;
 import static com.health.immunity.R.drawable.ic_fitcoinz;
-
 import static com.health.immunity.R.drawable.ic_soulpoints;
-
 
 public class HomeActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, IHomeActivity, SensorEventListener {
     private static final int REQUEST_OAUTH_REQUEST_CODE = 1;
@@ -156,7 +162,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     private boolean showSteps = true;
     public static boolean report=false;
     GoogleSignInClient mGoogleSignInClient;
-    public static FragmentTransaction fragmentTransaction;
     GoogleSignInAccount account;
     private int todayOffset;
     Object gold=0;
@@ -168,7 +173,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     private int total_start;
     public static Switch googleswitch;
     private int goal;
-    public static String webViewUrl="";
     private static final int PERMISSIONS_REQUEST_WRITE_CAL = 1999;
     private String strImage = "";
     String runningstr="",walkingstr="",zumbastr="",joggingstr="",aerobicsstr="",weightputstr="",heightputstr="",spo2putstr="";
@@ -220,7 +224,11 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         binding.tvwallet.setOnClickListener(this);
         binding.tvActivitylog.setOnClickListener(this);
         binding.imageProfic.setOnClickListener(this);
-
+//        binding.bottomNav.setClipChildren(false);
+//        binding.bottomNav.setClipToPadding(false);
+//        binding.bottomNav.setClipToOutline(false);
+//        menuView = (BottomNavigationMenuView) binding.bottomNav.getChildAt(0);
+//        menuView.setClipChildren(false);
 
         setBottomNavigationView();
         try
@@ -385,13 +393,8 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
 
         }
-       binding.coinLayout.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               AlyveCashFragment alyveCashFragment=new AlyveCashFragment();
-               viewFragment(alyveCashFragment,"WALLET");
-           }
-       });
+
+
 
 
 
@@ -589,20 +592,41 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
 
 
 
-    Runnable updateTextRunnable=new Runnable(){
-        public void run() {
-            if(coinSwitch==1){
-                binding.coinBal.setText(""+gold);
-                binding.coinImg.setImageResource(ic_fitcoinz);
-                coinSwitch=2;
-            }else{
-                binding.coinBal.setText(""+silver);
-                binding.coinImg.setImageResource(R.drawable.ic_soulpoints);
+    }
+    public void updateCoin(int coinUser){
+        String coinUsers= String.valueOf(coinUser).trim();
+        String path ="/users/user_id_"+coinUsers+"/coins_balance";
+        System.out.println("user"+path);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference(path);
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                System.out.println("dataSnapshot"+dataSnapshot.child("/gold").getValue());
+                gold=dataSnapshot.child("/gold").getValue();
+                if(gold==null){
+                    gold=0;
+                }
+                silver=dataSnapshot.child("/silver").getValue();
+                if(silver==null){
+                    silver=0;
+                }
                 coinSwitch=1;
+                if(coinHandler==1){
+                    handlerCoin.post(updateTextRunnable);
+                    coinHandler=0;
+                }
             }
-            handlerCoin.postDelayed(this, 3000);
-        }
-    };
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+
+
+    }
 
     Runnable updateTextRunnable=new Runnable(){
         public void run() {
@@ -984,10 +1008,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
             }
         });
     }
- public void startActFrag(){
-     ActFragment actFragment= new ActFragment();
-     viewFragment(actFragment,"ACT");
- }
+
 
     @Override
     public void setBottomNavigationView() {
@@ -1046,7 +1067,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public void viewFragment(Fragment fragment, String name) {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentTransaction = fragmentManager.beginTransaction();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.homeContainer, fragment);
         final int count = fragmentManager.getBackStackEntryCount();
         if (name.equals("INSIGHT")) {
@@ -1140,8 +1161,6 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     protected void onResume() {
         super.onResume();
-
-
 
         if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACTIVITY_RECOGNITION)
                 != PackageManager.PERMISSION_GRANTED && !PreferenceHelper.getStringPreference(context,IConstant.FIT_PEDOMETER).equals("1")) {
