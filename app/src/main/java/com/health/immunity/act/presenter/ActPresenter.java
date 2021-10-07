@@ -1,5 +1,6 @@
 package com.health.immunity.act.presenter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -7,10 +8,16 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import androidx.databinding.DataBindingUtil;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.health.immunity.HomeContainer.HomeActivity;
 import com.health.immunity.IConstant;
 import com.health.immunity.PreferenceHelper;
+import com.health.immunity.R;
 import com.health.immunity.act.model.SourceResponse;
 import com.health.immunity.act.view.IActFragment;
+import com.health.immunity.databinding.ActivityHomeBinding;
 import com.health.immunity.retrofit.RetrofitClient;
 
 import retrofit2.Call;
@@ -23,10 +30,14 @@ public class ActPresenter implements IActPresenter{
     IActFragment view;
     final String[] url = {""};
     Context context;
+
     public ActPresenter(IActFragment view, Context context1){
         this.view=view;
         this.context=context1;
+
     }
+
+
 
     @Override
     public String getUrlFromSourceAPI(WebView view1, String token,int urlPos) {
@@ -50,7 +61,7 @@ public class ActPresenter implements IActPresenter{
                                         view1.loadUrl(url[0]);
                                     }
                                     if(urlPos==997){
-                                        url[0] = "https://programs.alyve.health/engage";
+                                        url[0] = "https://preprod-alyve-health.netlify.app/engage/";
                                         view1.loadUrl(url[0]);
                                     }
                                     if(urlPos==996){
@@ -62,12 +73,27 @@ public class ActPresenter implements IActPresenter{
                                         url[0] = "https://programs.alyve.health/privacy";
                                         view1.loadUrl(url[0]);
                                     }
+                                    if(urlPos==991) {
+                                        url[0] = "https://preprod-alyve-health.netlify.app/my-wallet";
+                                        view1.loadUrl(url[0]);
+                                    }
 
                                 }
                                 else{
-                                System.out.println("###############@@@@@@@@@@foryu" + response.body().getJsonData().get(urlPos).getTokenValue());
-                                url[0] = response.body().getJsonData().get(urlPos).getTokenValue();
-                                view1.loadUrl(url[0] + token);
+                                    if(urlPos==0 && HomeActivity.webViewUrl.contains("/product/purchase/")){
+                                        view1.loadUrl(HomeActivity.webViewUrl);
+                                        HomeActivity.webViewUrl="";
+
+                                    }else if(urlPos==2 | urlPos==3){
+                                        System.out.println("###############@@@@@@@@@@foryu" + response.body().getJsonData().get(urlPos).getTokenValue());
+                                        url[0] = response.body().getJsonData().get(urlPos).getTokenValue();
+                                        view1.loadUrl(url[0]);
+
+                                    }else{
+                                        System.out.println("###############@@@@@@@@@@foryu" + response.body().getJsonData().get(urlPos).getTokenValue());
+                                        url[0] = response.body().getJsonData().get(urlPos).getTokenValue();
+                                        view1.loadUrl(url[0] + token);
+                                    }
                                 }
 
                             }

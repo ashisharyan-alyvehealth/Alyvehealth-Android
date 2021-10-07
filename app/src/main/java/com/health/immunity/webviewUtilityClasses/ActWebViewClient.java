@@ -1,5 +1,6 @@
 package com.health.immunity.webviewUtilityClasses;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,57 +14,32 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.health.immunity.HomeContainer.HomeActivity;
 import com.health.immunity.IConstant;
 import com.health.immunity.R;
 import com.health.immunity.aboutus.AboutUsFragment;
 import com.health.immunity.act.ActFragment;
-import com.health.immunity.act.presenter.MyViewModel;
-import com.health.immunity.challenges.ChallengesFragment;
 
 import java.net.URISyntaxException;
 
 import static com.google.firebase.crashlytics.internal.Logger.TAG;
 
-public class MyWebViewClient extends WebViewClient {
+public class ActWebViewClient extends WebViewClient {
     private static final String TEL_PREFIX = "tel:";
     Context context;
     WebView view;
-    MyViewModel myViewModel=new MyViewModel();
-    FragmentActivity fragment1;
-
-
-    public MyWebViewClient(Context context, WebView view){
+    Fragment fragment;
+    public ActWebViewClient(Context context, WebView view){
         this.context=context;
         this.view=view;
 
     }
-    public MyWebViewClient(Context context, WebView view, FragmentActivity fragment){
-        this.context=context;
-        this.view=view;
-        this.fragment1= fragment;
-    }
-
 
 
 
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
-        HomeActivity.webViewUrl=url;
-        if(url.contains("/product/purchase/")){
-            ActFragment actFragment =new ActFragment();
-            FragmentManager fragmentManager = fragment1.getSupportFragmentManager();
-            HomeActivity.fragmentTransaction = fragmentManager.beginTransaction();
-            HomeActivity.fragmentTransaction.replace(R.id.homeContainer, actFragment);
-            HomeActivity.fragmentTransaction.commit();
-        }
 
         super.onPageStarted(view, url, favicon);
     }
@@ -71,7 +47,9 @@ public class MyWebViewClient extends WebViewClient {
 
     @Override
     public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        HomeActivity.webViewUrl=url;
+
+
+
         //boolean overrideUrlLoading = false;
         if(url.startsWith("https://programs.alyve.health/nativelink")){
             System.out.println("nativeurl1"+url);
@@ -124,7 +102,7 @@ public class MyWebViewClient extends WebViewClient {
                 startActivity(browserIntent);*/
         }
 
-       else if (url.startsWith("intent://")) {
+        else if (url.startsWith("intent://")) {
             try {
                 Context context = view.getContext();
                 Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
@@ -170,3 +148,4 @@ public class MyWebViewClient extends WebViewClient {
     }
 
 }
+
